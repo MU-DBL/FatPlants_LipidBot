@@ -1,0 +1,521 @@
+phase,category,question,check,cypher_executable,generated_cypher,generation_type
+Phase 1,Direct Entity Lookup,What is gene gmx:100217331?,1.0,MATCH (n:Gene {id: 'gmx:100217331'}) RETURN n,MATCH (n:Gene {id: 'gmx:100217331'}) RETURN properties(n),Template
+Phase 1,Direct Entity Lookup,Show me enzyme EC:6.4.1.2,1.0,MATCH (n:EC {id: 'EC:6.4.1.2'}) RETURN n,MATCH (n:EC {id: 'EC:6.4.1.2'}) RETURN n,Template
+Phase 1,Direct Entity Lookup,Find compound C00141,1.0,MATCH (n:Compound {id: 'C00141'}) RETURN n,MATCH (n:Compound {id: 'C00141'}) RETURN n,Template
+Phase 1,Direct Entity Lookup,Get pathway path:ats01040,1.0,MATCH (n:Pathway {id: 'path:ats01040'}) RETURN n,MATCH (n:Pathway {id: 'path:ats01040'}) RETURN properties(n),Template
+Phase 1,Direct Entity Lookup,Display reaction R02814,1.0,MATCH (n:Reaction {id: 'R02814'}) RETURN n,MATCH (n:Reaction {id: 'R02814'}) RETURN properties(n),Template
+Phase 1,Direct Entity Lookup,List all genes,1.0,MATCH (n:Gene) RETURN n LIMIT 100,MATCH (n:Gene) RETURN n LIMIT 100,Template
+Phase 1,Direct Entity Lookup,Show me all pathways,1.0,MATCH (n:Pathway) RETURN n LIMIT 100,MATCH (n:Pathway) RETURN n LIMIT 100,Template
+Phase 1,Direct Entity Lookup,What compounds are in the database?,1.0,MATCH (n:Compound) RETURN n LIMIT 100,MATCH (n:Compound) RETURN n LIMIT 100,Template
+Phase 1,Direct Entity Lookup,Get all reactions,1.0,MATCH (n:Reaction) RETURN n LIMIT 100,MATCH (n:Reaction) RETURN n LIMIT 100,Template
+Phase 1,Direct Entity Lookup,Display all enzymes,1.0,MATCH (n:EC) RETURN n LIMIT 100,MATCH (n:EC) RETURN n LIMIT 100,Template
+Phase 1,Direct Entity Lookup,How many genes are there?,1.0,MATCH (n:Gene) RETURN count(n),MATCH (n:Gene) RETURN count(n),Template
+Phase 1,Direct Entity Lookup,Count the number of pathways,1.0,MATCH (n:Pathway) RETURN count(n),MATCH (n:Pathway) RETURN count(n),Template
+Phase 1,Direct Entity Lookup,How many reactions exist?,1.0,MATCH (n:Reaction) RETURN count(n),MATCH (n:Reaction) RETURN count(n),Template
+Phase 1,Direct Entity Lookup,What's the total number of compounds?,1.0,MATCH (n:Compound) RETURN count(n),MATCH (n:Compound) RETURN count(n),Template
+Phase 1,Direct Entity Lookup,Count all enzymes,1.0,MATCH (n:EC) RETURN count(n),MATCH (n:EC) RETURN count(n),Template
+Phase 1,Direct Entity Lookup,Does gene gmx:100037478 exist?,1.0,MATCH (n:Gene {id: 'gmx:100037478'}) RETURN EXISTS((n)),MATCH (n:Gene {id: 'gmx:100037478'}) RETURN n,Template
+Phase 1,Direct Entity Lookup,Is there a pathway path:gmx00280?,1.0,MATCH (n:Pathway {id: 'path:gmx00280'}) RETURN EXISTS((n)),MATCH (n:Pathway {id: 'path:gmx00280'}) RETURN n,Template
+Phase 1,Direct Entity Lookup,Do we have compound C00052?,1.0,MATCH (n:Compound {id: 'C00052'}) RETURN EXISTS((n)),MATCH (n:Compound {id: 'C00052'}) RETURN n,Template
+Phase 1,Direct Entity Lookup,Check if enzyme EC:1.3.1.10 exists,1.0,MATCH (n:EC {id: 'EC:1.3.1.10'}) RETURN EXISTS((n)),MATCH (n:EC {id: 'EC:1.3.1.10'}) RETURN n,Template
+Phase 1,Direct Entity Lookup,Is reaction R07449 in the database?,1.0,MATCH (n:Reaction {id: 'R07449'}) RETURN EXISTS((n)),MATCH (n:Reaction {id: 'R07449'}) RETURN n,Template
+Phase 1,Direct Entity Lookup,What are the properties of gene ath:AT1G01040?,1.0,MATCH (n:Gene {id: 'ath:AT1G01040'}) RETURN properties(n),MATCH (n:Gene {id: 'ath:AT1G01040'}) RETURN properties(n),Template
+Phase 1,Direct Entity Lookup,Show all properties of pathway path:gmx00061,1.0,MATCH (n:Pathway {id: 'path:gmx00061'}) RETURN properties(n),MATCH (n:Pathway {id: 'path:gmx00061'}) RETURN properties(n),Template
+Phase 1,Direct Entity Lookup,Get information about compound C06157,1.0,MATCH (n:Compound {id: 'C06157'}) RETURN properties(n),MATCH (n:Compound {id: 'C06157'}) RETURN properties(n),Template
+Phase 1,Direct Entity Lookup,Display properties of enzyme EC:4.2.1.59,1.0,MATCH (n:EC {id: 'EC:4.2.1.59'}) RETURN properties(n),MATCH (n:EC {id: 'EC:4.2.1.59'}) RETURN properties(n),Template
+Phase 1,Direct Entity Lookup,What information is stored for reaction R00200?,1.0,MATCH (n:Reaction {id: 'R00200'}) RETURN properties(n),MATCH (n:Reaction {id: 'R00200'}) RETURN properties(n),Template
+Phase 1,Simple Relationship Queries - Outgoing,What enzymes does gene ath:AT1G01050 encode?,1.0,MATCH (g:Gene {id: 'ath:AT1G01050'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ath:AT1G01050'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Outgoing,Which EC numbers are encoded by gene ats:109733199?,1.0,MATCH (g:Gene {id: 'ats:109733199'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ats:109733199'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Outgoing,Show enzymes for gene ats:109761713,1.0,MATCH (g:Gene {id: 'ats:109761713'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ats:109761713'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Outgoing,What does gene ath:AT1G54220 encode?,1.0,MATCH (g:Gene {id: 'ath:AT1G54220'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ath:AT1G54220'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Outgoing,List enzyme functions of gene ath:AT2G06990,1.0,MATCH (g:Gene {id: 'ath:AT2G06990'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ath:AT2G06990'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Outgoing,Get EC numbers for gene ath:AT5G61540,1.0,MATCH (g:Gene {id: 'ath:AT5G61540'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ath:AT5G61540'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Outgoing,Which ortholog group does gene gmx:100217331 belong to?,1.0,MATCH (g:Gene {id: 'gmx:100217331'})-[:BELONGS_TO]->(o:Ortholog) RETURN o,MATCH (g:Gene {id: 'gmx:100217331'})-[:BELONGS_TO]-(o:Ortholog) RETURN o,Template
+Phase 1,Simple Relationship Queries - Outgoing,Show ortholog for gene ats:109745953,1.0,MATCH (g:Gene {id: 'ats:109745953'})-[:BELONGS_TO]->(o:Ortholog) RETURN o,MATCH (g:Gene {id: 'ats:109745953'})-[:BELONGS_TO]-(o:Ortholog) RETURN o,Template
+Phase 1,Simple Relationship Queries - Outgoing,What ortholog contains gene gmx:100037478?,1.0,MATCH (g:Gene {id: 'gmx:100037478'})-[:BELONGS_TO]->(o:Ortholog) RETURN o,MATCH (g:Gene {id: 'gmx:100037478'})-[:BELONGS_TO]-(o:Ortholog) RETURN o,Template
+Phase 1,Simple Relationship Queries - Outgoing,Find ortholog group of gene ath:AT1G01040,1.0,MATCH (g:Gene {id: 'ath:AT1G01040'})-[:BELONGS_TO]->(o:Ortholog) RETURN o,MATCH (g:Gene {id: 'ath:AT1G01040'})-[:BELONGS_TO]-(o:Ortholog) RETURN o,Template
+Phase 1,Simple Relationship Queries - Outgoing,Get ortholog for gene ath:AT1G01050,1.0,MATCH (g:Gene {id: 'ath:AT1G01050'})-[:BELONGS_TO]->(o:Ortholog) RETURN o,MATCH (g:Gene {id: 'ath:AT1G01050'})-[:BELONGS_TO]-(o:Ortholog) RETURN o,Template
+Phase 1,Simple Relationship Queries - Outgoing,Which KO group includes gene K10246?,1.0,MATCH (g:Gene {id: 'K10246'})-[:BELONGS_TO]->(o:Ortholog) RETURN o,MATCH (g:Gene {id: 'K10246'})-[:BELONGS_TO]-(o:Ortholog) RETURN o,Template
+Phase 1,Simple Relationship Queries - Outgoing,Which reactions use compound C06000 as substrate?,1.0,MATCH (c:Compound {id: 'C06000'})-[:SUBSTRATE_OF]->(r:Reaction) RETURN r,MATCH (c:Compound {id: 'C06000'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,What reactions consume compound C00164?,1.0,MATCH (c:Compound {id: 'C00164'})-[:SUBSTRATE_OF]->(r:Reaction) RETURN r,MATCH (c:Compound {id: 'C00164'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Show reactions where C06000 is a substrate,1.0,MATCH (c:Compound {id: 'C06000'})-[:SUBSTRATE_OF]->(r:Reaction) RETURN r,MATCH (c:Compound {id: 'C06000'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Find reactions that use compound C08813,1.0,MATCH (c:Compound {id: 'C08813'})-[:SUBSTRATE_OF]->(r:Reaction) RETURN r,MATCH (c:Compound {id: 'C08813'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Get reactions with C06000 as input,1.0,MATCH (c:Compound {id: 'C06000'})-[:SUBSTRATE_OF]->(r:Reaction) RETURN r,MATCH (c:Compound {id: 'C06000'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Which reactions require compound C03069?,1.0,MATCH (c:Compound {id: 'C03069'})-[:SUBSTRATE_OF]->(r:Reaction) RETURN r,MATCH (c:Compound {id: 'C03069'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,What reactions does EC:1.14.13.1 catalyze?,1.0,MATCH (e:EC {id: 'EC:1.14.13.1'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'EC:1.14.13.1'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Which reactions are catalyzed by enzyme EC:1.14.13.1?,1.0,MATCH (e:EC {id: 'EC:1.14.13.1'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'EC:1.14.13.1'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Show reactions for enzyme EC:1.3.1.9,1.0,MATCH (e:EC {id: 'EC:1.3.1.9'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'EC:1.3.1.9'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Find reactions that EC:1.14.13.1 catalyzes,1.0,MATCH (e:EC {id: 'EC:1.14.13.1'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'EC:1.14.13.1'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Get reactions catalyzed by EC:6.2.1.3,1.0,MATCH (e:EC {id: 'EC:6.2.1.3'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'EC:6.2.1.3'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Which reactions does enzyme EC:2.1.1.369 perform?,1.0,MATCH (e:EC {id: 'EC:2.1.1.369'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'EC:2.1.1.369'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,What reactions does ortholog R10826 catalyze?,1.0,MATCH (o:Ortholog {id: 'R10826'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (o:Ortholog {id: 'R10826'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Which reactions are performed by KO K09458?,1.0,MATCH (o:Ortholog {id: 'K09458'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (o:Ortholog {id: 'K09458'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Show reactions catalyzed by ortholog R03777,1.0,MATCH (o:Ortholog {id: 'R03777'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (o:Ortholog {id: 'R03777'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Find reactions for ortholog group K00059,1.0,MATCH (o:Ortholog {id: 'K00059'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (o:Ortholog {id: 'K00059'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Get reactions that K00059 catalyzes,1.0,MATCH (o:Ortholog {id: 'R02814'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'K00059'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,Which reactions does ortholog K00059 perform?,1.0,MATCH (o:Ortholog {id: 'R04957'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (o:Ortholog {id: 'K00059'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Simple Relationship Queries - Outgoing,What enzyme functions does ortholog K00059 have?,1.0,MATCH (o:Ortholog {id: 'K00059'})-[:HAS_ENZYME_FUNCTION]->(e:EC) RETURN e,MATCH (o:Ortholog {id: 'K00059'})-[:HAS_ENZYME_FUNCTION]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Outgoing,Which EC numbers are associated with KO K11262?,1.0,MATCH (o:Ortholog {id: 'K11262'})-[:HAS_ENZYME_FUNCTION]->(e:EC) RETURN e,MATCH (o:Ortholog {id: 'K11262'})-[:HAS_ENZYME_FUNCTION]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Outgoing,Show enzyme functions of ortholog K00249,1.0,MATCH (o:Ortholog {id: 'K00249'})-[:HAS_ENZYME_FUNCTION]->(e:EC) RETURN e,MATCH (o:Ortholog {id: 'K00249'})-[:HAS_ENZYME_FUNCTION]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Outgoing,Find EC numbers for ortholog K01897,1.0,MATCH (o:Ortholog {id: 'K01897'})-[:HAS_ENZYME_FUNCTION]->(e:EC) RETURN e,MATCH (o:Ortholog {id: 'K01897'})-[:HAS_ENZYME_FUNCTION]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Outgoing,Get enzyme activities of K00059,1.0,MATCH (o:Ortholog {id: 'K00059'})-[:HAS_ENZYME_FUNCTION]->(e:EC) RETURN e,MATCH (n:EC {id: 'EC:2.7.7.14'}) RETURN properties(n),Template
+Phase 1,Simple Relationship Queries - Outgoing,Which enzymes does ortholog K00059 correspond to?,1.0,MATCH (o:Ortholog {id: 'K00059'})-[:HAS_ENZYME_FUNCTION]->(e:EC) RETURN e,MATCH (o:Ortholog {id: 'K00059'})-[:HAS_ENZYME_FUNCTION]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Outgoing,Which functional units include gene ats:109733199?,1.0,MATCH (n {id: 'ats:109733199'})-[:MEMBER_OF]->(f:FunctionalUnit) RETURN f,MATCH (g:Gene {id: 'ats:109733199'})-[:MEMBER_OF]-(f:FunctionalUnit) RETURN f,Template
+Phase 1,Simple Relationship Queries - Outgoing,Show functional units for ortholog K00626,1.0,MATCH (n {id: 'K00626'})-[:MEMBER_OF]->(f:FunctionalUnit) RETURN f,MATCH (o:Ortholog {id: 'K00626'})-[:HAS_ENZYME_FUNCTION]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Outgoing,What functional units contain gene ats:109761713?,1.0,MATCH (n {id: 'ats:109761713'})-[:MEMBER_OF]->(f:FunctionalUnit) RETURN f,MATCH (g:Gene {id: 'ats:109761713'})-[:MEMBER_OF]-(f:FunctionalUnit) RETURN f,Template
+Phase 1,Simple Relationship Queries - Outgoing,Find functional units with ortholog K13356,1.0,MATCH (n {id: 'K13356'})-[:MEMBER_OF]->(f:FunctionalUnit) RETURN f,MATCH (g:Gene {id: 'K13356'})-[:MEMBER_OF]-(f:FunctionalUnit) RETURN f,Template
+Phase 1,Simple Relationship Queries - Outgoing,Get functional units for gene ath:AT1G54220,1.0,MATCH (n {id: 'AT1G54220'})-[:MEMBER_OF]->(f:FunctionalUnit) RETURN f,MATCH (g:Gene {id: 'ath:AT1G54220'})-[:MEMBER_OF]-(f:FunctionalUnit) RETURN f,Template
+Phase 1,Simple Relationship Queries - Outgoing,Which complexes does ortholog K09754 belong to?,1.0,MATCH (n {id: 'K09754'})-[:MEMBER_OF]->(f:FunctionalUnit) RETURN f,MATCH (o:Ortholog {id: 'K09754'})-[:HAS_ENZYME_FUNCTION]-(e:EC) RETURN e,Template
+Phase 1,Simple Relationship Queries - Incoming,Which genes encode enzyme EC:2.3.1.199?,1.0,MATCH (g:Gene)-[:ENCODES]->(e:EC {id: 'EC:2.3.1.199'}) RETURN g,MATCH (g:Gene)-[:ENCODES]-(e:EC {id: 'EC:2.3.1.199'}) RETURN g,Template
+Phase 1,Simple Relationship Queries - Incoming,Show genes that produce EC:2.3.1.199,1.0,MATCH (g:Gene)-[:ENCODES]->(e:EC {id: 'EC:2.3.1.199'}) RETURN g,MATCH (g:Gene)-[:ENCODES]-(e:EC {id: 'EC:2.3.1.199'}) RETURN g,Template
+Phase 1,Simple Relationship Queries - Incoming,Find genes encoding EC:2.3.1.199,1.0,MATCH (g:Gene)-[:ENCODES]->(e:EC {id: 'EC:2.3.1.199'}) RETURN g,MATCH (g:Gene)-[:ENCODES]-(e:EC {id: 'EC:2.3.1.199'}) RETURN g,Template
+Phase 1,Simple Relationship Queries - Incoming,Get genes for enzyme EC:2.3.1.199,1.0,MATCH (g:Gene)-[:ENCODES]->(e:EC {id: 'EC:2.3.1.199'}) RETURN g,MATCH (g:Gene)-[:ENCODES]-(e:EC {id: 'EC:2.3.1.199'}) RETURN g,Template
+Phase 1,Simple Relationship Queries - Incoming,Which genes code for EC:2.3.1.199,1.0,MATCH (g:Gene)-[:ENCODES]->(e:EC {id: 'EC:2.3.1.199'}) RETURN g,MATCH (g:Gene)-[:ENCODES]-(e:EC {id: 'EC:2.3.1.199'}) RETURN g,Template
+Phase 1,Simple Relationship Queries - Incoming,List genes that encode EC:2.3.1.199,1.0,MATCH (g:Gene)-[:ENCODES]->(e:EC {id: 'EC:2.3.1.199'}) RETURN g,MATCH (g:Gene)-[:ENCODES]-(e:EC {id: 'EC:2.3.1.199'}) RETURN g,Template
+Phase 1,Simple Relationship Queries - Incoming,Which genes belong to ortholog K00382?,1.0,MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog {id: 'K00382'}) RETURN g,MATCH (g:Gene)-[:BELONGS_TO]-(o:Ortholog {id: 'K00382'}) RETURN g,Template
+Phase 1,Simple Relationship Queries - Incoming,Show genes in KO group K00382,1.0,MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog {id: 'K00382'}) RETURN g,MATCH (n:Gene {id: 'K00382'}) RETURN n,Template
+Phase 1,Simple Relationship Queries - Incoming,Find genes for ortholog K10246,1.0,MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog {id: 'K10246'}) RETURN g,MATCH (g:Gene)-[:BELONGS_TO]-(o:Ortholog {id: 'K10246'}) RETURN g,Template
+Phase 1,Simple Relationship Queries - Incoming,Get genes in ortholog K09458,1.0,MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog {id: 'K09458'}) RETURN g,MATCH (g:Gene)-[:BELONGS_TO]-(o:Ortholog {id: 'K09458'}) RETURN g,Template
+Phase 1,Simple Relationship Queries - Incoming,Which genes are in KO K00059?,1.0,MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog {id: 'K00059'}) RETURN g,MATCH (g:Gene)-[:BELONGS_TO]-(o:Ortholog {id: 'K00059'}) RETURN g,Template
+Phase 1,Simple Relationship Queries - Incoming,List genes belonging to ortholog K00059,1.0,MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog {id: 'K00059'}) RETURN g,MATCH (g:Gene)-[:BELONGS_TO]-(o:Ortholog {id: 'K00059'}) RETURN g,Template
+Phase 1,Simple Relationship Queries - Incoming,What are the substrates of reaction R07449?,1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction {id: 'R07449'}) RETURN c,MATCH (c:Compound)-[:SUBSTRATE_OF]-(r:Reaction {id: 'R07449'}) RETURN c,Template
+Phase 1,Simple Relationship Queries - Incoming,Which compounds are inputs to reaction R07449?,1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction {id: 'C00183'}) RETURN c,MATCH (c:Compound)-[:SUBSTRATE_OF]-(r:Reaction {id: 'R07449'}) RETURN c,Template
+Phase 1,Simple Relationship Queries - Incoming,Show substrates for reaction R00200,1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction {id: 'R00200'}) RETURN c,MATCH (c:Compound)-[:SUBSTRATE_OF]-(r:Reaction {id: 'R00200'}) RETURN c,Template
+Phase 1,Simple Relationship Queries - Incoming,Find input compounds of reaction R07449,1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction {id: 'C00141'}) RETURN c,MATCH (c:Compound)-[:SUBSTRATE_OF]-(r:Reaction {id: 'R07449'}) RETURN c,Template
+Phase 1,Simple Relationship Queries - Incoming,Get substrates of reaction R07764,1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction {id: 'R07764'}) RETURN c,MATCH (c:Compound)-[:SUBSTRATE_OF]-(r:Reaction {id: 'R07764'}) RETURN c,Template
+Phase 1,Simple Relationship Queries - Incoming,Which compounds does reaction  R07449 consume?,1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction {id: 'C01181'}) RETURN c,MATCH (c:Compound)-[:SUBSTRATE_OF]-(r:Reaction {id: 'R07449'}) RETURN c,Template
+Phase 1,Simple Relationship Queries - Incoming,Which enzymes catalyze reaction R07449?,1.0,MATCH (n)-[:CATALYZES]->(r:Reaction {id: 'R07449'}) RETURN n,MATCH (e:EC)-[:CATALYZES]-(r:Reaction {id: 'R07449'}) RETURN e,Template
+Phase 1,Simple Relationship Queries - Incoming,Show catalysts for reaction R01280,1.0,MATCH (n)-[:CATALYZES]->(r:Reaction {id: 'R01280'}) RETURN n,MATCH (e:EC)-[:CATALYZES]-(r:Reaction {id: 'R01280'}) RETURN e,Template
+Phase 1,Simple Relationship Queries - Incoming,What orthologs perform reaction R06870?,1.0,MATCH (n)-[:CATALYZES]->(r:Reaction {id: 'R06870'}) RETURN n,MATCH (n:Ortholog) RETURN n LIMIT 100,Template
+Phase 1,Simple Relationship Queries - Incoming,Find enzymes that catalyze reaction  R07449,1.0,MATCH (n)-[:CATALYZES]->(r:Reaction {id: 'R07449'}) RETURN n,MATCH (e:EC)-[:CATALYZES]-(r:Reaction {id: 'R07449'}) RETURN e,Template
+Phase 1,Simple Relationship Queries - Incoming,Get catalysts of reaction R06871,1.0,MATCH (n)-[:CATALYZES]->(r:Reaction {id: 'R06871'}) RETURN n,MATCH (e:EC)-[:CATALYZES]-(r:Reaction {id: 'R06871'}) RETURN e,Template
+Phase 1,Simple Relationship Queries - Incoming,Which EC numbers catalyze reaction R10826?,1.0,MATCH (n)-[:CATALYZES]->(r:Reaction {id: 'R10826'}) RETURN n,MATCH (e:EC)-[:CATALYZES]-(r:Reaction {id: 'R10826'}) RETURN e,Template
+Phase 1,Simple Relationship Queries - Incoming,Which reactions produce compound C00422?,1.0,MATCH (r:Reaction)-[:PRODUCES]->(c:Compound {id: 'C00422'}) RETURN r,MATCH (r:Reaction)-[:PRODUCES]-(c:Compound {id: 'C00422'}) RETURN r,Template
+Phase 1,Simple Relationship Queries - Incoming,Show reactions that generate C00422,1.0,MATCH (r:Reaction)-[:PRODUCES]->(c:Compound {id: 'C00422'}) RETURN r,MATCH (r:Reaction)-[:PRODUCES]-(c:Compound {id: 'C00422'}) RETURN r,Template
+Phase 1,Simple Relationship Queries - Incoming,Find reactions producing compound C00052,1.0,MATCH (r:Reaction)-[:PRODUCES]->(c:Compound {id: 'C00052'}) RETURN r,MATCH (r:Reaction)-[:PRODUCES]-(c:Compound {id: 'C00052'}) RETURN r,Template
+Phase 1,Simple Relationship Queries - Incoming,Get reactions that make C00422,1.0,MATCH (r:Reaction)-[:PRODUCES]->(c:Compound {id: 'C00422'}) RETURN r,MATCH (r:Reaction)-[:PRODUCES]-(c:Compound {id: 'C00422'}) RETURN r,Template
+Phase 1,Simple Relationship Queries - Incoming,Which reactions output compound C06157?,1.0,MATCH (r:Reaction)-[:PRODUCES]->(c:Compound {id: 'C06157'}) RETURN r,MATCH (r:Reaction)-[:PRODUCES]-(c:Compound {id: 'C06157'}) RETURN r,Template
+Phase 1,Simple Relationship Queries - Incoming,What reactions synthesize C00422?,1.0,MATCH (r:Reaction)-[:PRODUCES]->(c:Compound {id: 'C00422'}) RETURN r,MATCH (r:Reaction)-[:PRODUCES]-(c:Compound {id: 'C00422'}) RETURN r,Template
+Phase 1,Pathway-centric Queries,What reactions are in pathway path:ath00061?,1.0,MATCH (p:Pathway {id: 'path:ath00061'})-[:CONTAINS]->(r:Reaction) RETURN r,MATCH (p:Pathway {id: 'path:ath00061'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 1,Pathway-centric Queries,Show reactions in path:ats00603 pathway,1.0,MATCH (p:Pathway {id: 'path:ats00603'})-[:CONTAINS]->(r:Reaction) RETURN r,MATCH (p:Pathway {id: 'path:ats00603'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 1,Pathway-centric Queries,Find reactions in pathway path:ats00280,1.0,MATCH (p:Pathway {id: 'path:ats00280'})-[:CONTAINS]->(r:Reaction) RETURN r,MATCH (p:Pathway {id: 'path:ats00280'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 1,Pathway-centric Queries,Get reactions for path:gmx01040 pathway,1.0,MATCH (p:Pathway {id: 'path:gmx01040'})-[:CONTAINS]->(r:Reaction) RETURN r,MATCH (p:Pathway {id: 'gmx01040'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 1,Pathway-centric Queries,Which reactions are part of pathway path:ath00280?,1.0,MATCH (p:Pathway {id: 'path:ath00280'})-[:CONTAINS]->(r:Reaction) RETURN r,MATCH (p:Pathway {id: 'path:ath00280'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 1,Pathway-centric Queries,List reactions in path:gmx00603 pathway,1.0,MATCH (p:Pathway {id: 'path:gmx00603'})-[:CONTAINS]->(r:Reaction) RETURN r,MATCH (p:Pathway {id: 'path:gmx00603'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 1,Pathway-centric Queries,What functional units are in pathway path:gmx00061?,1.0,MATCH (p:Pathway {id: 'path:gmx00061'})-[:CONTAINS]->(f:FunctionalUnit) RETURN f,MATCH (p:Pathway {id: 'path:gmx00061'})-[:CONTAINS]-(f:FunctionalUnit) RETURN f,Template
+Phase 1,Pathway-centric Queries,Show complexes in path:ath00061 pathway,1.0,MATCH (p:Pathway {id: 'path:ath00061'})-[:CONTAINS]->(f:FunctionalUnit) RETURN f,MATCH (p:Pathway {id: 'ath00061'})-[:CONTAINS]-(f:FunctionalUnit) RETURN f,Template
+Phase 1,Pathway-centric Queries,Find functional units in pathway path:ats00603,1.0,MATCH (p:Pathway {id: 'path:ats00603'})-[:CONTAINS]->(f:FunctionalUnit) RETURN f,MATCH (p:Pathway {id: 'path:ats00603'})-[:CONTAINS]-(f:FunctionalUnit) RETURN f,Template
+Phase 1,Pathway-centric Queries,Get complexes in path:ats00280 pathway,1.0,MATCH (p:Pathway {id: 'path:ats00280'})-[:CONTAINS]->(f:FunctionalUnit) RETURN f,MATCH (p:Pathway {id: 'path:ats00280'})-[:CONTAINS]-(f:FunctionalUnit) RETURN f,Template
+Phase 1,Pathway-centric Queries,Which functional units are part of pathway path:gmx01040?,1.0,MATCH (p:Pathway {id: 'path:gmx01040'})-[:CONTAINS]->(f:FunctionalUnit) RETURN f,MATCH (p:Pathway {id: 'path:gmx01040'})-[:CONTAINS]-(f:FunctionalUnit) RETURN f,Template
+Phase 1,Pathway-centric Queries,List complexes in fatty acid biosynthesis,1.0,MATCH (p:Pathway {id: 'path:ath00061'})-[:CONTAINS]->(f:FunctionalUnit) RETURN f,MATCH (p:Pathway {id: 'path:ats00061'})-[:CONTAINS]-(f:FunctionalUnit) RETURN f,Template
+Phase 1,Reverse Pathway Queries,Which pathways contain reaction R07449?,1.0,MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction {id: 'R07449'}) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'R07449'}) RETURN p,Template
+Phase 1,Reverse Pathway Queries,Show pathways with reaction R07449,1.0,MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction {id: 'R07449'}) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'R07449'}) RETURN p,Template
+Phase 1,Reverse Pathway Queries,Find pathways including reaction R07449,1.0,MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction {id: 'R07449'}) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'R07449'}) RETURN p,Template
+Phase 1,Reverse Pathway Queries,Get pathways for reaction R07449,1.0,MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction {id: 'R07449'}) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'R07449'}) RETURN p,Template
+Phase 1,Reverse Pathway Queries,Which pathways have reaction R00200?,1.0,MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction {id: 'R00200'}) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'R00200'}) RETURN p,Template
+Phase 1,Reverse Pathway Queries,List pathways containing reaction R07449,1.0,MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction {id: 'R07449'}) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'R07449'}) RETURN p,Template
+Phase 1,Aggregation Queries,How many enzymes does gene ats:109733199 encode?,1.0,MATCH (n {id: 'ats:109733199'})-[r]->(m) RETURN count(r),MATCH (g:Gene {id: 'ats:109733199'})-[:ENCODES]-(e:EC) RETURN count(e),Template
+Phase 1,Aggregation Queries,Count reactions catalyzed by EC:1.1.1.1,1.0,MATCH (n {id: 'EC:1.1.1.1'})-[r]->(m) RETURN count(r),MATCH (p:Pathway {id: '1.1.1.1'})-[:CONTAINS]-(r:Reaction) RETURN count(r),Template
+Phase 1,Aggregation Queries,How many reactions use compound C00022 as substrate?,,MATCH (n {id: 'C00022'})-[r]->(m) RETURN count(r),MATCH (n:Reaction) RETURN count(n),Template
+Phase 1,Aggregation Queries,Count genes in ortholog K00010,,MATCH (n)-[r]->(m:{id:'K00010'}) RETURN count(r),MATCH (o:Ortholog {id: 'K00010'})-[:BELONGS_TO]-(g:Gene) RETURN count(g),Template
+Phase 1,Aggregation Queries,How many reactions are in pathway ko00010?,,MATCH (n {id: $id})-[r]->(m) RETURN count(r),MATCH (p:Pathway {id: 'ko00010'})-[:CONTAINS]-(r:Reaction) RETURN count(r),Template
+Phase 1,Aggregation Queries,Count functional units in pathway ko00020,,MATCH (n {id: $id})-[r]->(m) RETURN count(r),MATCH (p:Pathway {id: 'ko00020'})-[:CONTAINS]-(r:Reaction) RETURN count(r),Template
+Phase 1,Aggregation Queries,How many genes encode enzyme EC:1.1.1.1?,,MATCH (n)-[r]->(m {id: 'EC:1.1.1.1'}) RETURN count(r),MATCH (o:Ortholog {id: '1.1.1.1'})-[:BELONGS_TO]-(g:Gene) RETURN count(g),Template
+Phase 1,Aggregation Queries,Count genes in ortholog K00010,,MATCH (n)-[r]->(m {id: 'K00010'}) RETURN count(r),MATCH (o:Ortholog {id: 'K00010'})-[:BELONGS_TO]-(g:Gene) RETURN count(g),Template
+Phase 1,Aggregation Queries,How many reactions produce compound C00022?,,MATCH (n)-[r]->(m {id: 'C00022'}) RETURN count(r),MATCH (n:Reaction) RETURN count(n),Template
+Phase 1,Aggregation Queries,Count enzymes that catalyze reaction R00001?,,MATCH (n)-[r]->(m {id: 'R00001'}) RETURN count(r),MATCH (g:Gene {id: 'R00001'})-[:ENCODES]-(e:EC) RETURN count(e),Template
+Phase 1,Aggregation Queries,How many compounds are substrates of reaction R00010?,,MATCH (n)-[r]->(m {id: 'R00010'}) RETURN count(r),MATCH (n:Compound) RETURN count(n),Template
+Phase 1,Aggregation Queries,Count reactions in pathway ko00010,,MATCH (n)-[r]->(m {id: $id}) RETURN count(r),MATCH (p:Pathway {id: 'ko00010'})-[:CONTAINS]-(r:Reaction) RETURN count(r),Template
+Phase 1,Aggregation Queries,What types of nodes is gene ats:109761713 connected to?,,MATCH (n {id: 'ats:109761713'})-[]->(m) RETURN DISTINCT labels(m),MATCH (g:Gene {id: 'ats:109761713'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 1,Aggregation Queries,Show node types connected to pathway path:ats01040,,MATCH (n {id: 'path:ats01040'})-[]->(m) RETURN DISTINCT labels(m),MATCH (p:Pathway {id: 'path:ats01040'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 1,Aggregation Queries,What entities does compound C06000 interact with?,,MATCH (n {id: 'C06000'})-[]->(m) RETURN DISTINCT labels(m),MATCH (c:Compound {id: 'C06000'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 1,Aggregation Queries,List node types connected to enzyme EC:1.3.1.21,,MATCH (n {id: 'EC:1.3.1.21'})-[]->(m) RETURN DISTINCT labels(m),MATCH (e:EC {id: 'EC:1.3.1.21'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 1,Aggregation Queries,What types of nodes connect to reaction R07764?,,MATCH (n {id: 'R07764'})-[]->(m) RETURN DISTINCT labels(m),MATCH (c:Compound)-[:SUBSTRATE_OF]-(r:Reaction {id: 'R07764'}) RETURN c,Template
+Phase 1,Aggregation Queries,Show entity types linked to ortholog K11262,,MATCH (n {id: 'K11262'})-[]->(m) RETURN DISTINCT labels(m),MATCH (g:Gene)-[:BELONGS_TO]-(o:Ortholog {id: 'K11262'}) RETURN g,Template
+Phase 1,Aggregation Queries,What is connected to gene ath:AT1G54220?,,MATCH (n {id: 'AT1G54220'})-[]-(m) RETURN m,MATCH (g:Gene {id: 'ath:AT1G54220'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 1,Aggregation Queries,Show all neighbors of compound C00164,,MATCH (n {id: 'C00164'})-[]-(m) RETURN m,MATCH (c1:Compound {id: 'C00164'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 1,Aggregation Queries,Find all entities connected to enzyme EC:1.13.11.33,,MATCH (n {id: 'EC:1.13.11.33'})-[]-(m) RETURN m,MATCH (g:Gene {id: 'EC:1.13.11.33'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 1,Aggregation Queries,Get neighbors of reaction R01280,,MATCH (n {id: 'R01280'})-[]-(m) RETURN m,MATCH (c1:Compound {id: 'R01280'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 1,Aggregation Queries,What connects to pathway path:gmx00280?,,MATCH (n {id: 'path:gmx00280'})-[]-(m) RETURN m,MATCH (p:Pathway {id: 'path:gmx00280'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 1,Aggregation Queries,Show all nodes linked to ortholog K00249,,MATCH (n {id: 'K00249'})-[]-(m) RETURN m,MATCH (o:Ortholog {id: 'K00249'})-[:HAS_ENZYME_FUNCTION]-(e:EC) RETURN e,Template
+Phase 1,Aggregation Queries,Which pathways have the most reactions?,,"MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction) RETURN p.id, count(r) ORDER BY count(r) DESC","MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction) RETURN p.id, count(r) AS cnt ORDER BY cnt DESC LIMIT 10",Template
+Phase 1,Aggregation Queries,Rank pathways by number of reactions,,"MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction) RETURN p.id, count(r) ORDER BY count(r) DESC","MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction)
+RETURN p.id, p.name, count(r) AS numberOfReactions
+ORDER BY numberOfReactions DESC",Template
+Phase 1,Aggregation Queries,Show pathway sizes based on reaction count,,"MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction) RETURN p.id, count(r) ORDER BY count(r) DESC","MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction) RETURN p.id, count(r)",Template
+Phase 1,Aggregation Queries,Find largest pathways by reaction R06871 number,,"MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction) RETURN p.id, count(r) ORDER BY count(r) DESC",MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'R06871'}) RETURN p,Template
+Phase 1,Aggregation Queries,Order pathways by reaction count,,"MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction) RETURN p.id, count(r) ORDER BY count(r) DESC","MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction)
+RETURN p.id, count(r) AS reactionCount
+ORDER BY reactionCount DESC",Template
+Phase 1,Aggregation Queries,List pathways from most to least reactions,,"MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction) RETURN p.id, count(r) ORDER BY count(r) DESC","MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction) RETURN p.id, count(r) AS cnt ORDER BY cnt DESC LIMIT 10",Template
+Phase 1,Aggregation Queries,Which genes encode multiple enzymes?,,"MATCH (g:Gene)-[r:ENCODES]->() WITH g, count(r) as cnt WHERE cnt > $threshold RETURN g",MATCH (n:Gene) RETURN n LIMIT 100,Template
+Phase 1,Aggregation Queries,Find orthologs that catalyze more than 5 reactions,,"MATCH (g:Gene)-[r:ENCODES]->() WITH g, count(r) as cnt WHERE cnt > $threshold RETURN g",MATCH (n:Ortholog) RETURN n LIMIT 100,Template
+Phase 1,Aggregation Queries,Show compounds used in multiple reactions,,"MATCH (g:Gene)-[r:ENCODES]->() WITH g, count(r) as cnt WHERE cnt > $threshold RETURN g","MATCH (c:Compound)-[:SUBSTRATE_OF|PRODUCES]-(r:Reaction)
+WITH c, count(DISTINCT r) AS reactionCount
+WHERE reactionCount > 1
+RETURN c",Fallback
+Phase 1,Aggregation Queries,Which enzymes catalyze more than 3 reactions?,,"MATCH (g:Gene)-[r:ENCODES]->() WITH g, count(r) as cnt WHERE cnt > $threshold RETURN g","MATCH (enzyme:EC)-[:CATALYZES]->(reaction:Reaction)
+WITH enzyme, COUNT(reaction) AS num_reactions
+WHERE num_reactions > 3
+RETURN enzyme",Template
+Phase 1,Aggregation Queries,Find pathways with more than 10 reactions,,"MATCH (g:Gene)-[r:ENCODES]->() WITH g, count(r) as cnt WHERE cnt > $threshold RETURN g","MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction) RETURN p.id, count(r) AS cnt ORDER BY cnt DESC LIMIT 10",Template
+Phase 1,Aggregation Queries,List reactions with multiple substrates,,"MATCH (g:Gene)-[r:ENCODES]->() WITH g, count(r) as cnt WHERE cnt > $threshold RETURN g",MATCH (n:Reaction) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Find genes starting with AT1G,,MATCH (n:Gene) WHERE n.id STARTS WITH $prefix RETURN n,MATCH (n:Gene {id: 'AT1G'}) RETURN n,Template
+Phase 1,Filtering & Pattern Matching,Show enzymes starting with EC:1.1,,MATCH (n:Gene) WHERE n.id STARTS WITH $prefix RETURN n,MATCH (n:EC {id: '1.1'}) RETURN n,Template
+Phase 1,Filtering & Pattern Matching,Get compounds starting with C000,,MATCH (n:Gene) WHERE n.id STARTS WITH $prefix RETURN n,MATCH (n:Compound {id: 'C000'}) RETURN n,Template
+Phase 1,Filtering & Pattern Matching,List pathways starting with path:ats00280,,MATCH (n:Gene) WHERE n.id STARTS WITH $prefix RETURN n,MATCH (n:Pathway) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Find reactions starting with R000,,MATCH (n:Gene) WHERE n.id STARTS WITH $prefix RETURN n,MATCH (n:Reaction {id: 'R000'}) RETURN n,Template
+Phase 1,Filtering & Pattern Matching,Show orthologs starting with K00,,MATCH (n:Gene) WHERE n.id STARTS WITH $prefix RETURN n,MATCH (n:Ortholog) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Which genes encode enzymes?,,MATCH (g:Gene) WHERE EXISTS((g)-[:ENCODES]->()) RETURN g,MATCH (g:Gene)-[:ENCODES]-(e:EC) RETURN g,Template
+Phase 1,Filtering & Pattern Matching,Find compounds that are substrates,,MATCH (g:Gene) WHERE EXISTS((g)-[:ENCODES]->()) RETURN g,"MATCH (c:Compound)-[:SUBSTRATE_OF]-(:Reaction)
+RETURN DISTINCT c
+LIMIT 100",Fallback
+Phase 1,Filtering & Pattern Matching,Show enzymes that catalyze reactions,,MATCH (g:Gene) WHERE EXISTS((g)-[:ENCODES]->()) RETURN g,MATCH (n:EC) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Get reactions with substrates,,MATCH (g:Gene) WHERE EXISTS((g)-[:ENCODES]->()) RETURN g,MATCH (c:Compound {id: '2.7.7.14'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 1,Filtering & Pattern Matching,Which pathways contain reactions?,,MATCH (g:Gene) WHERE EXISTS((g)-[:ENCODES]->()) RETURN g,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction) RETURN p,Template
+Phase 1,Filtering & Pattern Matching,Find orthologs with enzyme EC:1.3.1.9 functions,,MATCH (g:Gene) WHERE EXISTS((g)-[:ENCODES]->()) RETURN g,MATCH (n:Ortholog) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Which genes don't encode any enzymes?,1.0,MATCH (g:Gene) WHERE NOT EXISTS((g)-[:ENCODES]->()) RETURN g,"MATCH (g:Gene)
+WHERE NOT EXISTS((g)-[:ENCODES]->(:EC))
+RETURN g",Fallback
+Phase 1,Filtering & Pattern Matching,Find compounds that aren't substrates,1.0,MATCH (g:Compound) WHERE NOT EXISTS((g)-[:SUBSTRATE_OF]->()) RETURN g,MATCH (c:Compound) WHERE NOT (c)-[:SUBSTRATE_OF]->() RETURN c,Template
+Phase 1,Filtering & Pattern Matching,Show enzymes that don't catalyze reactions,1.0,MATCH (g:EC) WHERE NOT EXISTS((g)-[:CATALYZES]->()) RETURN g,MATCH (n:EC) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Get reactions without products,1.0,MATCH (g:Reaction) WHERE NOT EXISTS((g)-[:PRODUCTS]->()) RETURN g,MATCH (r:Reaction) WHERE NOT (r)-[:PRODUCES]-() RETURN r,Template
+Phase 1,Filtering & Pattern Matching,Find orthologs without enzyme functions,1.0,MATCH (g:Ortholog) WHERE NOT EXISTS((g)-[:HAS_ENZYME_FUNCTION]->()) RETURN g,MATCH (e:EC) WHERE NOT (e)-[:CATALYZES]-() RETURN e,Template
+Phase 1,Filtering & Pattern Matching,Show both genes and orthologs,1.0,MATCH (n) WHERE n:Gene OR n:Ortholog RETURN n LIMIT 100,"MATCH (n)
+WHERE n:Gene OR n:Ortholog
+RETURN n
+LIMIT 100",Fallback
+Phase 1,Filtering & Pattern Matching,Find either enzymes or reactions,1.0,MATCH (n) WHERE n:EC OR n:Reaction RETURN n LIMIT 100,MATCH (n:EC) RETURN n,Template
+Phase 1,Filtering & Pattern Matching,Get compounds or pathways,1.0,MATCH (n) WHERE n:Gene OR n:Ortholog RETURN n LIMIT 100,MATCH (n:Compound) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,List genes and enzymes,1.0,MATCH (n) WHERE n:Gene OR n:EC RETURN n LIMIT 100,MATCH (n:Gene) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Show reactions and compounds,1.0,MATCH (n) WHERE n:Reaction OR n:Compounds RETURN n LIMIT 100,MATCH (n:Reaction) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Find orthologs or functional units,1.0,MATCH (n) WHERE n:Ortholog OR n:FunctionalUnit RETURN n LIMIT 100,MATCH (g:Gene {id: 'C00229'})-[:BELONGS_TO]-(o:Ortholog) RETURN o,Template
+Phase 1,Filtering & Pattern Matching,Which genes are most connected?,1.0,"MATCH (n:Gene)-[r]-() RETURN n, count(r) as degree ORDER BY degree DESC LIMIT 10",MATCH (n:Gene) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Find most connected compounds,1.0,"MATCH (n:Compound)-[r]-() RETURN n, count(r) as degree ORDER BY degree DESC LIMIT 10","MATCH (c:Compound)-[r]-()
+RETURN c.name, count(r) AS connectionCount
+ORDER BY connectionCount DESC
+LIMIT 100",Fallback
+Phase 1,Filtering & Pattern Matching,Show enzymes with most connections,1.0,"MATCH (n:EC)-[r]-() RETURN n, count(r) as degree ORDER BY degree DESC LIMIT 10",MATCH (n:EC) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Get most connected reactions,1.0,"MATCH (n:Reaction)-[r]-() RETURN n, count(r) as degree ORDER BY degree DESC LIMIT 10",MATCH (n:Reaction) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Which pathways have most connections?,1.0,"MATCH (n:Pathway)-[r]-() RETURN n, count(r) as degree ORDER BY degree DESC LIMIT 10","MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction) RETURN p.id, count(r) AS cnt ORDER BY cnt DESC LIMIT 10",Template
+Phase 1,Filtering & Pattern Matching,Find hub orthologs in the network,1.0,"MATCH (n:Ortholog)-[r]-() RETURN n, count(r) as degree ORDER BY degree DESC LIMIT 10",MATCH (n:Ortholog) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Show me 10 random genes,1.0,MATCH (n:Gene) RETURN n LIMIT 10,MATCH (n:Gene) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Get 5 sample pathways,1.0,MATCH (n:Pathway) RETURN n LIMIT 5,MATCH (n:Pathway) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Display 20 compounds,1.0,MATCH (n:Compound) RETURN n LIMIT 20,MATCH (n:Compound) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Give me 15 reactions,1.0,MATCH (n:Reaction) RETURN n LIMIT 15,MATCH (n:Reaction) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,Show 10 example enzymes,1.0,MATCH (n:EC) RETURN n LIMIT 10,MATCH (n:EC) RETURN n LIMIT 100,Template
+Phase 1,Filtering & Pattern Matching,List 5 orthologs,1.0,MATCH (n:Ortholog) RETURN n LIMIT 5,MATCH (n:Ortholog) RETURN n LIMIT 100,Template
+Phase 2,2-Hop Queries,What reactions is gene ath:AT1G01040 involved in through its ortholog?,1.0,MATCH (g:Gene {id: 'ath:AT1G01040'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (g:Gene {id: 'ath:AT1G01040'})-[:BELONGS_TO]-(o:Ortholog)-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,Show reactions catalyzed by the ortholog of gene ath:AT1G01050,1.0,MATCH (g:Gene {id: 'ath:AT1G01050'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (o:Ortholog {id: 'ath:AT1G01050'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,Find reactions for gene ats:109733199 via ortholog,1.0,MATCH (g:Gene {id: 'ats:109733199'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (g:Gene {id: 'ats:109733199'})-[:BELONGS_TO]-(o:Ortholog)-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,Get reactions that gene ats:109761713 participates in through ortholog,1.0,MATCH (g:Gene {id: 'ats:109761713'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (g:Gene {id: 'ats:109761713'})-[:BELONGS_TO]-(o:Ortholog)-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,Which reactions does gene ath:AT1G54220 indirectly catalyze?,1.0,MATCH (g:Gene {id: 'AT1G54220'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (g:Gene {id: 'ath:AT1G54220'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,List reactions connected to gene ath:AT2G06990 through ortholog groups,1.0,MATCH (g:Gene {id: 'AT2G06990'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (g:Gene {id: 'ath:AT2G06990'})-[:BELONGS_TO]-(o:Ortholog)-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,What reactions does gene ath:AT5G61540 catalyze through its enzymes?,1.0,MATCH (g:Gene {id: 'AT5G61540'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'ath:AT5G61540'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,Show reactions for gene gmx:100217331 via encoded enzymes,1.0,MATCH (g:Gene {id: 'gmx:100217331'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'gmx:100217331'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,Find reactions catalyzed by enzymes from gene EC:1.3.1.10,1.0,MATCH (g:Gene {id: 'EC:1.3.1.10'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'EC:1.3.1.10'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,Get reactions that gene ats:109745953 affects through EC numbers,1.0,MATCH (g:Gene {id: 'ats:109745953'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'ats:109745953'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,Which reactions are influenced by gene gmx:100037478?,1.0,MATCH (g:Gene {id: 'gmx:100037478'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'gmx:100037478'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,List reactions connected to gene EC:4.2.1.59 through enzymes,1.0,MATCH (g:Gene {id: 'EC:4.2.1.59'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'EC:4.2.1.59'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,What compounds are produced from compound C06000?,1.0,MATCH (c1:Compound {id: 'C06000'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->(c2:Compound) RETURN c2,MATCH (c1:Compound {id: 'C06000'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,2-Hop Queries,Show products when C00024 is used as substrate,1.0,MATCH (c1:Compound {id: 'C00024'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->(c2:Compound) RETURN c2,MATCH (c1:Compound {id: 'C00024'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,2-Hop Queries,Find compounds made from C00164,1.0,MATCH (c1:Compound {id: 'C00164'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->(c2:Compound) RETURN c2,MATCH (c1:Compound {id: 'C00164'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,2-Hop Queries,Get output compounds for substrate C08813,1.0,MATCH (c1:Compound {id: 'C08813'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->(c2:Compound) RETURN c2,MATCH (c1:Compound {id: 'C08813'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,2-Hop Queries,Which compounds are synthesized from C03069?,1.0,MATCH (c1:Compound {id: 'C03069'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->(c2:Compound) RETURN c2,MATCH (c1:Compound {id: 'C03069'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,2-Hop Queries,What can be produced using compound C00183 as input?,1.0,MATCH (c1:Compound {id: 'C00183'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->(c2:Compound) RETURN c2,MATCH (c1:Compound {id: 'C00183'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,2-Hop Queries,What enzyme functions does gene ath:AT1G01040 have through ortholog?,1.0,MATCH (g:Gene {id: 'ath:AT1G01040'})-[:BELONGS_TO]->(o:Ortholog)-[:HAS_ENZYME_FUNCTION]->(e:EC) RETURN e,MATCH (o:Ortholog {id: 'ath:AT1G01040'})-[:HAS_ENZYME_FUNCTION]-(e:EC) RETURN e,Template
+Phase 2,2-Hop Queries,Show EC numbers for gene ath:AT1G01050 via ortholog,1.0,MATCH (g:Gene {id: 'ath:AT1G01050'})-[:BELONGS_TO]->(o:Ortholog)-[:HAS_ENZYME_FUNCTION]->(e:EC) RETURN e,MATCH (o:Ortholog {id: 'ath:AT1G01050'})-[:HAS_ENZYME_FUNCTION]-(e:EC) RETURN e,Template
+Phase 2,2-Hop Queries,Find enzyme activities of gene gmx:547808 through KO group,1.0,MATCH (g:Gene {id: 'gmx:547808'})-[:BELONGS_TO]->(o:Ortholog)-[:HAS_ENZYME_FUNCTION]->(e:EC) RETURN e,MATCH (g:Gene {id: 'gmx:547808'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 2,2-Hop Queries,Get EC numbers associated with gene ats:109733199 via ortholog,1.0,MATCH (g:Gene {id: 'ats:109733199'})-[:BELONGS_TO]->(o:Ortholog)-[:HAS_ENZYME_FUNCTION]->(e:EC) RETURN e,MATCH (o:Ortholog {id: 'ats:109733199'})-[:HAS_ENZYME_FUNCTION]-(e:EC) RETURN e,Template
+Phase 2,2-Hop Queries,Which enzymes does gene ats:109761713 relate to through ortholog?,1.0,MATCH (g:Gene {id: 'ats:109761713'})-[:BELONGS_TO]->(o:Ortholog)-[:HAS_ENZYME_FUNCTION]->(e:EC) RETURN e,MATCH (o:Ortholog {id: 'ats:109761713'})-[:HAS_ENZYME_FUNCTION]-(e:EC) RETURN e,Template
+Phase 2,2-Hop Queries,List enzyme functions for gene ath:AT1G54220 via ortholog groups,1.0,MATCH (g:Gene {id: 'ath:AT1G54220'})-[:BELONGS_TO]->(o:Ortholog)-[:HAS_ENZYME_FUNCTION]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ath:AT1G54220'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 2,2-Hop Queries,What reactions use products from reaction R06871?,1.0,MATCH (r1:Reaction {id: 'R06871'})-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r_source:Reaction {id: 'R06871'})-[:PRODUCES]->(product:Compound)<-[:SUBSTRATE_OF]-(target_reaction:Reaction) RETURN target_reaction,Template
+Phase 2,2-Hop Queries,Show downstream reactions of reaction R10826,1.0,MATCH (r1:Reaction {id: 'R10826'})-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'R10826'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,2-Hop Queries,Find reactions that consume products of reaction R03777,1.0,MATCH (r1:Reaction {id: 'R03777'})-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'R03777'})-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,Template
+Phase 2,2-Hop Queries,Get reactions following reaction R02814,1.0,MATCH (r1:Reaction {id: 'R02814'})-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'R02814'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,2-Hop Queries,Which reactions use outputs from reaction R04957?,1.0,MATCH (r1:Reaction {id: 'R04957'})-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'R04957'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,2-Hop Queries,List next reactions after reaction R07449,1.0,MATCH (r1:Reaction {id: 'R07449'})-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'R07449'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,2-Hop Queries,What compounds are produced in pathway path:gmx00603?,1.0,MATCH (p:Pathway {id: 'path:gmx00603'})-[:CONTAINS]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN DISTINCT c,MATCH (p:Pathway {id: 'path:gmx00603'})-[:CONTAINS]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,2-Hop Queries,Show all products of path:ath00603 pathway,1.0,MATCH (p:Pathway {id: 'path:ath00603'})-[:CONTAINS]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN DISTINCT c,MATCH (p:Pathway {id: 'ath00603'})-[:CONTAINS]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,2-Hop Queries,Find compounds made in pathway path:ats01040,1.0,MATCH (p:Pathway {id: 'path:ats01040'})-[:CONTAINS]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN DISTINCT c,MATCH (p:Pathway {id: 'path:ats01040'})-[:CONTAINS]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,2-Hop Queries,Which compounds are synthesized in pathway path:gmx00280?,1.0,MATCH (p:Pathway {id: 'path:gmx00280'})-[:CONTAINS]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN DISTINCT c,MATCH (p:Pathway {id: 'path:gmx00280'})-[:CONTAINS]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,2-Hop Queries,List all products from path:gmx00061 pathway,1.0,MATCH (p:Pathway {id: 'path:gmx00061'})-[:CONTAINS]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN DISTINCT c,MATCH (p:Pathway {id: 'path:gmx00061'})-[:CONTAINS]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,2-Hop Queries,What compounds are consumed in pathway path:ath00061?,1.0,MATCH (p:Pathway {id: 'path:ath00061'})-[:CONTAINS]->(r:Reaction)<-[:SUBSTRATE_OF]-(c:Compound) RETURN DISTINCT c,MATCH (p:Pathway {id: 'path:ath00061'})-[:CONTAINS]-(r:Reaction)-[:SUBSTRATE_OF]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,2-Hop Queries,Find input compounds for pathway path:ats00603,1.0,MATCH (p:Pathway {id: 'path:ats00603'})-[:CONTAINS]->(r:Reaction)<-[:SUBSTRATE_OF]-(c:Compound) RETURN DISTINCT c,MATCH (p:Pathway {id: 'path:ats00603'})-[:CONTAINS]-(r:Reaction)-[:SUBSTRATE_OF]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,2-Hop Queries,Which compounds are consumed in pathway path:ats00280?,1.0,MATCH (p:Pathway {id: 'path:ats00280'})-[:CONTAINS]->(r:Reaction)<-[:SUBSTRATE_OF]-(c:Compound) RETURN DISTINCT c,MATCH (p:Pathway {id: 'path:ats00280'})-[:CONTAINS]-(r:Reaction)-[:SUBSTRATE_OF]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,2-Hop Queries,What enzymes are associated with functional unit M00001?,,MATCH (f:FunctionalUnit {id: $id})<-[:MEMBER_OF]-(n)-[:ENCODES|HAS_ENZYME_FUNCTION]->(e:EC) RETURN DISTINCT e,MATCH (f:FunctionalUnit {id: 'M00001'})-[:MEMBER_OF]-(n)-[:ENCODES|HAS_ENZYME_FUNCTION]-(e:EC) RETURN DISTINCT e,Template
+Phase 2,2-Hop Queries,Show EC numbers for complex M00002,,MATCH (f:FunctionalUnit {id: $id})<-[:MEMBER_OF]-(n)-[:ENCODES|HAS_ENZYME_FUNCTION]->(e:EC) RETURN DISTINCT e,MATCH (f:FunctionalUnit {id: 'M00002'})-[:MEMBER_OF]-(n)-[:ENCODES|HAS_ENZYME_FUNCTION]-(e:EC) RETURN DISTINCT e,Template
+Phase 2,2-Hop Queries,Find enzyme EC:1.3.1.9 activities in functional unit M00003,,MATCH (f:FunctionalUnit {id: 'EC:1.3.1.9'})<-[:MEMBER_OF]-(n)-[:ENCODES|HAS_ENZYME_FUNCTION]->(e:EC) RETURN DISTINCT e,MATCH (e:EC {id: 'EC:1.3.1.9'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,2-Hop Queries,Get enzymes for complex M00004,,MATCH (f:FunctionalUnit {id: $id})<-[:MEMBER_OF]-(n)-[:ENCODES|HAS_ENZYME_FUNCTION]->(e:EC) RETURN DISTINCT e,MATCH (f:FunctionalUnit {id: 'M00004'})-[:MEMBER_OF]-(n)-[:ENCODES|HAS_ENZYME_FUNCTION]-(e:EC) RETURN DISTINCT e,Template
+Phase 2,2-Hop Queries,Which EC numbers relate to functional unit M00005?,,MATCH (f:FunctionalUnit {id: $id})<-[:MEMBER_OF]-(n)-[:ENCODES|HAS_ENZYME_FUNCTION]->(e:EC) RETURN DISTINCT e,MATCH (f:FunctionalUnit {id: 'M00005'})-[:MEMBER_OF]-(n)-[:ENCODES|HAS_ENZYME_FUNCTION]-(e:EC) RETURN DISTINCT e,Template
+Phase 2,2-Hop Queries,List enzymes in complex M00006,,MATCH (f:FunctionalUnit {id: $id})<-[:MEMBER_OF]-(n)-[:ENCODES|HAS_ENZYME_FUNCTION]->(e:EC) RETURN DISTINCT e,MATCH (f:FunctionalUnit {id: 'M00006'})-[:MEMBER_OF]-(n)-[:ENCODES|HAS_ENZYME_FUNCTION]-(e:EC) RETURN DISTINCT e,Template
+Phase 2,3-Hop Queries,What compounds does gene ath:AT2G06990 help produce?,,MATCH (g:Gene {id: 'AT2G06990'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN c,MATCH (g:Gene {id: 'ath:AT2G06990'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,3-Hop Queries,Show products from gene ath:AT5G61540 via ortholog pathway,,MATCH (g:Gene {id: 'AT5G61540'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN c,MATCH (g:Gene {id: 'ath:AT5G61540'})-[:BELONGS_TO]-(o:Ortholog)-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,3-Hop Queries,Find compounds synthesized by gene gmx:100217331,,MATCH (g:Gene {id: 'gmx:100217331'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN c,MATCH (g:Gene {id: 'gmx:100217331'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,3-Hop Queries,Get output compounds from gene ats:109745953,,MATCH (g:Gene {id: 'ats:109745953'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN c,MATCH (r:Reaction {id: 'ats:109745953'})-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,3-Hop Queries,Which compounds are produced through gene gmx:100037478?,,MATCH (g:Gene {id: 'gmx:100037478'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN c,MATCH (g:Gene {id: 'gmx:100037478'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,3-Hop Queries,List compounds made by gene ath:AT1G01040 via ortholog,,MATCH (g:Gene {id: 'ath:AT1G01040'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN c,MATCH (r:Reaction {id: 'ath:AT1G01040'})-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,3-Hop Queries,What compounds does gene ath:AT1G01050 produce through enzymes?,,MATCH (g:Gene {id: 'ath:AT1G01050'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN c,MATCH (g:Gene {id: 'ath:AT1G01050'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,3-Hop Queries,Show products from gene ats:109733199 via EC pathway,,MATCH (g:Gene {id: 'ats:109733199'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN c,MATCH (g:Gene {id: 'ats:109733199'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,3-Hop Queries,Find compounds made by gene ats:109761713 through enzymes,,MATCH (g:Gene {id: 'ats:109761713'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN c,MATCH (g:Gene {id: 'ats:109761713'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,3-Hop Queries,Get products from gene ath:AT1G54220 via enzyme catalysis,,MATCH (g:Gene {id: 'AT1G54220'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN c,MATCH (g:Gene {id: 'ath:AT1G54220'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,3-Hop Queries,Which compounds result from gene ath:AT2G06990 activity?,,MATCH (g:Gene {id: 'AT2G06990'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN c,MATCH (g:Gene {id: 'ath:AT2G06990'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,3-Hop Queries,List compounds produced by gene ath:AT5G61540 via enzymes,,MATCH (g:Gene {id: 'AT5G61540'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound) RETURN c,MATCH (g:Gene {id: 'ath:AT5G61540'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,3-Hop Queries,What reactions follow pathway path:gmx01040?,,MATCH (p:Pathway {id: 'path:gmx01040'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (p:Pathway {id: 'gmx01040'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,3-Hop Queries,Show downstream reactions from glycolysis products,,MATCH (p:Pathway {id: 'path:ath00010'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'glycolysis'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,3-Hop Queries,Find reactions that use outputs from pathway path:ath00280,,MATCH (p:Pathway {id: 'path:ath00280'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (c:Compound {id: 'ath00280'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 2,3-Hop Queries,Get subsequent reactions after TCA cycle,,MATCH (p:Pathway {id: 'path:ath00020'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: '2.7.7.14'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,3-Hop Queries,Which reactions consume products from pathway path:gmx00603?,,MATCH (p:Pathway {id: 'path:gmx00603'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (c:Compound {id: 'gmx00603'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 2,3-Hop Queries,List reactions following fatty acid biosynthesis,,MATCH (p:Pathway {id: 'path:ath00061'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'path:ats00061'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,3-Hop Queries,What reactions are two steps downstream from compound C01181?,,MATCH (c1:Compound {id: 'C01181'})-[:SUBSTRATE_OF]->(r1:Reaction)-[:PRODUCES]->(c2:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'C01181'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,3-Hop Queries,Show reactions in the second step after using R06870,,MATCH (c1:Compound {id: 'R06870'})-[:SUBSTRATE_OF]->(r1:Reaction)-[:PRODUCES]->(c2:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'R06870'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,3-Hop Queries,Find reactions two hops away from compound C00422,,MATCH (c1:Compound {id: 'C00422'})-[:SUBSTRATE_OF]->(r1:Reaction)-[:PRODUCES]->(c2:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'C00422'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,3-Hop Queries,Get second-level reactions from R06871,,MATCH (c1:Compound {id: 'R06871'})-[:SUBSTRATE_OF]->(r1:Reaction)-[:PRODUCES]->(c2:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'R06871'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,3-Hop Queries,Which reactions are reached through two conversions from R10826?,,MATCH (c1:Compound {id: 'R10826'})-[:SUBSTRATE_OF]->(r1:Reaction)-[:PRODUCES]->(c2:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'R10826'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,3-Hop Queries,List reactions two steps after R03777,,MATCH (c1:Compound {id: 'R03777'})-[:SUBSTRATE_OF]->(r1:Reaction)-[:PRODUCES]->(c2:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) RETURN r2,MATCH (r1:Reaction {id: 'R03777'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,3-Hop Queries,Which pathways is gene gmx:100217331 involved in?,,MATCH (g:Gene {id: 'gmx:100217331'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'gmx:100217331'}) RETURN p,Template
+Phase 2,3-Hop Queries,Show pathways for gene ats:109745953 through ortholog,,MATCH (g:Gene {id: 'ats:109745953'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'ats:109745953'}) RETURN p,Template
+Phase 2,3-Hop Queries,Find pathways connected to gene gmx:100037478,,MATCH (g:Gene {id: 'gmx:100037478'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'gmx:100037478'}) RETURN p,Template
+Phase 2,3-Hop Queries,Get pathways that gene ath:AT1G01040 participates in,,MATCH (g:Gene {id: 'ath:AT1G01040'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'ath:AT1G01040'}) RETURN p,Template
+Phase 2,3-Hop Queries,Which pathways involve gene ath:AT1G01050?,,MATCH (g:Gene {id: 'ath:AT1G01050'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'ath:AT1G01050'}) RETURN p,Template
+Phase 2,3-Hop Queries,List pathways for gene ats:109733199 via ortholog,,MATCH (g:Gene {id: 'ats:109733199'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'ats:109733199'}) RETURN p,Template
+Phase 2,3-Hop Queries,Which pathways does gene ats:109761713 affect through enzymes?,,MATCH (g:Gene {id: 'ats:109761713'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'ats:109761713'}) RETURN p,Template
+Phase 2,3-Hop Queries,Show pathways for gene ath:AT1G54220 via encoded EC,,MATCH (g:Gene {id: 'AT1G54220'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,"MATCH (g:Gene {id: ""ath:AT1G54220""})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:CONTAINS]-(p:Pathway)
+RETURN p",Fallback
+Phase 2,3-Hop Queries,Find pathways influenced by gene ath:AT2G06990,,MATCH (g:Gene {id: 'AT2G06990'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'ath:AT2G06990'}) RETURN p,Template
+Phase 2,3-Hop Queries,Get pathways connected to gene ath:AT5G61540 through enzymes,,MATCH (g:Gene {id: 'AT5G61540'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'ath:AT5G61540'}) RETURN p,Template
+Phase 2,3-Hop Queries,Which pathways involve gene gmx:100217331 via EC numbers?,,MATCH (g:Gene {id: 'gmx:100217331'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'gmx:100217331'}) RETURN p,Template
+Phase 2,3-Hop Queries,List pathways for gene ats:109745953 through enzymes,,MATCH (g:Gene {id: 'ats:109745953'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'ats:109745953'}) RETURN p,Template
+Phase 2,Variable-Length Paths,How is compound EC:1.3.1.21 connected to EC:1.3.1.21?,,MATCH path = (c1:Compound {id: 'EC:1.3.1.21'1})-[:SUBSTRATE_OF|PRODUCES*1..5]-(c2:Compound {id: 'EC:1.3.1.21'2}) RETURN path,MATCH (e:EC {id: 'EC:1.3.1.21'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,Variable-Length Paths,Show pathways between path:ath00603 and path:ath00603,,MATCH path = (c1:Compound {id: 'path:ath00603'1})-[:SUBSTRATE_OF|PRODUCES*1..5]-(c2:Compound {id: 'path:ath00603'2}) RETURN path,MATCH (n:Pathway {id: 'ath00603'}) RETURN n,Template
+Phase 2,Variable-Length Paths,Find conversion routes from C00035 to C00037,,MATCH path = (c1:Compound {id: 'C00035'1})-[:SUBSTRATE_OF|PRODUCES*1..5]-(c2:Compound {id: 'C00035'2}) RETURN path,MATCH (c1:Compound {id: 'C00035'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,Variable-Length Paths,Get paths connecting C00041 to C00043,,MATCH path = (c1:Compound {id: 'C00041'1})-[:SUBSTRATE_OF|PRODUCES*1..5]-(c2:Compound {id: 'C00041'2}) RETURN path,MATCH (c1:Compound {id: 'C00041'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,Variable-Length Paths,Which reactions link C00041 to C00043?,,MATCH path = (c1:Compound {id: 'C00041'1})-[:SUBSTRATE_OF|PRODUCES*1..5]-(c2:Compound {id: 'C00041'2}) RETURN path,MATCH (p1:Pathway {id: 'C00041'})-[:CONTAINS]-(r:Reaction)-[:CONTAINS]-(p2:Pathway {id: 'C00043'}) RETURN r,Template
+Phase 2,Variable-Length Paths,Show metabolic route from C00058 to C00062,,MATCH path = (c1:Compound {id: 'C00058'1})-[:SUBSTRATE_OF|PRODUCES*1..5]-(c2:Compound {id: 'C00058'2}) RETURN path,MATCH (c1:Compound {id: 'C00058'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,Variable-Length Paths,What's the shortest connection between gene path:ats01040 and pathway path:ats01040?,,MATCH path = shortestPath((n1 {id: 'path:ats01040'})-[*..5]-(n2 {id: 'path:ats01040'})) RETURN path,MATCH (g:Gene {id: 'path:ats01040'})-[:MEMBER_OF]-(f:FunctionalUnit) RETURN f,Template
+Phase 2,Variable-Length Paths,Find shortest path from compound EC:1.13.11.33 to enzyme EC:1.13.11.33,,MATCH path = shortestPath((n1 {id: 'EC:1.13.11.33'})-[*..5]-(n2 {id: 'EC:1.13.11.33'})) RETURN path,MATCH (n:EC {id: 'EC:1.13.11.33'}) RETURN n,Template
+Phase 2,Variable-Length Paths,Get shortest connection between ortholog path:gmx00280 and pathway path:gmx00280,,MATCH path = shortestPath((n1 {id: 'path:gmx00280'})-[*..5]-(n2 {id: 'path:gmx00280'})) RETURN path,MATCH (p1:Pathway {id: 'path:gmx00280'})-[:CONTAINS]-(r:Reaction)-[:CONTAINS]-(p2:Pathway {id: 'path:gmx00280'}) RETURN r,Template
+Phase 2,Variable-Length Paths,What's the closest path from enzyme EC:6.4.1.2 to compound EC:6.4.1.2?,,MATCH path = shortestPath((n1 {id: 'EC:6.4.1.2'})-[*..5]-(n2 {id: 'EC:6.4.1.1'})) RETURN path,MATCH (g:Gene {id: 'EC:6.4.1.2'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,Variable-Length Paths,Find minimum hops from gene ath:AT1G01040 to reaction ath:AT1G01040,,MATCH path = shortestPath((n1 {id: 'C00058'})-[*..5]-(n2 {id: 'C00062'})) RETURN path,MATCH (g:Gene {id: 'ath:AT1G01040'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 2,Variable-Length Paths,What is within 2 steps of gene ath:AT1G01050?,1.0,MATCH (n {id: 'ath:AT1G01050'})-[*1..2]-(m) RETURN DISTINCT m,MATCH (g:Gene {id: 'ath:AT1G01050'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 2,Variable-Length Paths,Show all entities within 2 hops of compound C00052,1.0,MATCH (n {id: 'C00052'})-[*1..2]-(m) RETURN DISTINCT m,MATCH (c1:Compound {id: 'C00052'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,Variable-Length Paths,Find everything connected within 2 steps of pathway path:gmx00061,1.0,MATCH (n {id: 'path:gmx00061'})-[*1..2]-(m) RETURN DISTINCT m,MATCH (p:Pathway {id: 'path:gmx00061'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,Variable-Length Paths,Get neighbors within 2 hops of enzyme EC:2.3.1.199,1.0,MATCH (n {id: 'EC:2.3.1.199'})-[*1..2]-(m) RETURN DISTINCT m,MATCH (g:Gene {id: 'EC:2.3.1.199'})-[:ENCODES]-(e:EC)-[:CATALYZES]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 2,Variable-Length Paths,Which entities are 2 steps from reaction R04957?,1.0,MATCH (n {id: 'R04957'})-[*1..2]-(m) RETURN DISTINCT m,MATCH (r1:Reaction {id: 'R04957'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,Variable-Length Paths,List all nodes within 2 hops of ortholog K10246,1.0,MATCH (n {id: 'K10246'})-[*1..2]-(m) RETURN DISTINCT m,MATCH (g:Gene)-[:BELONGS_TO]-(o:Ortholog {id: 'K10246'}) RETURN g,Template
+Phase 2,Variable-Length Paths,Show the metabolic cascade starting from compound C06157,1.0,MATCH path = (c:Compound {id: 'C06157'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->()-[:SUBSTRATE_OF*0..3]->() RETURN path,MATCH (r1:Reaction {id: '2.7.7.14'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,Variable-Length Paths,What happens downstream from C00024?,1.0,MATCH path = (c:Compound {id: 'C00024'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->()-[:SUBSTRATE_OF*0..3]->() RETURN path,MATCH (r1:Reaction {id: 'C00024'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,Variable-Length Paths,Trace the pathway forward from compound C06000,1.0,MATCH path = (c:Compound {id: 'C06000'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->()-[:SUBSTRATE_OF*0..3]->() RETURN path,MATCH (c1:Compound {id: 'C06000'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,Variable-Length Paths,Show metabolic flow from C00033,1.0,MATCH path = (c:Compound {id: 'C00033'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->()-[:SUBSTRATE_OF*0..3]->() RETURN path,MATCH (c1:Compound {id: 'C00033'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,Variable-Length Paths,What are the downstream products of C00035?,1.0,MATCH path = (c:Compound {id: 'C00035'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->()-[:SUBSTRATE_OF*0..3]->() RETURN path,MATCH (c1:Compound {id: 'C00035'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,Variable-Length Paths,Trace metabolic progression from C00037,1.0,MATCH path = (c:Compound {id: 'C00037'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->()-[:SUBSTRATE_OF*0..3]->() RETURN path,MATCH (c1:Compound {id: 'C00037'})-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]-(c2:Compound) RETURN c2,Template
+Phase 2,Intersection & Union Queries,Which reactions are shared between pathways path:ath00061 and path:ath00061?,,MATCH (p1:Pathway {id: 'path:ath00061'1})-[:CONTAINS]->(r:Reaction)<-[:CONTAINS]-(p2:Pathway {id: 'path:ath00061'2}) RETURN r,MATCH (p1:Pathway {id: 'path:ath00061'})-[:CONTAINS]-(r:Reaction)-[:CONTAINS]-(p2:Pathway {id: 'path:ath00061'}) RETURN r,Template
+Phase 2,Intersection & Union Queries,Find common reactions in glycolysis and TCA cycle,,MATCH (p1:Pathway {id: 'path:ath00010'1})-[:CONTAINS]->(r:Reaction)<-[:CONTAINS]-(p2:Pathway {id: 'path:ath00010'2}) RETURN r,MATCH (p1:Pathway {id: 'glycolysis'})-[:CONTAINS]-(r:Reaction)-[:CONTAINS]-(p2:Pathway {id: 'TCA cycle'}) RETURN r,Template
+Phase 2,Intersection & Union Queries,Show overlapping reactions between pathways path:ats00603 and path:ats00603,,MATCH (p1:Pathway {id: 'path:ats00603'1})-[:CONTAINS]->(r:Reaction)<-[:CONTAINS]-(p2:Pathway {id: 'path:ats00603'2}) RETURN r,MATCH (p1:Pathway {id: 'path:ats00603'})-[:CONTAINS]-(r:Reaction)-[:CONTAINS]-(p2:Pathway {id: 'path:ats00603'}) RETURN r,Template
+Phase 2,Intersection & Union Queries,Get shared reactions between fatty acid biosynthesis and degradation,,MATCH (p1:Pathway {id: 'path:ath00061'1})-[:CONTAINS]->(r:Reaction)<-[:CONTAINS]-(p2:Pathway {id: 'path:ath00061'2}) RETURN r,MATCH (p1:Pathway {id: 'path:ats00061'})-[:CONTAINS]-(r:Reaction)-[:CONTAINS]-(p2:Pathway {id: 'path:ats00071'}) RETURN r,Template
+Phase 2,Intersection & Union Queries,Which reactions appear in both pathway path:ats00280 and path:ats00280?,,MATCH (p1:Pathway {id: 'path:ats00280'1})-[:CONTAINS]->(r:Reaction)<-[:CONTAINS]-(p2:Pathway {id: 'path:ats00280'2}) RETURN r,MATCH (p1:Pathway {id: 'ats00280'})-[:CONTAINS]-(r:Reaction)-[:CONTAINS]-(p2:Pathway {id: 'ats00280'}) RETURN r,Template
+Phase 2,Intersection & Union Queries,List common reactions between pentose phosphate and glycolysis,,MATCH (p1:Pathway {id: 'path:ath00010'1})-[:CONTAINS]->(r:Reaction)<-[:CONTAINS]-(p2:Pathway {id: 'path:ath00010'2}) RETURN r,MATCH (p1:Pathway {id: 'map00030'})-[:CONTAINS]-(r:Reaction)-[:CONTAINS]-(p2:Pathway {id: 'map00010'}) RETURN r,Template
+Phase 2,Intersection & Union Queries,Which genes encode the same enzyme EC:1.3.1.10?,,"MATCH (g1:Gene)-[:ENCODES]->(e:EC {id: 'EC:1.3.1.10'})<-[:ENCODES]-(g2:Gene) WHERE g1 <> g2 RETURN g1, g2",MATCH (g:Gene)-[:ENCODES]-(e:EC {id: 'EC:1.3.1.10'}) RETURN g,Template
+Phase 2,Intersection & Union Queries,Find genes with redundant encoding for ats:109733199,,"MATCH (g1:Gene)-[:ENCODES]->(e:EC {id: 'ats:109733199'})<-[:ENCODES]-(g2:Gene) WHERE g1 <> g2 RETURN g1, g2",MATCH (n:Gene {id: 'ats:109733199'}) RETURN n,Template
+Phase 2,Intersection & Union Queries,Show genes that both produce enzyme ats:109761713,,"MATCH (g1:Gene)-[:ENCODES]->(e:EC {id: 'ats:109761713'})<-[:ENCODES]-(g2:Gene) WHERE g1 <> g2 RETURN g1, g2",MATCH (g:Gene)-[:ENCODES]-(e:EC {id: 'ats:109761713'}) RETURN g,Template
+Phase 2,Intersection & Union Queries,Get genes with overlapping function for ath:AT1G54220,,"MATCH (g1:Gene)-[:ENCODES]->(e:EC {id: 'AT1G54220'})<-[:ENCODES]-(g2:Gene) WHERE g1 <> g2 RETURN g1, g2",MATCH (g:Gene {id: 'ath:AT1G54220'})-[:BELONGS_TO]-(o:Ortholog) RETURN o,Template
+Phase 2,Intersection & Union Queries,Which genes share enzyme EC:4.2.1.59?,,"MATCH (g1:Gene)-[:ENCODES]->(e:EC {id: 'EC:4.2.1.59'})<-[:ENCODES]-(g2:Gene) WHERE g1 <> g2 RETURN g1, g2",MATCH (g:Gene)-[:ENCODES]-(e:EC {id: 'EC:4.2.1.59'}) RETURN g,Template
+Phase 2,Intersection & Union Queries,List genes encoding the same ath:AT2G06990,,"MATCH (g1:Gene)-[:ENCODES]->(e:EC {id: 'AT2G06990'})<-[:ENCODES]-(g2:Gene) WHERE g1 <> g2 RETURN g1, g2",MATCH (g:Gene)-[:ENCODES]-(e:EC {id: 'ath:AT2G06990'}) RETURN g,Template
+Phase 2,Intersection & Union Queries,Which compounds are used in multiple pathways?,,"MATCH (p:Pathway)-[:CONTAINS]->(:Reaction)-[:PRODUCES|SUBSTRATE_OF]-(c:Compound) WITH c, count(DISTINCT p) as pathwayCount WHERE pathwayCount > 1 RETURN c, pathwayCount","MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction)-[:PRODUCES]->(c:Compound)
+WITH c, COUNT(DISTINCT p) AS pathwayCount
+WHERE pathwayCount > 1
+RETURN DISTINCT c",Template
+Phase 2,Intersection & Union Queries,Find metabolites shared across pathways,,"MATCH (p:Pathway)-[:CONTAINS]->(:Reaction)-[:PRODUCES|SUBSTRATE_OF]-(c:Compound) WITH c, count(DISTINCT p) as pathwayCount WHERE pathwayCount > 1 RETURN c, pathwayCount","MATCH (c:Compound)-[:SUBSTRATE_OF|PRODUCES]-(r:Reaction)-[:CONTAINS]-(p:Pathway)
+WITH c, COLLECT(DISTINCT p) AS pathways
+WHERE size(pathways) > 1
+RETURN c.name AS CompoundName, c.id AS CompoundId, size(pathways) AS NumberOfPathways, [pathway IN pathways | pathway.title] AS PathwayTitles",Fallback
+Phase 2,Intersection & Union Queries,Show compounds with broad pathway involvement,,"MATCH (p:Pathway)-[:CONTAINS]->(:Reaction)-[:PRODUCES|SUBSTRATE_OF]-(c:Compound) WITH c, count(DISTINCT p) as pathwayCount WHERE pathwayCount > 1 RETURN c, pathwayCount","MATCH (c:Compound)-[:SUBSTRATE_OF|PRODUCES]-(r:Reaction)-[:CONTAINS]-(p:Pathway)
+RETURN c.name AS Compound, count(DISTINCT p) AS PathwayCount
+ORDER BY PathwayCount DESC
+LIMIT 100",Fallback
+Phase 2,Intersection & Union Queries,Get hub metabolites in the network,,"MATCH (p:Pathway)-[:CONTAINS]->(:Reaction)-[:PRODUCES|SUBSTRATE_OF]-(c:Compound) WITH c, count(DISTINCT p) as pathwayCount WHERE pathwayCount > 1 RETURN c, pathwayCount",MATCH (n:Compound {id: '2.7.7.14'}) RETURN n,Template
+Phase 2,Intersection & Union Queries,Which compounds connect different pathways?,,"MATCH (p:Pathway)-[:CONTAINS]->(:Reaction)-[:PRODUCES|SUBSTRATE_OF]-(c:Compound) WITH c, count(DISTINCT p) as pathwayCount WHERE pathwayCount > 1 RETURN c, pathwayCount","MATCH (c:Compound)-[:SUBSTRATE_OF|PRODUCES]-(r:Reaction)-[:CONTAINS]-(p:Pathway)
+WITH c, COLLECT(DISTINCT p) AS connectedPathways
+WHERE size(connectedPathways) > 1
+RETURN c.name AS Compound, [pathway IN connectedPathways | pathway.title] AS PathwaysConnected
+LIMIT 100",Fallback
+Phase 2,Intersection & Union Queries,List compounds appearing in multiple metabolic routes,,"MATCH (p:Pathway)-[:CONTAINS]->(:Reaction)-[:PRODUCES|SUBSTRATE_OF]-(c:Compound) WITH c, count(DISTINCT p) as pathwayCount WHERE pathwayCount > 1 RETURN c, pathwayCount","MATCH (c:Compound)-[:SUBSTRATE_OF|PRODUCES]-(r:Reaction)-[:CONTAINS]-(p:Pathway)
+WITH c, COLLECT(DISTINCT p) AS pathways
+WHERE size(pathways) > 1
+RETURN c.id, c.name, size(pathways) AS numberOfPathways
+LIMIT 100",Fallback
+Phase 2,Intersection & Union Queries,Which reactions use the same substrates?,,"MATCH (r1:Reaction)<-[:SUBSTRATE_OF]-(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) WHERE r1 <> r2 RETURN r1, c, r2","MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction)
+WITH c, COLLECT(r) AS reactions
+WHERE size(reactions) > 1
+RETURN c.name AS sharedSubstrate, [reaction IN reactions | reaction.name] AS reactionsSharingThisSubstrate
+LIMIT 100",Fallback
+Phase 2,Intersection & Union Queries,Find competing reactions for substrates,,"MATCH (r1:Reaction)<-[:SUBSTRATE_OF]-(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) WHERE r1 <> r2 RETURN r1, c, r2",MATCH (c:Compound {id: '2.7.7.14'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 2,Intersection & Union Queries,Show reactions with overlapping substrate requirements,,"MATCH (r1:Reaction)<-[:SUBSTRATE_OF]-(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) WHERE r1 <> r2 RETURN r1, c, r2","MATCH (c:Compound)-[:SUBSTRATE_OF]->(r1:Reaction)
+MATCH (c)-[:SUBSTRATE_OF]->(r2:Reaction)
+WHERE r1 <> r2
+RETURN r1, r2
+LIMIT 100",Fallback
+Phase 2,Intersection & Union Queries,Get reactions that share input compounds,,"MATCH (r1:Reaction)<-[:SUBSTRATE_OF]-(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) WHERE r1 <> r2 RETURN r1, c, r2",MATCH (p1:Pathway {id: '2.7.7.14'})-[:CONTAINS]-(r:Reaction)-[:CONTAINS]-(p2:Pathway {id: '2.7.7.14'}) RETURN r,Template
+Phase 2,Intersection & Union Queries,Which reactions compete for the same metabolites?,,"MATCH (r1:Reaction)<-[:SUBSTRATE_OF]-(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) WHERE r1 <> r2 RETURN r1, c, r2",MATCH (c:Compound {id: 'C00019'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 2,Intersection & Union Queries,List reaction R03777 pairs with common substrates,,"MATCH (r1:Reaction)<-[:SUBSTRATE_OF]-(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction) WHERE r1 <> r2 RETURN r1, c, r2","MATCH (r1:Reaction {id: 'R03777'})-[:CONSUMES]->(s:Substrate)<-[:CONSUMES]-(r2:Reaction)
+WHERE r1 <> r2
+RETURN r1, r2",Template
+Phase 2,Comparative & Set Operations,Which reactions are unique to pathway path:ath00280?,,MATCH (p1:Pathway {id: 'path:ath00280'1})-[:CONTAINS]->(r:Reaction) WHERE NOT EXISTS((p2:Pathway)-[:CONTAINS]->(r)) WHERE p2.id <> 'path:ath00280'1 RETURN r,MATCH (p:Pathway {id: 'ath00280'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,Comparative & Set Operations,Find reactions exclusive to ath00280,,MATCH (p1:Pathway {id: 'path:ath00010'1})-[:CONTAINS]->(r:Reaction) WHERE NOT EXISTS((p2:Pathway)-[:CONTAINS]->(r)) WHERE p2.id <> 'path:ath00010'1 RETURN r,MATCH (p:Pathway {id: 'ath00280'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,Comparative & Set Operations,Show reactions only in pathway path:gmx00603,,MATCH (p1:Pathway {id: 'path:gmx00603'1})-[:CONTAINS]->(r:Reaction) WHERE NOT EXISTS((p2:Pathway)-[:CONTAINS]->(r)) WHERE p2.id <> 'path:gmx00603'1 RETURN r,MATCH (p:Pathway {id: 'path:gmx00603'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,Comparative & Set Operations,Get reactions specific to TCA cycle,,MATCH (p1:Pathway {id: 'path:ath00280'1})-[:CONTAINS]->(r:Reaction) WHERE NOT EXISTS((p2:Pathway)-[:CONTAINS]->(r)) WHERE p2.id <> 'path:ath00020'1 RETURN r,MATCH (p:Pathway {id: 'TCA cycle'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,Comparative & Set Operations,Which reactions appear only in pathway path:ath00603?,,MATCH (p1:Pathway {id: 'path:ath00603'1})-[:CONTAINS]->(r:Reaction) WHERE NOT EXISTS((p2:Pathway)-[:CONTAINS]->(r)) WHERE p2.id <> 'path:ath00603'1 RETURN r,MATCH (p:Pathway {id: 'path:ath00603'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,Comparative & Set Operations,List reactions exclusive to fatty acid biosynthesis,,MATCH (p1:Pathway {id: 'path:ath00061'1})-[:CONTAINS]->(r:Reaction) WHERE NOT EXISTS((p2:Pathway)-[:CONTAINS]->(r)) WHERE p2.id <> 'path:ath00061'1 RETURN r,MATCH (p:Pathway {id: 'path:ats00061'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,Comparative & Set Operations,"Which compounds are only produced, never consumed?",1.0,MATCH (r:Reaction)-[:PRODUCES]->(c:Compound) WHERE NOT EXISTS((c)-[:SUBSTRATE_OF]->()) RETURN c,"MATCH (c:Compound)
+WHERE EXISTS { (r:Reaction)-[:PRODUCES]->(c) }
+  AND NOT EXISTS { (c)-[:CONSUMES]->(r2:Reaction) }
+RETURN c",Template
+Phase 2,Comparative & Set Operations,Find terminal metabolic products,1.0,MATCH (r:Reaction)-[:PRODUCES]->(c:Compound) WHERE NOT EXISTS((c)-[:SUBSTRATE_OF]->()) RETURN c,MATCH (p:Pathway {id: '2.7.7.14'})-[:CONTAINS]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,Comparative & Set Operations,Show end products in the network,1.0,MATCH (r:Reaction)-[:PRODUCES]->(c:Compound) WHERE NOT EXISTS((c)-[:SUBSTRATE_OF]->()) RETURN c,"MATCH (r:Reaction)-[:PRODUCES]->(c:Compound)
+WHERE NOT EXISTS {
+  (c)-[:SUBSTRATE_OF]->(:Reaction)
+}
+RETURN c.name, c.id, c.formula
+LIMIT 100",Fallback
+Phase 2,Comparative & Set Operations,Get compounds that are dead-end products,1.0,MATCH (r:Reaction)-[:PRODUCES]->(c:Compound) WHERE NOT EXISTS((c)-[:SUBSTRATE_OF]->()) RETURN c,MATCH (n:Compound {id: '2.7.7.14'}) RETURN n,Template
+Phase 2,Comparative & Set Operations,Which compounds have no downstream reactions?,1.0,MATCH (r:Reaction)-[:PRODUCES]->(c:Compound) WHERE NOT EXISTS((c)-[:SUBSTRATE_OF]->()) RETURN c,MATCH (r:Reaction) WHERE NOT (r)-[:PRODUCES]-() RETURN r,Template
+Phase 2,Comparative & Set Operations,List final output compounds,1.0,MATCH (r:Reaction)-[:PRODUCES]->(c:Compound) WHERE NOT EXISTS((c)-[:SUBSTRATE_OF]->()) RETURN c,"MATCH (r:Reaction)-[:PRODUCES]->(c:Compound)
+WHERE NOT EXISTS((c)-[:SUBSTRATE_OF]->(:Reaction))
+RETURN DISTINCT c.name AS finalOutputCompound
+LIMIT 100",Fallback
+Phase 2,Comparative & Set Operations,"Which compounds are only consumed, never produced?",1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction) WHERE NOT EXISTS(()-[:PRODUCES]->(c)) RETURN c,"MATCH (c:Compound)
+WHERE EXISTS((c)-[:SUBSTRATE_OF]-(:Reaction))
+AND NOT EXISTS((:Reaction)-[:PRODUCES]-(c))
+RETURN c",Fallback
+Phase 2,Comparative & Set Operations,Find starting materials in metabolism,1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction) WHERE NOT EXISTS(()-[:PRODUCES]->(c)) RETURN c,MATCH (p:Pathway {id: '01100'})-[:CONTAINS]-(r:Reaction)-[:SUBSTRATE_OF]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,Comparative & Set Operations,Show input-only compounds,1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction) WHERE NOT EXISTS(()-[:PRODUCES]->(c)) RETURN c,"MATCH (c:Compound)
+WHERE EXISTS {
+    (c)-[:SUBSTRATE_OF]->(:Reaction)
+}
+AND NOT EXISTS {
+    (:Reaction)-[:PRODUCES]->(c)
+}
+RETURN c",Fallback
+Phase 2,Comparative & Set Operations,Get compounds that must come from outside,1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction) WHERE NOT EXISTS(()-[:PRODUCES]->(c)) RETURN c,MATCH (p:Pathway {id: '2.7.7.14'})-[:CONTAINS]-(r:Reaction)-[:SUBSTRATE_OF]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,Comparative & Set Operations,Which compounds have no production pathway?,1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction) WHERE NOT EXISTS(()-[:PRODUCES]->(c)) RETURN c,MATCH (r:Reaction) WHERE NOT (r)-[:PRODUCES]-() RETURN r,Template
+Phase 2,Comparative & Set Operations,List external input requirements,1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction) WHERE NOT EXISTS(()-[:PRODUCES]->(c)) RETURN c,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction)-[:SUBSTRATE_OF]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,Comparative & Set Operations,Which enzymes catalyze multiple reactions?,1.0,"MATCH (e:EC)-[:CATALYZES]->(r:Reaction) WITH e, collect(r) as reactions WHERE size(reactions) > 1 RETURN e, reactions","MATCH (e:EC)-[:CATALYZES]->(r:Reaction)
+WITH e, count(r) AS reactionCount
+WHERE reactionCount > 1
+RETURN e",Fallback
+Phase 2,Comparative & Set Operations,Find promiscuous enzymes,1.0,"MATCH (e:EC)-[:CATALYZES]->(r:Reaction) WITH e, collect(r) as reactions WHERE size(reactions) > 1 RETURN e, reactions","MATCH (e:EC)-[:CATALYZES]-(r:Reaction)
+WITH e, count(DISTINCT r) AS numReactions
+WHERE numReactions > 1
+RETURN e.id, e.name, numReactions",Fallback
+Phase 2,Comparative & Set Operations,Show enzymes with broad substrate specificity,1.0,"MATCH (e:EC)-[:CATALYZES]->(r:Reaction) WITH e, collect(r) as reactions WHERE size(reactions) > 1 RETURN e, reactions",MATCH (n:EC {id: 'EC:5.3.3.8'}) RETURN n,Template
+Phase 2,Comparative & Set Operations,Get multi-functional enzymes,1.0,"MATCH (e:EC)-[:CATALYZES]->(r:Reaction) WITH e, collect(r) as reactions WHERE size(reactions) > 1 RETURN e, reactions",MATCH (n:EC {id: 'EC:2.7.7.14'}) RETURN n,Template
+Phase 2,Comparative & Set Operations,Which EC numbers have multiple activities?,1.0,"MATCH (e:EC)-[:CATALYZES]->(r:Reaction) WITH e, collect(r) as reactions WHERE size(reactions) > 1 RETURN e, reactions",MATCH (n:EC) RETURN n LIMIT 100,Template
+Phase 2,Comparative & Set Operations,List enzymes with diverse catalytic roles,1.0,"MATCH (e:EC)-[:CATALYZES]->(r:Reaction) WITH e, collect(r) as reactions WHERE size(reactions) > 1 RETURN e, reactions",MATCH (n:EC) RETURN n LIMIT 100,Template
+Phase 2,Connectivity & Network Analysis,Which compounds are central metabolites?,1.0,"MATCH (c:Compound)-[r]-() WITH c, count(r) as degree WHERE degree > $threshold RETURN c, degree ORDER BY degree DESC",MATCH (n:Compound {id: '2.7.7.14'}) RETURN n,Template
+Phase 2,Connectivity & Network Analysis,Find hub compounds in the network,1.0,"MATCH (c:Compound)-[r]-() WITH c, count(r) as degree WHERE degree > $threshold RETURN c, degree ORDER BY degree DESC",MATCH (n:Compound {id: '2.7.7.14'}) RETURN n,Template
+Phase 2,Connectivity & Network Analysis,Show compounds with most connections,1.0,"MATCH (c:Compound)-[r]-() WITH c, count(r) as degree WHERE degree > $threshold RETURN c, degree ORDER BY degree DESC","MATCH (n:Compound)
+RETURN n, size((n)--()) AS connections
+ORDER BY connections DESC
+LIMIT 10",Template
+Phase 2,Connectivity & Network Analysis,Get key metabolic intermediates,1.0,"MATCH (c:Compound)-[r]-() WITH c, count(r) as degree WHERE degree > $threshold RETURN c, degree ORDER BY degree DESC","MATCH (e:EC)-[:CATALYZES]->(r_sub:Reaction)<-[:SUBSTRATE_OF]-(c:Compound)
+WHERE e.id IN [""2.7.7.14"", ""3.1.1.5""]
+WITH DISTINCT c
+WHERE EXISTS {
+  MATCH (c)<-[:PRODUCES]-(:Reaction)
+}
+RETURN DISTINCT c.name AS IntermediateCompoundName, c.id AS IntermediateCompoundId
+
+UNION
+
+MATCH (e:EC)-[:CATALYZES]->(r_prod:Reaction)-[:PRODUCES]->(c:Compound)
+WHERE e.id IN [""2.7.7.14"", ""3.1.1.5""]
+WITH DISTINCT c
+WHERE EXISTS {
+  MATCH (c)-[:SUBSTRATE_OF]->(:Reaction)
+}
+RETURN DISTINCT c.name AS IntermediateCompoundName, c.id AS IntermediateCompoundId
+LIMIT 100",Fallback
+Phase 2,Connectivity & Network Analysis,Which compounds have highest degree?,1.0,"MATCH (c:Compound)-[r]-() WITH c, count(r) as degree WHERE degree > $threshold RETURN c, degree ORDER BY degree DESC",MATCH (n:Compound) RETURN n LIMIT 100,Template
+Phase 2,Connectivity & Network Analysis,List most connected metabolites,1.0,"MATCH (c:Compound)-[r]-() WITH c, count(r) as degree WHERE degree > $threshold RETURN c, degree ORDER BY degree DESC",MATCH (n:Compound) RETURN n LIMIT 100,Template
+Phase 2,Connectivity & Network Analysis,Which pathways are isolated?,,MATCH (p:Pathway) WHERE NOT EXISTS((p)-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(:Reaction)<-[:CONTAINS]-(:Pathway)) RETURN p,"MATCH (p:Pathway)
+WHERE NOT EXISTS((p)-[:CONTAINS]-())
+RETURN p.id, p.title, p.species",Fallback
+Phase 2,Connectivity & Network Analysis,Find pathways with no connections to others,,MATCH (p:Pathway) WHERE NOT EXISTS((p)-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(:Reaction)<-[:CONTAINS]-(:Pathway)) RETURN p,MATCH (p:Pathway) WHERE NOT (p)-[:CONTAINS]-() RETURN p,Template
+Phase 2,Connectivity & Network Analysis,Show standalone metabolic pathways,,MATCH (p:Pathway) WHERE NOT EXISTS((p)-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(:Reaction)<-[:CONTAINS]-(:Pathway)) RETURN p,MATCH (n:Pathway) RETURN n,Template
+Phase 2,Connectivity & Network Analysis,Get pathways without metabolic crosstalk,,MATCH (p:Pathway) WHERE NOT EXISTS((p)-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(:Reaction)<-[:CONTAINS]-(:Pathway)) RETURN p,MATCH (p:Pathway) WHERE NOT (p)-[:CONTAINS]-() RETURN p,Template
+Phase 2,Connectivity & Network Analysis,Which pathways don't share metabolites with others?,,MATCH (p:Pathway) WHERE NOT EXISTS((p)-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(:Reaction)<-[:CONTAINS]-(:Pathway)) RETURN p,"MATCH (p1:Pathway)
+WHERE NOT EXISTS {
+    MATCH (p1)-[:CONTAINS]->(r1:Reaction)
+    MATCH (c:Compound)-[:SUBSTRATE_OF|PRODUCES]-(r1)
+    MATCH (p2:Pathway)
+    WHERE p1 <> p2
+    MATCH (p2)-[:CONTAINS]->(r2:Reaction)
+    MATCH (c)-[:SUBSTRATE_OF|PRODUCES]-(r2)
+}
+RETURN p1.id, p1.title, p1.species",Fallback
+Phase 2,Connectivity & Network Analysis,List disconnected pathways,,MATCH (p:Pathway) WHERE NOT EXISTS((p)-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(:Reaction)<-[:CONTAINS]-(:Pathway)) RETURN p,MATCH (n:Pathway) RETURN n LIMIT 100,Template
+Phase 2,Connectivity & Network Analysis,How are pathways connected through compounds?,,"MATCH (p1:Pathway)-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(:Reaction)<-[:CONTAINS]-(p2:Pathway) WHERE p1 <> p2 RETURN p1, c, p2","MATCH (p1:Pathway)-[:CONTAINS]-(r1:Reaction)
+MATCH (r1)-[:PRODUCES|SUBSTRATE_OF]-(c:Compound)
+MATCH (c)-[:PRODUCES|SUBSTRATE_OF]-(r2:Reaction)
+MATCH (r2)-[:CONTAINS]-(p2:Pathway)
+WHERE p1 <> p2
+RETURN p1.name, c.name, p2.name
+LIMIT 100",Fallback
+Phase 2,Connectivity & Network Analysis,Find compounds linking different pathways,,"MATCH (p1:Pathway)-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(:Reaction)<-[:CONTAINS]-(p2:Pathway) WHERE p1 <> p2 RETURN p1, c, p2","MATCH (c:Compound)-[:SUBSTRATE_OF|PRODUCES]-(r:Reaction)
+MATCH (p:Pathway)-[:CONTAINS]-(r)
+WITH c, COLLECT(DISTINCT p) AS pathways
+WHERE size(pathways) > 1
+RETURN c.name, [p IN pathways | p.title] AS linkedPathways",Fallback
+Phase 2,Connectivity & Network Analysis,Show metabolic pathway path:gmx01040 connections,,"MATCH (p1:Pathway)-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(:Reaction)<-[:CONTAINS]-(p2:Pathway) WHERE p1 <> p2 RETURN p1, c, p2",MATCH (p:Pathway {id: 'path:gmx01040'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,Connectivity & Network Analysis,Get compounds that bridge pathways,,"MATCH (p1:Pathway)-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(:Reaction)<-[:CONTAINS]-(p2:Pathway) WHERE p1 <> p2 RETURN p1, c, p2","MATCH (c:Compound)-[:SUBSTRATE_OF|PRODUCES]-(r:Reaction)-[:CONTAINS]-(p:Pathway)
+WITH c, COLLECT(DISTINCT p) AS pathways
+WHERE size(pathways) > 1
+RETURN c.id AS CompoundId, c.name AS CompoundName, [pathway IN pathways | pathway.title] AS BridgingPathways
+LIMIT 100",Fallback
+Phase 2,Connectivity & Network Analysis,Which compounds connect pathway path:ath00280 to others?,,"MATCH (p1:Pathway)-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(:Reaction)<-[:CONTAINS]-(p2:Pathway) WHERE p1 <> p2 RETURN p1, c, p2",MATCH (p:Pathway {id: 'path:ath00280'})-[:CONTAINS]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,Connectivity & Network Analysis,List inter-pathway path:gmx00603 metabolite exchanges,,"MATCH (p1:Pathway)-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(:Reaction)<-[:CONTAINS]-(p2:Pathway) WHERE p1 <> p2 RETURN p1, c, p2",MATCH (p:Pathway {id: 'gmx00603'})-[:CONTAINS]-(r:Reaction)-[:PRODUCES]-(c:Compound) RETURN DISTINCT c,Template
+Phase 2,Connectivity & Network Analysis,Show sequential reactions in pathway path:ath00603,,MATCH path = (p:Pathway {id: 'path:ath00603'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(r2:Reaction)<-[:CONTAINS]-(p) RETURN path,MATCH (p:Pathway {id: 'ath00603'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,Connectivity & Network Analysis,Find reaction R00200 chains in glycolysis,,MATCH path = (p:Pathway {id: 'R00200'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(r2:Reaction)<-[:CONTAINS]-(p) RETURN path,MATCH (r1:Reaction {id: 'R00200'})-[:PRODUCES]-(c:Compound)-[:SUBSTRATE_OF]-(r2:Reaction) RETURN r2,Template
+Phase 2,Connectivity & Network Analysis,Get ordered reactions in pathway path:ats01040,,MATCH path = (p:Pathway {id: 'path:ats01040'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(r2:Reaction)<-[:CONTAINS]-(p) RETURN path,MATCH (p:Pathway {id: 'path:ats01040'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,Connectivity & Network Analysis,Show reaction R07764 sequences in TCA cycle,,MATCH path = (p:Pathway {id: 'R07764'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(r2:Reaction)<-[:CONTAINS]-(p) RETURN path,MATCH (p:Pathway {id: 'R07764'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,Connectivity & Network Analysis,Map reaction flow in pathway path:gmx00280,,MATCH path = (p:Pathway {id: 'path:gmx00280'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(r2:Reaction)<-[:CONTAINS]-(p) RETURN path,MATCH (p:Pathway {id: 'path:gmx00280'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 2,Connectivity & Network Analysis,Display sequential steps in fatty acid biosynthesis path:ath00061,,MATCH path = (p:Pathway {id: 'path:ath00061'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(r2:Reaction)<-[:CONTAINS]-(p) RETURN path,MATCH (p:Pathway {id: 'path:ath00061'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 3,Paraphrasing & Synonyms,What enzymes does gene ath:AT5G61540 encode?,1.0,MATCH (g:Gene {id: 'ath:AT5G61540'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ath:AT5G61540'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 3,Paraphrasing & Synonyms,Which EC numbers are encoded by gene gmx:100217331?,1.0,MATCH (g:Gene {id: 'gmx:100217331'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'gmx:100217331'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 3,Paraphrasing & Synonyms,Show me the enzyme functions of gene ats:109745953,1.0,MATCH (g:Gene {id: 'ats:109745953'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ats:109745953'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 3,Paraphrasing & Synonyms,Gene gmx:100037478 encodes which enzymes?,1.0,MATCH (g:Gene {id: 'gmx:100037478'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'gmx:100037478'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 3,Paraphrasing & Synonyms,List enzyme activities for gene ath:AT1G01040,1.0,MATCH (g:Gene {id: 'ath:AT1G01040'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ath:AT1G01040'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 3,Paraphrasing & Synonyms,What are the EC numbers for gene ath:AT1G01050?,1.0,MATCH (g:Gene {id: 'ath:AT1G01050'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ath:AT1G01050'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 3,Paraphrasing & Synonyms,Tell me the enzymes from gene ats:109733199,1.0,MATCH (g:Gene {id: 'ats:109733199'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ats:109733199'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 3,Paraphrasing & Synonyms,Gene ats:109761713 produces what enzymes?,1.0,MATCH (g:Gene {id: 'ats:109761713'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ats:109761713'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 3,Informal & Conversational,"Hey, what reactions use C00422 ?",1.0,MATCH (c:Compound {id: 'C00422'})-[:SUBSTRATE_OF]->(r:Reaction) RETURN r,MATCH (c:Compound {id: 'C00422'})-[:SUBSTRATE_OF]-(r:Reaction) RETURN r,Template
+Phase 3,Informal & Conversational,Can you tell me about pathway path:gmx00061?,1.0,MATCH (p:Pathway {id: 'path:gmx00061'})-[:CONTAINS]->(n) RETURN n,MATCH (n:Pathway {id: 'path:gmx00061'}) RETURN properties(n),Template
+Phase 3,Informal & Conversational,I need to know which genes encode EC:4.2.1.59,1.0,MATCH (g:Gene)-[:ENCODES]->(e:EC {id: 'EC:4.2.1.59'}) RETURN g,MATCH (g:Gene)-[:ENCODES]-(e:EC {id: 'EC:4.2.1.59'}) RETURN g,Template
+Phase 3,Informal & Conversational,Show me what's in the path:ath00061 pathway,1.0,MATCH (p:Pathway {id: 'path:ath00061'})-[:CONTAINS]->(n) RETURN n,MATCH (p:Pathway {id: 'path:ath00061'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 3,Informal & Conversational,What does gene ath:AT2G06990 do?,1.0,MATCH (g:Gene {id: 'AT2G06990'})-[*1..2]-(n) RETURN DISTINCT n,MATCH (g:Gene {id: 'ath:AT2G06990'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 3,Informal & Conversational,Find stuff related to compound C00164,1.0,MATCH (n {id: 'C00164'})-[r]-(m) RETURN m,MATCH (n:Compound {id: 'C00164'}) RETURN n,Template
+Phase 3,Informal & Conversational,Tell me about enzyme EC:1.13.11.33,1.0,MATCH (e:EC {id: 'EC:1.13.11.33'})-[r]-(n) RETURN n,MATCH (n:EC {id: 'EC:1.13.11.33'}) RETURN properties(n),Template
+Phase 3,Informal & Conversational,What's connected to reaction R06870?,1.0,MATCH (n {id: 'R06870'})-[r]-(m) RETURN m,MATCH (c:Compound)-[:SUBSTRATE_OF]-(r:Reaction {id: 'R06870'}) RETURN c,Template
+Phase 3,Ambiguous Queries,What about ath:AT1G01210?,1.0,MATCH (g:Gene {id: 'ath:AT1G01210'}) RETURN g,MATCH (n:Gene {id: 'ath:AT1G01210'}) RETURN properties(n),Template
+Phase 3,Ambiguous Queries,Show me path:ats00603,1.0,MATCH (p:Pathway {id: 'path:ats00603'}) RETURN p,MATCH (n:Pathway {id: 'ats00603'}) RETURN n,Template
+Phase 3,Ambiguous Queries,Find reactions for EC:6.4.1.2,1.0,MATCH (e:EC {id: 'EC:6.4.1.2'})-[:CATALYZES]->(r:Reaction) RETURN r,MATCH (e:EC {id: 'EC:6.4.1.2'})-[:CATALYZES]-(r:Reaction) RETURN r,Template
+Phase 3,Ambiguous Queries,Show me the pathway path:ats00280,1.0,MATCH (p:Pathway) RETURN p ,MATCH (n:Pathway {id: 'path:ats00280'}) RETURN n,Template
+Phase 3,Ambiguous Queries,Tell me about the enzyme EC:6.4.1.2,1.0,MATCH (e:EC) RETURN e ,MATCH (n:EC {id: 'EC:6.4.1.2'}) RETURN properties(n),Template
+Phase 3,Ambiguous Queries,Get information about this gene ath:AT5G61540,1.0,MATCH (g:Gene) RETURN g ,MATCH (n:Gene {id: 'ath:AT5G61540'}) RETURN properties(n),Template
+Phase 3,Typos & Misspellings,What enzimes does gene gmx:100217331 encode?,1.0,MATCH (g:Gene {id: 'gmx:100217331'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'gmx:100217331'})-[:ENCODES]-(e:EC) RETURN e,Template
+Phase 3,Typos & Misspellings,Show reacctions in pathway path:gmx01040,1.0,MATCH (p:Pathway {id: 'path:gmx01040'})-[:CONTAINS]->(r:Reaction) RETURN r,MATCH (p:Pathway {id: 'path:gmx01040'})-[:CONTAINS]-(r:Reaction) RETURN r,Template
+Phase 3,Typos & Misspellings,Find compunds produced by reaction R10826,1.0,MATCH (r:Reaction {id: 'R10826'})-[:PRODUCES]->(c:Compound) RETURN c,MATCH (r:Reaction {id: 'R10826'})-[:PRODUCES]-(c:Compound) RETURN c,Template
+Phase 3,Typos & Misspellings,Get ortholg for gene ats:109745953,1.0,MATCH (g:Gene {id: 'ats:109745953'})-[:BELONGS_TO]->(o:Ortholog) RETURN o,MATCH (g:Gene {id: 'ats:109745953'})-[:BELONGS_TO]-(o:Ortholog) RETURN o,Template
+Phase 3,Typos & Misspellings,Show substrates of reation R00010,1.0,MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction {id: 'R00010'}) RETURN c,MATCH (c:Compound)-[:SUBSTRATE_OF]-(r:Reaction {id: 'R00010'}) RETURN c,Template
+Phase 3,Typos & Misspellings,Find pathwys for compound C03069,1.0,MATCH (c:Compound {id: 'C03069'})-[:SUBSTRATE_OF|PRODUCES]-(r:Reaction)<-[:CONTAINS]-(p:Pathway) RETURN p,MATCH (p:Pathway)-[:CONTAINS]-(r:Reaction {id: 'C03069'}) RETURN p,Template
+Phase 3,Typos & Misspellings,What does geen ath:AT3G01130 encode?,1.0,MATCH (g:Gene {id: 'ath:AT3G01130'})-[:ENCODES]->(e:EC) RETURN e,MATCH (g:Gene {id: 'ath:AT3G01130'})-[:MEMBER_OF]-(f:FunctionalUnit) RETURN f,Template
+Phase 3,Edge Cases & Negations,Show genes that don't encode any enzymes,1.0,MATCH (g:Gene) WHERE NOT EXISTS((g)-[:ENCODES]->()) RETURN g,"MATCH (g:Gene)
+WHERE NOT (g)-[:ENCODES]->(:EC)
+RETURN g",Template
+Phase 3,Edge Cases & Negations,Find reactions without products,1.0,MATCH (r:Reaction) WHERE NOT EXISTS((r)-[:PRODUCES]->()) RETURN r,MATCH (r:Reaction) WHERE NOT (r)-[:PRODUCES]-() RETURN r,Template
+Phase 3,Edge Cases & Negations,Which pathways have no reactions?,1.0,MATCH (p:Pathway) WHERE NOT EXISTS((p)-[:CONTAINS]->(:Reaction)) RETURN p,MATCH (p:Pathway) WHERE NOT (p)-[:CONTAINS]-() RETURN p,Template
+Phase 3,Edge Cases & Negations,Get compounds not used as substrates,1.0,MATCH (c:Compound) WHERE NOT EXISTS((c)-[:SUBSTRATE_OF]->()) RETURN c,MATCH (r:Reaction) WHERE NOT (r)-[:PRODUCES]-() RETURN r,Template
+Phase 3,Edge Cases & Negations,Find empty pathways,1.0,MATCH (p:Pathway) WHERE NOT EXISTS((p)-[:CONTAINS]->()) RETURN p,MATCH (p:Pathway) WHERE NOT (p)-[:CONTAINS]-() RETURN p,Template
+Phase 3,Edge Cases & Negations,Show orphan reactions,1.0,MATCH (r:Reaction) WHERE NOT EXISTS((:Pathway)-[:CONTAINS]->(r)) RETURN r,MATCH (r:Reaction) WHERE NOT (r)-[:PRODUCES]-() RETURN r,Template
+Phase 3,Edge Cases & Negations,Which enzymes don't catalyze anything?,1.0,MATCH (e:EC) WHERE NOT EXISTS((e)-[:CATALYZES]->()) RETURN e,MATCH (n:EC) RETURN n LIMIT 100,Template
+Phase 3,Edge Cases & Negations,List genes not in any ortholog group,1.0,MATCH (g:Gene) WHERE NOT EXISTS((g)-[:BELONGS_TO]->()) RETURN g,MATCH (e:EC) WHERE NOT (e)-[:CATALYZES]-() RETURN e,Template

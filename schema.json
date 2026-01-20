@@ -1,0 +1,62 @@
+﻿[
+  {
+    "start": "Compound",
+    "rel": "SUBSTRATE_OF",
+    "end": "Reaction"
+  },
+  {
+    "start": "EC",
+    "rel": "CATALYZES",
+    "end": "Reaction"
+  },
+  {
+    "start": "Gene",
+    "rel": "BELONGS_TO",
+    "end": "Ortholog"
+  },
+  {
+    "start": "Gene",
+    "rel": "ENCODES",
+    "end": "EC"
+  },
+  {
+    "start": "Gene",
+    "rel": "MEMBER_OF",
+    "end": "FunctionalUnit"
+  },
+  {
+    "start": "Ortholog",
+    "rel": "CATALYZES",
+    "end": "Reaction"
+  },
+  {
+    "start": "Ortholog",
+    "rel": "HAS_ENZYME_FUNCTION",
+    "end": "EC"
+  },
+  {
+    "start": "Ortholog",
+    "rel": "MEMBER_OF",
+    "end": "FunctionalUnit"
+  },
+  {
+    "start": "Pathway",
+    "rel": "CONTAINS",
+    "end": "EC"
+  },
+  {
+    "start": "Pathway",
+    "rel": "CONTAINS",
+    "end": "FunctionalUnit"
+  },
+  {
+    "start": "Pathway",
+    "rel": "CONTAINS",
+    "end": "Reaction"
+  },
+  {
+    "start": "Reaction",
+    "rel": "PRODUCES",
+    "end": "Compound"
+  }
+]

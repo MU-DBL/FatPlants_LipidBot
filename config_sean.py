@@ -1,0 +1,8 @@
+GEMINI_API_KEY = "AIzaSyAdMUQzMbeHZBZlMt2LCcm_dTsqlMjMSXc"
+# GEMINI_API_KEY = "AIzaSyAu6jo_mWY3dCLn1tHLZrNeHhfZiU6Ypho"
+GEMINI_MODEL_NAME = "gemini-2.5-flash"
+NEO4J_URI = "bolt://128.206.232.34:7687"
+NEO4J_USER = "neo4j"
+NEO4J_PASSWORD = "ZTjgBxsK3KczbEq6uyTa"
+
+    
