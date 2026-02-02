@@ -1,3 +1,4 @@
+import json
 import os
 import asyncio
 from pathlib import Path
@@ -9,8 +10,9 @@ from config import HF_HOME, GEMINI_MODEL_NAME, GEMINI_API_KEY, NEO4J_URI, NEO4J_
 from llm_factory import LLMFactory
 from data_service import LLMProvider
 from cypher.cypher_query import cypher_query
-from neo4j_client import Neo4jClient  # make sure this is your async Neo4j client
+from cypher.db_enginer import Neo4jClient
 import logging
+from contextlib import asynccontextmanager
 
 # Set HF cache
 os.environ["HF_HOME"] = HF_HOME
@@ -150,17 +152,13 @@ async def lipidbot(req: LipidBotRequest, request: Request):
 
         # 1) Run Cypher query
         result, cypher = await asyncio.wait_for(
-            asyncio.to_thread(
-                cypher_query,
-                req.query,
-                llm,
-                neo4j_client
-            ),
+            cypher_query(req.query, llm, neo4j_client),
             timeout=60.0
         )
 
         # 2) Run citation search
-        hits = search(
+        hits = await asyncio.to_thread(
+            search,
             query=req.query,
             top_k_per_model=req.top_k,
             fuse=req.fuse,
@@ -170,11 +168,52 @@ async def lipidbot(req: LipidBotRequest, request: Request):
             add_bm25=True
         )
 
+        # 3) Format hits for LLM consumption
+        citations = []
+        for i, hit in enumerate(hits[:10], 1):  # Limit to top 10
+            citations.append({
+                "id": i,
+                "text": getattr(hit, 'text', str(hit)),
+                "source": getattr(hit, 'source', 'Unknown'),
+                "score": getattr(hit, 'score', 0)
+            })
+
+        # 4) Create prompt for AI agent
+        prompt = f"""You are a lipid biology expert assistant. A user asked: "{req.query}"
+
+            We have two sources of information:
+
+            **Database Query Results (Cypher):**
+            {json.dumps(result, indent=2)}
+
+            **Relevant Citations:**
+            {json.dumps(citations, indent=2)}
+
+            Please provide a comprehensive answer that:
+            1. Directly answers the user's question
+            2. Combines insights from both the database and citations
+            3. Cites specific sources when making claims (use [1], [2], etc.)
+            4. Is clear and actionable
+
+            Format your response in a user-friendly way."""
+
+        # 5) Call LLM to synthesize response
+        ai_response = await llm.agenerate(
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3  # Lower for more factual responses
+        )
+        
+        formatted_answer = ai_response.generations[0][0].text
+
+        # 6) Return structured response
         return {
             "success": True,
-            "cypher_result": result,
-            "cypher_query": cypher,
-            "hits": [h.__dict__ for h in hits]
+            "answer": formatted_answer,
+            "sources": {
+                "cypher_query": cypher,
+                "cypher_result": result,
+                "citations": citations
+            }
         }
     except asyncio.TimeoutError:
         logger.error(f"LipidBot timeout for: {req.query}")

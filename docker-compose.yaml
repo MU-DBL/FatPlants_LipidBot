@@ -1,0 +1,7 @@
+services:
+  lipid-bot:
+    build: .
+    environment:
+      - HF_HOME=/hf_home  
+    volumes:
+      - C:/Users/yqzn9/Downloads/hf_home/:/hf_home

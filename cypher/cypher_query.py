@@ -10,18 +10,22 @@ from cypher.entity_extractor import BioEntityExtractor
 from llm_factory import BaseLLM
 from cypher.db_enginer import Neo4jClient
 
-def cypher_query(question: str, llm:BaseLLM, neo4j_client: Neo4jClient):
+async def cypher_query(question: str, llm:BaseLLM, neo4j_client: Neo4jClient):
 
     entity_extractor = BioEntityExtractor(llm=llm)
     llm_query_engine = LLMCypherQueryGenerator(llm=llm)
 
     entities = entity_extractor.extract_mentions(question) 
+    print(entities)
     cypher, source = llm_query_engine.generate_query(
                 question=question,
                 entities=entities
     )
 
-    result = neo4j_client.run_query(cypher=cypher)
+    print(cypher)
+    print(source)
+
+    result = await neo4j_client.run_query(cypher=cypher)
     return result, cypher
 
  

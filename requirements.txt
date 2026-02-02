@@ -13,4 +13,3 @@ ollama
 rapidfuzz
 pyahocorasick
 pandas
-neo4j
