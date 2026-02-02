@@ -5,8 +5,9 @@ from typing import List, Literal, Optional
 from fastapi import FastAPI, HTTPException, Request, APIRouter
 from pydantic import BaseModel
 from citation.search import search, get_cached_retrievers, get_cached_bm25
-from config import HF_HOME, LLMProvider, GEMINI_MODEL_NAME, GEMINI_API_KEY, NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD
+from config import HF_HOME, GEMINI_MODEL_NAME, GEMINI_API_KEY, NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD
 from llm_factory import LLMFactory
+from data_service import LLMProvider
 from cypher.cypher_query import cypher_query
 from neo4j_client import Neo4jClient  # make sure this is your async Neo4j client
 import logging

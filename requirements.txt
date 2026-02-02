@@ -12,3 +12,5 @@ google-generativeai
 ollama
 rapidfuzz
 pyahocorasick
+pandas
+neo4j

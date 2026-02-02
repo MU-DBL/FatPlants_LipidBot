@@ -76,8 +76,8 @@ def search(
 
     # 2. BM25 가져오기 (캐시 사용)
     if add_bm25:
-        cache = get_cached_bm25()
-        per_model_results.append(cache.search(query, top_k=top_k_per_model))
+        bm25_cache = get_cached_bm25()
+        per_model_results.append(bm25_cache.search(query, top_k=top_k_per_model))
 
     # Fusion Logic (박사님 원본 로직 유지)
     def key_of(h: Hit):

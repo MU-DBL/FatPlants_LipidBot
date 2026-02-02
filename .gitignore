@@ -1,1 +1,3 @@
 /citation/citation_cache
+__pycache__
+config.py
