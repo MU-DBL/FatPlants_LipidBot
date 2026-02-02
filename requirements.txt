@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+sentence-transformers
+faiss-cpu
+numpy
+nltk
+pydantic
+huggingface_hub
+rank-bm25
+neo4j
+google-generativeai
+ollama
+rapidfuzz
+pyahocorasick
