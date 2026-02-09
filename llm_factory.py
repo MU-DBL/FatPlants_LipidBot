@@ -9,6 +9,7 @@ from data_service import LLMProvider
 import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 import ollama
+from ollama import AsyncClient
 
 class BaseLLM(ABC):
     """Abstract base class for LLM implementations"""
@@ -41,7 +42,7 @@ class GeminiLLM(BaseLLM):
         """
         
         # API Key 
-        self.api_key = api_key or GEMINI_API_KEY or os.getenv("GOOGLE_API_KEY")
+        self.api_key = api_key or os.getenv("GOOGLE_API_KEY")
         
         if not self.api_key:
             raise ValueError("Gemini API Key is missing! Please check config_sean.py")
@@ -77,6 +78,24 @@ class GeminiLLM(BaseLLM):
         except Exception as e:
             print(f"Gemini Generation Error: {e}")
             return "" 
+        
+    async def agenerate(self, prompt: str = None, messages: list = None) -> str:
+        """Async Gemini generation"""
+        try:
+            content = messages if messages else prompt
+            if not content:
+                raise ValueError("Either `prompt` or `messages` must be provided.")
+
+            response = await self.model.generate_content_async(
+                content,
+                generation_config=self.generation_config,
+                safety_settings=self.safety_settings,
+            )
+            return response.text.strip()
+
+        except Exception as e:
+            print(f"Gemini Async Generation Error: {e}")
+            return ""
     
     def get_provider_name(self) -> str:
         return "gemini"
@@ -108,6 +127,7 @@ class OllamaLLM(BaseLLM):
         
         if host:
             self.client = ollama.Client(host=host)
+            self.async_client = AsyncClient(host=host)
         else:
             self.client = ollama.Client()
     
@@ -119,9 +139,27 @@ class OllamaLLM(BaseLLM):
         )
         return response['response'].strip()
     
+    async def agenerate(self, prompt: str = None, messages: list = None) -> str:
+        """Asynchronous generation supporting both raw prompts and message lists"""
+        if messages:
+            # Use the chat API if messages are provided
+            response = await self.async_client.chat(
+                model=self.model_name,
+                messages=messages,
+                options=self.options
+            )
+            return response['message']['content'].strip()
+        
+        # Fallback to standard generation if only a prompt is provided
+        response = await self.async_client.generate(
+            model=self.model_name,
+            prompt=prompt,
+            options=self.options
+        )
+        return response['response'].strip()
+    
     def get_provider_name(self) -> str:
         return "ollama"
-
 
 class LLMFactory:
     """Factory for creating LLM instances"""

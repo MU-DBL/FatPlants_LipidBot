@@ -3,6 +3,7 @@ import os, re, pickle, glob
 import ahocorasick
 from typing import Dict, List, Optional, Tuple
 import pandas as pd
+from config import AC_KEGG_PKL
 
 # ---------- 规范化 ----------
 def norm(s: str) -> str:
@@ -92,18 +93,30 @@ def build_ac(entries: pd.DataFrame, min_length: int = 2):
     return A, alias_map
 
 # ---------- 缓存 ----------
-def save_cache(A, alias_map: Dict, cache_path: str = "ac_kegg.pkl"):
+def save_cache(A, alias_map: Dict, cache_path: str):
     """Save automaton and alias map to cache"""
     with open(cache_path, "wb") as f:
         pickle.dump((A, alias_map), f)
     print(f"Cache saved to {cache_path}")
 
-def load_cache(cache_path: str = "ac_kegg.pkl") -> Tuple:
-    """Load automaton and alias map from cache"""
-    with open(cache_path, "rb") as f:
-        A, alias_map = pickle.load(f)
-    print(f"Cache loaded from {cache_path}")
-    return A, alias_map
+
+AC_AUTOMATON = None
+ALIAS_MAP = None
+
+def load_cache(cache_path: str):
+    global AC_AUTOMATON, ALIAS_MAP
+
+    if cache_path is None:
+        cache_path = AC_KEGG_PKL
+    
+    if AC_AUTOMATON is None or ALIAS_MAP is None:
+        with open(cache_path, "rb") as f:
+            AC_AUTOMATON, ALIAS_MAP = pickle.load(f)
+        print(f"Cache loaded from {cache_path}")
+    else:
+        print("Cache loaded from memory")
+
+    return AC_AUTOMATON, ALIAS_MAP
 
 # ---------- 查询 ----------
 def query_text(

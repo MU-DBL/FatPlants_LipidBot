@@ -5,3 +5,10 @@ services:
       - HF_HOME=/hf_home  
     volumes:
       - C:/Users/yqzn9/Downloads/hf_home/:/hf_home
+    networks:
+      - neo4j_network
+
+networks:
+  neo4j_network:
+    external: true 
+    name: neo4j_default

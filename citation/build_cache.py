@@ -88,8 +88,8 @@ def build_bm25_cache(csv_path: str, cache_path: str):
     cache.build_from_csv(csv_path, ["citation_id","title","abstract"])
     cache.save()
 
-if __name__ == "__main__":
-    os.environ["HF_HOME"] = hf_model_dir
-    csv_path = "files/combined_all_classified_filtered.csv"
-    build_cache_hybrid_model(csv_path, model_names = default_model_name , cache_dir = cache_dir)
-    # build_bm25_cache(csv_path, bm25_cache_file)
+# if __name__ == "__main__":
+#     os.environ["HF_HOME"] = hf_model_dir
+#     csv_path = "file/combined_all_classified_filtered.csv"
+#     build_cache_hybrid_model(csv_path, model_names = default_model_name , cache_dir = cache_dir)
+#     build_bm25_cache(csv_path, bm25_cache_file)
