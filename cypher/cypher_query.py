@@ -15,19 +15,20 @@ from cypher.cypher_generator import SimpleCypherGenerator
 async def cypher_query(question: str, llm:BaseLLM, neo4j_client: Neo4jClient):
 
     entity_extractor = BioEntityExtractor(llm=llm)
-    # llm_query_engine = LLMCypherQueryGenerator(llm=llm)
+   
     cypher_generator = SimpleCypherGenerator(llm=llm)
 
     entities = entity_extractor.extract_mentions(question) 
     # print(entities)
+    # llm_query_engine = LLMCypherQueryGenerator(llm=llm)
     # cypher, source = llm_query_engine.generate_query(
     #             question=question,
     #             entities=entities
     # )
 
     try:
-        cypher_query, metadata = cypher_generator.generate_query(question=question)
-        print(cypher_query)
+        cypher_query, metadata = cypher_generator.generate_query(question=question, entities=entities)
+        # print(cypher_query)
         result = await neo4j_client.run_query(cypher=cypher_query)
 
     except Exception as e:

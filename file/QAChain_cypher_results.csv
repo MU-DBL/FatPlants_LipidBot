@@ -93,19 +93,19 @@ Phase 1,Simple Relationship Queries - Outgoing,Get ortholog for gene ath:AT1G010
 RETURN o;",['K01507'],1
 Phase 1,Simple Relationship Queries - Outgoing,Which KO group includes gene K10246?,"MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog)
 WHERE g.id = 'K10246'
-RETURN o.id AS KOGroup;",I don't know the answer.,0
+RETURN o.id AS KOGroup;",I don't know the answer.,1
 Phase 1,Simple Relationship Queries - Outgoing,Which reactions use compound C06000 as substrate?,"MATCH (c:Compound {id: 'C06000'})-[:SUBSTRATE_OF]->(r:Reaction)
 RETURN r;",['R05064'],1
 Phase 1,Simple Relationship Queries - Outgoing,What reactions consume compound C00164?,"MATCH (c:Compound {id: 'C00164'})<-[:SUBSTRATE_OF]-(r:Reaction)
-RETURN r;",I don't know the answer.,1
+RETURN r;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Outgoing,Show reactions where C06000 is a substrate,"MATCH (c:Compound {id: ""C06000""})-[:SUBSTRATE_OF]->(r:Reaction)
 RETURN r.id, r.name, r.equation;",R05064,1
 Phase 1,Simple Relationship Queries - Outgoing,Find reactions that use compound C08813,"MATCH (c:Compound {id: 'C08813'})<-[:SUBSTRATE_OF]-(r:Reaction)
-RETURN r;",I don't know the answer.,1
+RETURN r;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Outgoing,Get reactions with C06000 as input,"MATCH (c:Compound {id: ""C06000""})<-[:SUBSTRATE_OF]-(r:Reaction)
-RETURN r;",I don't know the answer.,1
+RETURN r;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Outgoing,Which reactions require compound C03069?,"MATCH (c:Compound {id: 'C03069'})<-[:SUBSTRATE_OF]-(r:Reaction)
-RETURN r.id AS reactionId, r.name AS reactionName, r.equation AS equation",I don't know the answer.,1
+RETURN r.id AS reactionId, r.name AS reactionName, r.equation AS equation",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Outgoing,What reactions does EC:1.14.13.1 catalyze?,"MATCH (ec:EC {id: '1.14.13.1'})-[:CATALYZES]->(r:Reaction)
 RETURN r;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Outgoing,Which reactions are catalyzed by enzyme EC:1.14.13.1?,"MATCH (e:EC {id: '1.14.13.1'})-[:CATALYZES]->(r:Reaction)
@@ -117,7 +117,7 @@ RETURN r;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Outgoing,Get reactions catalyzed by EC:6.2.1.3,"MATCH (e:EC {id: '6.2.1.3'})-[:CATALYZES]->(r:Reaction)
 RETURN r;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Outgoing,Which reactions does enzyme EC:2.1.1.369 perform?,"MATCH (e:EC {id:'2.1.1.369'})-[:CATALYZES]->(r:Reaction)
-RETURN r.id, r.name, r.equation;",I don't know the answer.,1
+RETURN r.id, r.name, r.equation;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Outgoing,What reactions does ortholog R10826 catalyze?,"MATCH (o:Ortholog {id: 'R10826'})-[:CATALYZES]->(r:Reaction)
 RETURN r.id, r.name, r.equation;",I don't know the answer.,1
 Phase 1,Simple Relationship Queries - Outgoing,Which reactions are performed by KO K09458?,"MATCH (o:Ortholog {id: 'K09458'})-[:CATALYZES]->(r:Reaction)
@@ -153,17 +153,17 @@ RETURN fu.id AS id, fu.name AS name, fu.type AS type;",path:ats03018_244,1
 Phase 1,Simple Relationship Queries - Outgoing,Get functional units for gene ath:AT1G54220,"MATCH (g:Gene {id: 'ath:AT1G54220'})-[:MEMBER_OF]->(fu:FunctionalUnit)
 RETURN fu;",I don't know the answer.,1
 Phase 1,Simple Relationship Queries - Incoming,Which genes encode enzyme EC:2.3.1.199?,"MATCH (g:Gene)-[:ENCODES]->(e:EC {id: '2.3.1.199'})
-RETURN DISTINCT g.id, g.name, g.symbol;",I don't know the answer.,1
+RETURN DISTINCT g.id, g.name, g.symbol;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Incoming,Show genes that produce EC:2.3.1.199,"MATCH (g:Gene)-[:ENCODES]->(ec:EC {id: '2.3.1.199'})
-RETURN g.id, g.name, g.symbol, g.position, g.link, g.species;",I don't know the answer.,1
+RETURN g.id, g.name, g.symbol, g.position, g.link, g.species;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Incoming,Find genes encoding EC:2.3.1.199,"MATCH (g:Gene)-[:ENCODES]->(e:EC {id: '2.3.1.199'})
-RETURN g;",I don't know the answer.,1
+RETURN g;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Incoming,Get genes for enzyme EC:2.3.1.199,"MATCH (g:Gene)-[:ENCODES]->(e:EC {id: '2.3.1.199'})
-RETURN g;",I don't know the answer.,1
+RETURN g;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Incoming,Which genes code for EC:2.3.1.199,"MATCH (g:Gene)-[:ENCODES]->(e:EC {id: '2.3.1.199'})
-RETURN g.id AS geneId, g.name AS geneName, g.symbol AS geneSymbol;",I don't know the answer.,1
+RETURN g.id AS geneId, g.name AS geneName, g.symbol AS geneSymbol;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Incoming,List genes that encode EC:2.3.1.199,"MATCH (g:Gene)-[:ENCODES]->(e:EC {id: '2.3.1.199'})
-RETURN g.id AS geneId, g.name AS geneName, g.symbol AS geneSymbol, g.position AS genePosition, g.link AS geneLink, g.species AS geneSpecies;",I don't know the answer.,1
+RETURN g.id AS geneId, g.name AS geneName, g.symbol AS geneSymbol, g.position AS genePosition, g.link AS geneLink, g.species AS geneSpecies;",I don't know the answer.,0
 Phase 1,Simple Relationship Queries - Incoming,Which genes belong to ortholog K00382?,"MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog {id: 'K00382'})
 RETURN g;","['gmx:547523', 'gmx:100809578', 'gmx:100803176', 'gmx:100788043', 'gmx:100782004', 'gmx:100776304']",1
 Phase 1,Simple Relationship Queries - Incoming,Show genes in KO group K00382,"MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog {id: 'K00382'})
@@ -215,24 +215,24 @@ RETURN r.id AS reactionId, r.name AS reactionName, r.equation AS equation;","R05
 Phase 1,Pathway-centric Queries,What reactions are in pathway path:ath00061?,"MATCH (p:Pathway {id:'path:ath00061'})-[:CONTAINS]->(r:Reaction)
 RETURN r;","['R04568', 'R01404', 'R01403', 'R00390', 'R12329', 'R02767', 'R10208', 'R02768', 'R12300', 'R01280']",1
 Phase 1,Pathway-centric Queries,Show reactions in path:ats00603 pathway,"MATCH (p:Pathway {id: 'ats00603'})-[:CONTAINS]->(r:Reaction)
-RETURN r;",I don't know the answer.,1
+RETURN r;",I don't know the answer.,0
 Phase 1,Pathway-centric Queries,Find reactions in pathway path:ats00280,"MATCH (p:Pathway {id:'path:ats00280'})-[:CONTAINS]->(r:Reaction)
 RETURN r;","['R02050', 'R03383', 'R03172', 'R01090', 'R04097', 'R07601', 'R02662', 'R02661', 'R04224', 'R05064']",1
 Phase 1,Pathway-centric Queries,Get reactions for path:gmx01040 pathway,"MATCH (p:Pathway {id: 'gmx01040'})-[:CONTAINS]->(r:Reaction)
-RETURN r;",I don't know the answer.,1
+RETURN r;",I don't know the answer.,0
 Phase 1,Pathway-centric Queries,Which reactions are part of pathway path:ath00280?,"MATCH (p:Pathway {id:'path:ath00280'})-[:CONTAINS]->(r:Reaction)
 RETURN r;","['R02050', 'R03383', 'R03172', 'R01090', 'R04097', 'R07601', 'R02662', 'R02661', 'R04224', 'R05064']",1
 Phase 1,Pathway-centric Queries,List reactions in path:gmx00603 pathway,"MATCH (p:Pathway {id: 'gmx00603'})-[:CONTAINS]->(r:Reaction)
-RETURN r;",I don't know the answer.,1
+RETURN r;",I don't know the answer.,0
 Phase 1,Pathway-centric Queries,What functional units are in pathway path:gmx00061?,"MATCH (p:Pathway {id: 'path:gmx00061'})-[:CONTAINS]->(fu:FunctionalUnit)
 RETURN fu;",['path:gmx00061_331'],1
 Phase 1,Pathway-centric Queries,Show complexes in path:ath00061 pathway,"MATCH (p:Pathway {id:'ath00061'})-[:CONTAINS]->(fu:FunctionalUnit)
 WHERE fu.type = 'complex'
-RETURN fu.id, fu.name, fu.type;",I don't know the answer.,1
+RETURN fu.id, fu.name, fu.type;",I don't know the answer.,0
 Phase 1,Pathway-centric Queries,Find functional units in pathway path:ats00603,"MATCH (p:Pathway {id:'path:ats00603'})-[:CONTAINS]->(fu:FunctionalUnit)
 RETURN fu;",I don't know the answer.,1
 Phase 1,Pathway-centric Queries,Get complexes in path:ats00280 pathway,"MATCH (p:Pathway {id:'ats00280'})-[:CONTAINS]->(fu:FunctionalUnit)
-RETURN fu;",I don't know the answer.,1
+RETURN fu;",I don't know the answer.,0
 Phase 1,Pathway-centric Queries,Which functional units are part of pathway path:gmx01040?,"MATCH (p:Pathway {id:""path:gmx01040""})-[:CONTAINS]->(fu:FunctionalUnit)
 RETURN fu;","['path:gmx01040_444', 'path:gmx01040_436', 'path:gmx01040_415', 'path:gmx01040_411', 'path:gmx01040_407', 'path:gmx01040_362', 'path:gmx01040_321', 'path:gmx01040_316', 'path:gmx01040_280', 'path:gmx01040_276']",1
 Phase 1,Pathway-centric Queries,List complexes in fatty acid biosynthesis,"MATCH (p:Pathway)-[:CONTAINS]->(fu:FunctionalUnit)
@@ -279,21 +279,21 @@ RETURN DISTINCT labels(n) AS nodeTypes;",FunctionalUnit,1
 Phase 1,Aggregation Queries,Show node types connected to pathway path:ats01040,"MATCH (p:Pathway {id:'path:ats01040'})-[:CONTAINS]->(n)
 RETURN DISTINCT labels(n) AS nodeTypes;","FunctionalUnit, Reaction",1
 Phase 1,Aggregation Queries,What entities does compound C06000 interact with?,"MATCH (c:Compound {id:""C06000""})-[:PRODUCES|SUBSTRATE_OF]->(r:Reaction)
-RETURN r;",['R05064'],1
+RETURN r;",['R05064'],0
 Phase 1,Aggregation Queries,List node types connected to enzyme EC:1.3.1.21,"MATCH (ec:EC {id:'1.3.1.21'})-[r]-(n)
 UNWIND labels(n) AS l
-RETURN collect(DISTINCT l) AS connectedNodeTypes;",I don't know the answer.,1
+RETURN collect(DISTINCT l) AS connectedNodeTypes;",I don't know the answer.,0
 Phase 1,Aggregation Queries,What types of nodes connect to reaction R07764?,"MATCH (r:Reaction {id:'R07764'})-[*]-(n)
 RETURN DISTINCT labels(n) AS nodeTypes;","Pathway, EC, Ortholog, Compound, FunctionalUnit, Gene.",1
 Phase 1,Aggregation Queries,Show entity types linked to ortholog K11262,"MATCH (o:Ortholog {id: 'K11262'})-[:CATALYZES|:HAS_ENZYME_FUNCTION|:MEMBER_OF]->(n)
-RETURN DISTINCT labels(n) AS entityType;","Reaction, EC",1
+RETURN DISTINCT labels(n) AS entityType;","Reaction, EC",0
 Phase 1,Aggregation Queries,What is connected to gene ath:AT1G54220?,"MATCH (g:Gene {id: 'ath:AT1G54220'})-[r]->(n)
 RETURN type(r) AS relationship, n;","I’m sorry, but I don’t know the answer.",1
 Phase 1,Aggregation Queries,Show all neighbors of compound C00164,"MATCH (c:Compound {id:""C00164""})-[:PRODUCES|SUBSTRATE_OF]->(r:Reaction)
 RETURN r
 UNION
 MATCH (r:Reaction)-[:PRODUCES]->(c:Compound {id:""C00164""})
-RETURN r",['R01360'],1
+RETURN r",['R01360'],0
 Phase 1,Aggregation Queries,Find all entities connected to enzyme EC:1.13.11.33,"MATCH (e:EC {id:'1.13.11.33'})
 OPTIONAL MATCH (g:Gene)-[:ENCODES]->(e)
 OPTIONAL MATCH (o:Ortholog)-[:HAS_ENZYME_FUNCTION]->(e)
@@ -305,7 +305,7 @@ OPTIONAL MATCH (p:Pathway)-[:CONTAINS]->(e)
 OPTIONAL MATCH (p2:Pathway)-[:CONTAINS]->(fu)
 OPTIONAL MATCH (c:Compound)-[:PRODUCES]->(r)
 OPTIONAL MATCH (c2:Compound)-[:SUBSTRATE_OF]->(r)
-RETURN DISTINCT e, g, o, g2, fu, g3, r, p, p2, c, c2",I don't know the answer.,1
+RETURN DISTINCT e, g, o, g2, fu, g3, r, p, p2, c, c2",I don't know the answer.,0
 Phase 1,Aggregation Queries,Get neighbors of reaction R01280,"MATCH (r:Reaction {id:'R01280'})-[rel]->(n)
 RETURN DISTINCT n, type(rel) AS relType
 UNION
@@ -410,7 +410,7 @@ RETURN r, c;","['R06870', 'R06870', 'R06871', 'R06871', 'R07444', 'R07449', 'R04
 Phase 1,Filtering & Pattern Matching,Which pathways contain reactions?,"MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction)
 RETURN p.id AS pathwayId, p.title AS pathwayTitle, r.id AS reactionId, r.name AS reactionName;",Fatty acid biosynthesis contains reactions.,1
 Phase 1,Filtering & Pattern Matching,Find orthologs with enzyme EC:1.3.1.9 functions,"MATCH (o:Ortholog)-[:HAS_ENZYME_FUNCTION]->(e:EC {id: ""1.3.1.9""})
-RETURN o;",I don't know the answer.,1
+RETURN o;",I don't know the answer.,0
 Phase 1,Filtering & Pattern Matching,Which genes don't encode any enzymes?,"MATCH (g:Gene)
 WHERE NOT (g)-[:ENCODES]->()
 RETURN g;","['ats:109732741', 'ats:109779197', 'ats:109767527', 'ats:109775477', 'ats:109735074', 'ats:109741796', 'ats:109746620', 'ats:109748080', 'ats:109763601', 'ats:120965235']",1
@@ -431,7 +431,6 @@ RETURN g, o;","['ats:109732741', 'ats:109779197', 'ats:109767527', 'ats:10977547
 Phase 1,Filtering & Pattern Matching,Find either enzymes or reactions,"MATCH (e:EC) RETURN e AS node
 UNION
 MATCH (r:Reaction) RETURN r AS node","['EC:3.1.3.75', 'EC:3.1.2.14', 'EC:3.1.2.21', 'EC:1.14.19.2', 'EC:1.3.1.9', 'EC:1.3.1.-', 'EC:2.3.1.-', 'EC:4.2.1.-', 'EC:2.3.1.41', 'EC:2.3.1.179']",1
-Phase 1,Filtering & Pattern Matching,Find either enzymes or reactions,,Exception: CypherSyntaxError,1
 Phase 1,Filtering & Pattern Matching,Get compounds or pathways,"MATCH (c:Compound) 
 RETURN c AS node, 'Compound' AS type
 UNION ALL
@@ -448,22 +447,22 @@ Palmitoyl‑acyl carrier protein thioesterase, chloroplastic – oleoyl‑[acyl�
 Palmitoyl‑acyl carrier protein thioesterase, chloroplastic isoform X1 – oleoyl‑[acyl‑carrier‑protein] hydrolase,  
 Myristoyl‑acyl carrier protein thioesterase, chloroplastic‑like (FATB1B) – oleoyl‑[acyl‑carrier‑protein] hydrolase,  
 Palmitoyl‑acyl carrier protein thioesterase, chloroplastic – oleoyl‑[acyl‑carrier‑protein] hydrolase,  
-Oleoyl‑acyl carrier protein thioesterase 1, chloroplastic‑like – oleoyl‑[acyl‑carrier‑protein] hydrolase.",1
+Oleoyl‑acyl carrier protein thioesterase 1, chloroplastic‑like – oleoyl‑[acyl‑carrier‑protein] hydrolase.",0
 Phase 1,Filtering & Pattern Matching,Show reactions and compounds,"MATCH (r:Reaction)-[:PRODUCES]->(c:Compound)
 RETURN r, c;","['R06870', 'R06870', 'R06871', 'R06871', 'R07444', 'R07449', 'R04014', 'R04014', 'R08162', 'R08162']",1
-Phase 1,Filtering & Pattern Matching,Find orthologs or functional units,,Exception: CypherSyntaxError,1
+Phase 1,Filtering & Pattern Matching,Find orthologs or functional units,,Exception: CypherSyntaxError,0
 Phase 1,Filtering & Pattern Matching,Which genes are most connected?,"MATCH (g:Gene)-[r]-()
 RETURN g.name AS geneName, g.id AS geneId, count(r) AS connections
 ORDER BY connections DESC
 LIMIT 10","(RefSeq) triacylglycerol lipase SDP1 isoform X1, (RefSeq) triacylglycerol lipase SDP1, (RefSeq) triacylglycerol lipase SDP1, (RefSeq) triacylglycerol lipase SDP1 isoform X1",1
-Phase 1,Filtering & Pattern Matching,Find most connected compounds,,Exception: CypherSyntaxError,1
+Phase 1,Filtering & Pattern Matching,Find most connected compounds,,Exception: CypherSyntaxError,0
 Phase 1,Filtering & Pattern Matching,Show enzymes with most connections,"MATCH (e:EC)
 OPTIONAL MATCH (e)-[r]->()
 OPTIONAL MATCH ()-[r2]->(e)
 RETURN e.id AS enzymeId, e.name AS enzymeName, (count(r)+count(r2)) AS connections
 ORDER BY connections DESC
 LIMIT 10","enoyl‑CoA hydratase (416 connections), palmitoyl‑CoA hydrolase (312), acyl‑CoA oxidase (286), beta‑ketoacyl‑[acyl‑carrier‑protein] synthase II (280), 3‑hydroxyacyl‑CoA dehydrogenase (260), phospholipase A2 (240), acetyl‑CoA C‑acyltransferase (224), phospholipase D (208), oleoyl‑[acyl‑carrier‑protein] hydrolase (192), linoleate 13S‑lipoxygenase (180).",1
-Phase 1,Filtering & Pattern Matching,Get most connected reactions,,Exception: CypherSyntaxError,1
+Phase 1,Filtering & Pattern Matching,Get most connected reactions,,Exception: CypherSyntaxError,0
 Phase 1,Filtering & Pattern Matching,Which pathways have most connections?,"MATCH (p:Pathway)-[:CONTAINS]->()
 WITH p, count(*) AS connections
 ORDER BY connections DESC
@@ -478,7 +477,7 @@ WITH o, count(DISTINCT r) AS reactions, count(DISTINCT e) AS ecs, count(DISTINCT
 WITH o, reactions + ecs + units + genes AS hubScore
 WHERE hubScore > 5
 RETURN o, hubScore
-ORDER BY hubScore DESC;","['K10246', 'K10245', 'K10244', 'K10247', 'K10250', 'K11533', 'K10248', 'K00665', 'K15397', 'K13508']",1
+ORDER BY hubScore DESC;","['K10246', 'K10245', 'K10244', 'K10247', 'K10250', 'K11533', 'K10248', 'K00665', 'K15397', 'K13508']",0
 Phase 1,Filtering & Pattern Matching,Show me 10 random genes,"MATCH (g:Gene)
 RETURN g
 ORDER BY rand()
@@ -506,8 +505,8 @@ Phase 2,2-Hop Queries,Find reactions for gene ats:109733199 via ortholog,"MATCH 
 RETURN r;",I don't know the answer.,1
 Phase 2,2-Hop Queries,Get reactions that gene ats:109761713 participates in through ortholog,"MATCH (g:Gene {id: 'ats:109761713'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)
 RETURN r;",I don't know the answer.,1
-Phase 2,2-Hop Queries,Which reactions does gene ath:AT1G54220 indirectly catalyze?,,Exception: CypherSyntaxError,1
-Phase 2,2-Hop Queries,List reactions connected to gene ath:AT2G06990 through ortholog groups,,Exception: CypherSyntaxError,1
+Phase 2,2-Hop Queries,Which reactions does gene ath:AT1G54220 indirectly catalyze?,,Exception: CypherSyntaxError,0
+Phase 2,2-Hop Queries,List reactions connected to gene ath:AT2G06990 through ortholog groups,,Exception: CypherSyntaxError,0
 Phase 2,2-Hop Queries,What reactions does gene ath:AT5G61540 catalyze through its enzymes?,"MATCH (g:Gene {id:'ath:AT5G61540'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)
 RETURN r.id AS reactionId, r.name AS reactionName;",I don't know the answer.,1
 Phase 2,2-Hop Queries,Show reactions for gene gmx:100217331 via encoded enzymes,"MATCH (g:Gene {id: 'gmx:100217331'})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)
@@ -516,7 +515,7 @@ Phase 2,2-Hop Queries,Find reactions catalyzed by enzymes from gene EC:1.3.1.10,
 RETURN r;",I don't know the answer.,1
 Phase 2,2-Hop Queries,Get reactions that gene ats:109745953 affects through EC numbers,"MATCH (g:Gene {id: 'ats:109745953'})-[:ENCODES]->(ec:EC)-[:CATALYZES]->(r:Reaction)
 RETURN r;",I don't know the answer.,1
-Phase 2,2-Hop Queries,Which reactions are influenced by gene gmx:100037478?,,Exception: CypherSyntaxError,1
+Phase 2,2-Hop Queries,Which reactions are influenced by gene gmx:100037478?,,Exception: CypherSyntaxError,0
 Phase 2,2-Hop Queries,List reactions connected to gene EC:4.2.1.59 through enzymes,"MATCH (g:Gene)-[:ENCODES]->(e:EC {id: '4.2.1.59'})-[:CATALYZES]->(r:Reaction)
 RETURN r;",I don't know the answer.,1
 Phase 2,2-Hop Queries,What compounds are produced from compound C06000?,"MATCH (c:Compound {id: 'C06000'})<-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]->(p:Compound)
@@ -544,33 +543,33 @@ RETURN e.id, e.name, e.sysname;",I don't know the answer.,1
 Phase 2,2-Hop Queries,List enzyme functions for gene ath:AT1G54220 via ortholog groups,"MATCH (g:Gene {id: 'ath:AT1G54220'})-[:BELONGS_TO]->(o:Ortholog)-[:HAS_ENZYME_FUNCTION]->(ec:EC)
 RETURN ec.id AS ec_id, ec.name AS ec_name, ec.sysname AS ec_sysname, ec.names AS ec_names;","dihydrolipoyllysine‑residue acetyltransferase, acetyl‑CoA:dihydrolipoamide S‑acetyltransferase, dihydrolipoamide S‑acetyltransferase, dihydrolipoate acetyltransferase, dihydrolipoic transacetylase, dihydrolipoyl acetyltransferase, lipoate acetyltransferase, lipoate transacetylase, lipoic acetyltransferase, lipoic acid acetyltransferase, lipoic transacetylase, lipoylacetyltransferase, thioltransacetylase A, transacetylase X, enzyme‑dihydrolipoyllysine:acetyl‑CoA S‑acetyltransferase, acetyl‑CoA:enzyme 6‑N‑(dihydrolipoyl)lysine S‑acetyltransferase.",1
 Phase 2,2-Hop Queries,What reactions use products from reaction R06871?,"MATCH (r1:Reaction {id:""R06871""})-[:PRODUCES]->(c:Compound)<-[:SUBSTRATE_OF]-(r2:Reaction)
-RETURN DISTINCT r2;",I don't know the answer.,1
+RETURN DISTINCT r2;",I don't know the answer.,0
 Phase 2,2-Hop Queries,Show downstream reactions of reaction R10826,"MATCH (r:Reaction {id:""R10826""})-[:PRODUCES]->(c:Compound)<-[:SUBSTRATE_OF]-(down:Reaction)
-RETURN DISTINCT down.id, down.name, down.equation;",I don't know the answer.,1
+RETURN DISTINCT down.id, down.name, down.equation;",I don't know the answer.,0
 Phase 2,2-Hop Queries,Find reactions that consume products of reaction R03777,"MATCH (r:Reaction {id:'R03777'})-[:PRODUCES]->(c:Compound)<-[:SUBSTRATE_OF]-(other:Reaction)
-RETURN other.id, other.name, other.equation;",I don't know the answer.,1
+RETURN other.id, other.name, other.equation;",I don't know the answer.,0
 Phase 2,2-Hop Queries,Get reactions following reaction R02814,"MATCH (r1:Reaction {id: 'R02814'})-[:PRODUCES]->(c:Compound)<-[:SUBSTRATE_OF]-(r2:Reaction)
-RETURN r2;",I don't know the answer.,1
+RETURN r2;",I don't know the answer.,0
 Phase 2,2-Hop Queries,Which reactions use outputs from reaction R04957?,"MATCH (r1:Reaction {id:""R04957""})-[:PRODUCES]->(c:Compound)<-[:SUBSTRATE_OF]-(r2:Reaction)
-RETURN r2.id, r2.name;",I don't know the answer.,1
+RETURN r2.id, r2.name;",I don't know the answer.,0
 Phase 2,2-Hop Queries,List next reactions after reaction R07449,"MATCH (r:Reaction {id: 'R07449'})-[:PRODUCES]->(c:Compound)<-[:SUBSTRATE_OF]-(nextR:Reaction)
-RETURN nextR.id AS nextReactionId, nextR.name AS nextReactionName, c.id AS productCompoundId, c.name AS productCompoundName;",I don't know the answer.,1
+RETURN nextR.id AS nextReactionId, nextR.name AS nextReactionName, c.id AS productCompoundId, c.name AS productCompoundName;",I don't know the answer.,0
 Phase 2,2-Hop Queries,What compounds are produced in pathway path:gmx00603?,"MATCH (p:Pathway {id: 'path:gmx00603'})-[:CONTAINS]->(r:Reaction)-[:PRODUCES]->(c:Compound)
 RETURN c.id AS compoundId, c.name AS compoundName;","NOR2 antigen, UDP, IV4‑alpha‑Gal‑Gb4Cer, Lactosylceramide, D‑Galactose, Globotriaosylceramide, N‑Acetyl‑D‑galactosamine.",1
 Phase 2,2-Hop Queries,Show all products of path:ath00603 pathway,"MATCH (p:Pathway {id:'ath00603'})-[:CONTAINS]->(r:Reaction)-[:PRODUCES]->(c:Compound)
-RETURN DISTINCT c;",I don't know the answer.,1
+RETURN DISTINCT c;",I don't know the answer.,0
 Phase 2,2-Hop Queries,Find compounds made in pathway path:ats01040,"MATCH (p:Pathway {id: 'path:ats01040'})-[:CONTAINS]->(r:Reaction)-[:PRODUCES]->(c:Compound)
 RETURN DISTINCT c;","['C06427', 'C00010', 'C06428', 'C06429', 'C06426', 'C03242', 'C00219', 'C01595', 'C00712', 'C06425']",1
 Phase 2,2-Hop Queries,Which compounds are synthesized in pathway path:gmx00280?,"MATCH (p:Pathway {id:'path:gmx00280'})-[:CONTAINS]->(r:Reaction)-[:PRODUCES]->(c:Compound)
 RETURN DISTINCT c;","['C00041', 'C00349', 'C00013', 'C00020', 'C01213', 'C00030', 'C03345', 'C00025', 'C00233', 'C15975']",1
 Phase 2,2-Hop Queries,List all products from path:gmx00061 pathway,"MATCH (p:Pathway {id:'gmx00061'})-[:CONTAINS]->(r:Reaction)-[:PRODUCES]->(c:Compound)
-RETURN c;",I don't know the answer.,1
+RETURN c;",I don't know the answer.,0
 Phase 2,2-Hop Queries,What compounds are consumed in pathway path:ath00061?,"MATCH (p:Pathway {id:""ath00061""})-[:CONTAINS]->(r:Reaction)<-[:SUBSTRATE_OF]-(c:Compound)
 RETURN DISTINCT c;",I don't know the answer.,1
 Phase 2,2-Hop Queries,Find input compounds for pathway path:ats00603,"MATCH (p:Pathway {id:'path:ats00603'})-[:CONTAINS]->(r:Reaction)<-[:SUBSTRATE_OF]-(c:Compound)
 RETURN DISTINCT c;","['G13080', 'G10609', 'G00094', 'G00093', 'C00001', 'G00092']",1
 Phase 2,2-Hop Queries,Which compounds are consumed in pathway path:ats00280?,"MATCH (p:Pathway {id:'path:ats00280'})-[:CONTAINS]->(r:Reaction)-[:SUBSTRATE_OF]->(c:Compound)
-RETURN c;",I don't know the answer.,1
+RETURN c;",I don't know the answer.,0
 Phase 2,2-Hop Queries,What enzymes are associated with functional unit M00001?,"MATCH (fu:FunctionalUnit {id:'M00001'})
 MATCH (fu)<-[:MEMBER_OF]-(g:Gene)-[:ENCODES]->(ec:EC)
 RETURN DISTINCT ec
@@ -581,13 +580,13 @@ RETURN DISTINCT ec
 UNION
 MATCH (fu:FunctionalUnit {id:'M00001'})
 MATCH (fu)<-[:CONTAINS]-(p:Pathway)-[:CONTAINS]->(ec:EC)
-RETURN DISTINCT ec",I don't know the answer.,1
+RETURN DISTINCT ec",I don't know the answer.,0
 Phase 2,2-Hop Queries,Show EC numbers for complex M00002,"MATCH (p:Pathway {id: 'M00002'})-[:CONTAINS]->(ec:EC)
-RETURN ec.id;",I don't know the answer.,1
+RETURN ec.id;",I don't know the answer.,0
 Phase 2,2-Hop Queries,Find enzyme EC:1.3.1.9 activities in functional unit M00003,"MATCH (fu:FunctionalUnit {id:'M00003'})<-[:CONTAINS]-(p:Pathway)-[:CONTAINS]->(r:Reaction)<-[:CATALYZES]-(ec:EC {id:'1.3.1.9'})
-RETURN ec;",I don't know the answer.,1
+RETURN ec;",I don't know the answer.,0
 Phase 2,2-Hop Queries,Get enzymes for complex M00004,"MATCH (p:Pathway {id: 'M00004'})-[:CONTAINS]->(e:EC)
-RETURN e.id AS ec_id, e.name AS ec_name, e.sysname AS ec_sysname, e.link AS ec_link, e.names AS ec_names;",I don't know the answer.,1
+RETURN e.id AS ec_id, e.name AS ec_name, e.sysname AS ec_sysname, e.link AS ec_link, e.names AS ec_names;",I don't know the answer.,0
 Phase 2,2-Hop Queries,Which EC numbers relate to functional unit M00005?,"MATCH (fu:FunctionalUnit {id: 'M00005'})-[:MEMBER_OF]->(ec:EC)
 RETURN DISTINCT ec.id;",I don't know the answer.,1
 Phase 2,2-Hop Queries,List enzymes in complex M00006,"MATCH (fu:FunctionalUnit {id:'M00006'})<-[:MEMBER_OF]-(ec:EC)
@@ -596,10 +595,10 @@ Phase 2,3-Hop Queries,What compounds does gene ath:AT2G06990 help produce?,"MATC
 RETURN DISTINCT c.id AS compoundId, c.name AS compoundName, c.formula AS formula
 UNION
 MATCH (g:Gene {id:'ath:AT2G06990'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound)
-RETURN DISTINCT c.id AS compoundId, c.name AS compoundName, c.formula AS formula;",I don't know the answer.,1
+RETURN DISTINCT c.id AS compoundId, c.name AS compoundName, c.formula AS formula;",I don't know the answer.,0
 Phase 2,3-Hop Queries,Show products from gene ath:AT5G61540 via ortholog pathway,"MATCH (g:Gene {id: 'ath:AT5G61540'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound)
 MATCH (o)-[:MEMBER_OF]->(fu:FunctionalUnit)<-[:CONTAINS]-(p:Pathway)
-RETURN c.id AS compoundId, c.name AS compoundName, p.id AS pathwayId, p.title AS pathwayTitle;",I don't know the answer.,1
+RETURN c.id AS compoundId, c.name AS compoundName, p.id AS pathwayId, p.title AS pathwayTitle;",I don't know the answer.,0
 Phase 2,3-Hop Queries,Find compounds synthesized by gene gmx:100217331,"MATCH (g:Gene {id:""gmx:100217331""})-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound)
 RETURN DISTINCT c;","['C00001', 'C00139', 'C01203', 'C16520']",1
 Phase 2,3-Hop Queries,Get output compounds from gene ats:109745953,"MATCH (g:Gene {id:""ats:109745953""})-[:ENCODES]->(ec:EC)-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound)
@@ -628,12 +627,12 @@ MATCH (c)-[:SUBSTRATE_OF]->(r2:Reaction)
 RETURN DISTINCT r2, c;",I don't know the answer.,1
 Phase 2,3-Hop Queries,Find reactions that use outputs from pathway path:ath00280,"MATCH (p:Pathway {id:""path:ath00280""})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(c:Compound)
 MATCH (r2:Reaction)-[:SUBSTRATE_OF]->(c)
-RETURN DISTINCT r2;",I don't know the answer.,1
+RETURN DISTINCT r2;",I don't know the answer.,0
 Phase 2,3-Hop Queries,Get subsequent reactions after TCA cycle,"MATCH (p:Pathway {title: ""TCA cycle""})-[:CONTAINS]->(r1:Reaction)
 MATCH (r1)-[:PRODUCES]->(c:Compound)
 MATCH (r2:Reaction)-[:SUBSTRATE_OF]->(c)
 WHERE r2 <> r1
-RETURN DISTINCT r2.name AS reactionName;",I don't know the answer.,1
+RETURN DISTINCT r2.name AS reactionName;",I don't know the answer.,0
 Phase 2,3-Hop Queries,Which reactions consume products from pathway path:gmx00603?,"MATCH (p:Pathway {id:'path:gmx00603'})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(c:Compound)<-[:SUBSTRATE_OF]-(r2:Reaction)
 RETURN DISTINCT r2;",I don't know the answer.,1
 Phase 2,3-Hop Queries,List reactions following fatty acid biosynthesis,"MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction)
@@ -647,13 +646,13 @@ Phase 2,3-Hop Queries,Find reactions two hops away from compound C00422,"MATCH (
   -[:PRODUCES|:SUBSTRATE_OF]->(r1:Reaction)
   -[:CONTAINS]->(p:Pathway)
   -[:CONTAINS]->(r2:Reaction)
-RETURN DISTINCT r2;",I don't know the answer.,1
+RETURN DISTINCT r2;",I don't know the answer.,0
 Phase 2,3-Hop Queries,Get second-level reactions from R06871,"MATCH (r1:Reaction {id: 'R06871'})-[:PRODUCES]->(c:Compound)-[:SUBSTRATE_OF]->(r2:Reaction)
 RETURN r2;","['rn:R01021', 'R01021']",1
 Phase 2,3-Hop Queries,Which reactions are reached through two conversions from R10826?,"MATCH (r1:Reaction {id:""R10826""})-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(:Reaction)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF]->(r3:Reaction)
 RETURN DISTINCT r3.id, r3.name;","I’m sorry, but I don’t have that information.",1
 Phase 2,3-Hop Queries,List reactions two steps after R03777,"MATCH (r:Reaction {id:'R03777'})-[:PRODUCES]->(c:Compound)<-[:SUBSTRATE_OF]-(r2:Reaction)
-RETURN DISTINCT r2.id, r2.name, r2.equation;",I don't know the answer.,1
+RETURN DISTINCT r2.id, r2.name, r2.equation;",I don't know the answer.,0
 Phase 2,3-Hop Queries,Which pathways is gene gmx:100217331 involved in?,"MATCH (g:Gene {id:""gmx:100217331""})-[:MEMBER_OF]->(fu:FunctionalUnit)<-[:CONTAINS]-(p:Pathway)
 RETURN DISTINCT p
 UNION
@@ -667,7 +666,7 @@ MATCH (g:Gene {id:""gmx:100217331""})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->
 RETURN DISTINCT p
 UNION
 MATCH (g:Gene {id:""gmx:100217331""})-[:BELONGS_TO]->(o:Ortholog)-[:HAS_ENZYME_FUNCTION]->(ec:EC)<-[:CONTAINS]-(p:Pathway)
-RETURN DISTINCT p","['aralip_4', 'aralip_3', 'aralip_2', 'path:ats00061', 'path:csat00061', 'path:ath00061', 'path:gmx00061']",1
+RETURN DISTINCT p","['aralip_4', 'aralip_3', 'aralip_2', 'path:ats00061', 'path:csat00061', 'path:ath00061', 'path:gmx00061']",0
 Phase 2,3-Hop Queries,Show pathways for gene ats:109745953 through ortholog,"MATCH (g:Gene {id: 'ats:109745953'})-[:BELONGS_TO]->(o:Ortholog)
 OPTIONAL MATCH (o)-[:CATALYZES]->(r:Reaction)
 OPTIONAL MATCH (o)-[:HAS_ENZYME_FUNCTION]->(e:EC)
@@ -675,11 +674,11 @@ OPTIONAL MATCH (o)-[:MEMBER_OF]->(fu:FunctionalUnit)
 OPTIONAL MATCH (p:Pathway)-[:CONTAINS]->(r)
 OPTIONAL MATCH (p)-[:CONTAINS]->(e)
 OPTIONAL MATCH (p)-[:CONTAINS]->(fu)
-RETURN DISTINCT p.id AS pathwayId, p.title AS pathwayTitle;",I don't know the answer.,1
+RETURN DISTINCT p.id AS pathwayId, p.title AS pathwayTitle;",I don't know the answer.,0
 Phase 2,3-Hop Queries,Find pathways connected to gene gmx:100037478,"MATCH (g:Gene {id:'gmx:100037478'})-[:MEMBER_OF|ENCODES|BELONGS_TO|CATALYZES|HAS_ENZYME_FUNCTION|CONTAINS|PRODUCES|SUBSTRATE_OF*]->(p:Pathway)
-RETURN DISTINCT p;",I don't know the answer.,1
-Phase 2,3-Hop Queries,Get pathways that gene ath:AT1G01040 participates in,,Exception: CypherSyntaxError,1
-Phase 2,3-Hop Queries,Which pathways involve gene ath:AT1G01050?,,Exception: CypherSyntaxError,1
+RETURN DISTINCT p;",I don't know the answer.,0
+Phase 2,3-Hop Queries,Get pathways that gene ath:AT1G01040 participates in,,Exception: CypherSyntaxError,0
+Phase 2,3-Hop Queries,Which pathways involve gene ath:AT1G01050?,,Exception: CypherSyntaxError,0
 Phase 2,3-Hop Queries,List pathways for gene ats:109733199 via ortholog,"MATCH (g:Gene {id:'ats:109733199'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)
 MATCH (p:Pathway)-[:CONTAINS]->(r)
 RETURN DISTINCT p.id, p.title;",I don't know the answer.,1
@@ -695,7 +694,7 @@ OPTIONAL MATCH (g)-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)<-[:CON
 OPTIONAL MATCH (g)-[:BELONGS_TO]->(o)-[:MEMBER_OF]->(fu2:FunctionalUnit)<-[:CONTAINS]-(p4:Pathway)
 WITH collect(DISTINCT p1)+collect(DISTINCT p2)+collect(DISTINCT p3)+collect(DISTINCT p4) AS paths
 UNWIND paths AS p
-RETURN DISTINCT p;",['path:ath03018'],1
+RETURN DISTINCT p;",['path:ath03018'],0
 Phase 2,3-Hop Queries,Get pathways connected to gene ath:AT5G61540 through enzymes,"MATCH (g:Gene {id: 'ath:AT5G61540'})-[:ENCODES]->(ec:EC)-[:CATALYZES]->(r:Reaction)-[:CONTAINS]->(p:Pathway)
 RETURN DISTINCT p
 UNION
@@ -703,25 +702,25 @@ MATCH (g:Gene {id: 'ath:AT5G61540'})-[:BELONGS_TO]->(o:Ortholog)-[:HAS_ENZYME_FU
 RETURN DISTINCT p
 UNION
 MATCH (g:Gene {id: 'ath:AT5G61540'})-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction)-[:CONTAINS]->(p:Pathway)
-RETURN DISTINCT p",I don't know the answer.,1
+RETURN DISTINCT p",I don't know the answer.,0
 Phase 2,3-Hop Queries,Which pathways involve gene gmx:100217331 via EC numbers?,"MATCH (g:Gene {id:""gmx:100217331""})-[:ENCODES]->(ec:EC)
 MATCH (p:Pathway)-[:CONTAINS]->(ec)
 RETURN DISTINCT p
 UNION
 MATCH (g:Gene {id:""gmx:100217331""})-[:ENCODES]->(ec:EC)
 MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction)-[:CATALYZES]->(ec)
-RETURN DISTINCT p",I don't know the answer.,1
+RETURN DISTINCT p",I don't know the answer.,0
 Phase 2,3-Hop Queries,List pathways for gene ats:109745953 through enzymes,"MATCH (g:Gene {id:""ats:109745953""})-[:ENCODES]->(e:EC)<-[:CONTAINS]-(p:Pathway)
 RETURN DISTINCT p.id, p.title;",I don't know the answer.,1
-Phase 2,Variable-Length Paths,How is compound EC:1.3.1.21 connected to EC:1.3.1.21?,,Exception: CypherSyntaxError,1
+Phase 2,Variable-Length Paths,How is compound EC:1.3.1.21 connected to EC:1.3.1.21?,,Exception: CypherSyntaxError,0
 Phase 2,Variable-Length Paths,Show pathways between path:ath00603 and path:ath00603,"MATCH (p:Pathway {id:""ath00603""})
-RETURN p;",I don't know the answer.,1
-Phase 2,Variable-Length Paths,Find conversion routes from C00035 to C00037,,I don't know the answer.,1
+RETURN p;",I don't know the answer.,0
+Phase 2,Variable-Length Paths,Find conversion routes from C00035 to C00037,,I don't know the answer.,0
 Phase 2,Variable-Length Paths,Get paths connecting C00041 to C00043,"MATCH p = (c1:Compound {id: 'C00041'})-[:SUBSTRATE_OF|PRODUCES*1..5]-(c2:Compound {id: 'C00043'})
-RETURN p;",I don't know the answer.,1
+RETURN p;",I don't know the answer.,0
 Phase 2,Variable-Length Paths,Which reactions link C00041 to C00043?,"MATCH (c1:Compound {id: 'C00041'})-[:SUBSTRATE_OF]->(r:Reaction)-[:PRODUCES]->(c2:Compound {id: 'C00043'})
-RETURN r.id, r.name;",I don't know the answer.,1
-Phase 2,Variable-Length Paths,Show metabolic route from C00058 to C00062,,I don't know the answer.,1
+RETURN r.id, r.name;",I don't know the answer.,0
+Phase 2,Variable-Length Paths,Show metabolic route from C00058 to C00062,,I don't know the answer.,0
 Phase 2,Variable-Length Paths,What's the shortest connection between gene path:ats01040 and pathway path:ats01040?,"MATCH (g:Gene {id:'path:ats01040'}), (p:Pathway {id:'path:ats01040'}), 
       path = shortestPath((g)-[*]-(p))
 RETURN path;",I don't know the answer.,1
@@ -732,16 +731,16 @@ Phase 2,Variable-Length Paths,Get shortest connection between ortholog path:gmx0
 MATCH path = shortestPath((o)-[*]-(p))
 RETURN path;",I don't know the answer.,1
 Phase 2,Variable-Length Paths,What's the closest path from enzyme EC:6.4.1.2 to compound EC:6.4.1.2?,"MATCH p=(e:EC {id:""6.4.1.2""})-[:CATALYZES]->(r:Reaction)-[:PRODUCES]->(c:Compound)
-RETURN p;",I don't know the answer.,1
+RETURN p;",I don't know the answer.,0
 Phase 2,Variable-Length Paths,Find minimum hops from gene ath:AT1G01040 to reaction ath:AT1G01040,"MATCH (g:Gene {id:""ath:AT1G01040""}),(r:Reaction {id:""ath:AT1G01040""})
 WITH g,r
 MATCH p=shortestPath((g)-[*]-(r))
 RETURN length(p) AS hops;",I don't know the answer.,1
 Phase 2,Variable-Length Paths,What is within 2 steps of gene ath:AT1G01050?,"MATCH (g:Gene {id:'ath:AT1G01050'})-[*1..2]-(n)
 RETURN DISTINCT n;","['EC:3.6.1.1', 'K01507', 'rn:R00004', 'ath:AT5G09650', 'ath:AT4G01480', 'ath:AT3G53620', 'ath:AT2G46860', 'ath:AT2G18230', 'K15986', 'K11726']",1
-Phase 2,Variable-Length Paths,Show all entities within 2 hops of compound C00052,,Exception: CypherSyntaxError,1
-Phase 2,Variable-Length Paths,Find everything connected within 2 steps of pathway path:gmx00061,,Exception: CypherSyntaxError,1
-Phase 2,Variable-Length Paths,Get neighbors within 2 hops of enzyme EC:2.3.1.199,,Exception: CypherSyntaxError,1
+Phase 2,Variable-Length Paths,Show all entities within 2 hops of compound C00052,,Exception: CypherSyntaxError,0
+Phase 2,Variable-Length Paths,Find everything connected within 2 steps of pathway path:gmx00061,,Exception: CypherSyntaxError,0
+Phase 2,Variable-Length Paths,Get neighbors within 2 hops of enzyme EC:2.3.1.199,,Exception: CypherSyntaxError,0
 Phase 2,Variable-Length Paths,Which entities are 2 steps from reaction R04957?,"MATCH (r:Reaction {id:'R04957'})-[:PRODUCES|SUBSTRATE_OF|CATALYZES|CONTAINS|MEMBER_OF|ENCODES|BELONGS_TO|HAS_ENZYME_FUNCTION*2]-(x)
 WHERE x <> r
 RETURN DISTINCT x;","['R04741', 'path:ats01212_354', 'path:ats01212_345', 'path:ats01212_336', 'path:ats01212_251', 'path:ats01212_243', 'path:ats01212_225', 'path:ats01212_215', 'path:ats01212_199', 'path:ats01212_183']",1
@@ -750,13 +749,13 @@ RETURN DISTINCT n;","['R07762', 'R10825', 'path:ats01040_280', 'path:ats01212_33
 Phase 2,Variable-Length Paths,Show the metabolic cascade starting from compound C06157,"MATCH path = (c:Compound {id:'C06157'})-[:SUBSTRATE_OF]->(r1:Reaction)-[:PRODUCES]->(c1:Compound)-[:SUBSTRATE_OF]->(r2:Reaction)-[:PRODUCES]->(c2:Compound)-[:SUBSTRATE_OF]->(r3:Reaction)-[:PRODUCES]->(c3:Compound)
 RETURN path;",I don't know the answer.,1
 Phase 2,Variable-Length Paths,What happens downstream from C00024?,"MATCH (c:Compound {id:'C00024'})<-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]->(p:Compound)
-RETURN r.name AS reactionName, r.equation AS reactionEquation, p.name AS productName, p.id AS productId;",I don't know the answer.,1
+RETURN r.name AS reactionName, r.equation AS reactionEquation, p.name AS productName, p.id AS productId;",I don't know the answer.,0
 Phase 2,Variable-Length Paths,Trace the pathway forward from compound C06000,"MATCH path = (c:Compound {id:'C06000'})-[:PRODUCES]->(r:Reaction)-[:PRODUCES]->(c2:Compound)
 RETURN path;",I don't know the answer.,1
 Phase 2,Variable-Length Paths,Show metabolic flow from C00033,"MATCH (c:Compound {id: 'C00033'})<-[:PRODUCES]-(r:Reaction)-[:PRODUCES]->(c2:Compound)
 RETURN c, r, c2;","['C00033', 'C00033']",1
 Phase 2,Variable-Length Paths,What are the downstream products of C00035?,"MATCH (c:Compound {id: 'C00035'})<-[:SUBSTRATE_OF]-(r:Reaction)-[:PRODUCES]->(p:Compound)
-RETURN p.id, p.name, p.formula;",I don't know the answer.,1
+RETURN p.id, p.name, p.formula;",I don't know the answer.,0
 Phase 2,Variable-Length Paths,Trace metabolic progression from C00037,MATCH p = (c:Compound {id:'C00037'})<-[:PRODUCES]-(r:Reaction)-[:PRODUCES*]->(c2:Compound) RETURN p;,I don't know the answer.,1
 Phase 2,Intersection & Union Queries,Which reactions are shared between pathways path:ath00061 and path:ath00061?,"MATCH (p1:Pathway {id:'ath00061'}), (p2:Pathway {id:'ath00061'}), (p1)-[:CONTAINS]->(r:Reaction), (p2)-[:CONTAINS]->(r)
 RETURN DISTINCT r;",I don't know the answer.,1
@@ -775,7 +774,7 @@ WHERE toLower(p1.title) CONTAINS 'pentose phosphate'
   AND toLower(p2.title) CONTAINS 'glycolysis'
 RETURN DISTINCT r.id AS reactionId, r.name AS reactionName;",I don't know the answer.,1
 Phase 2,Intersection & Union Queries,Which genes encode the same enzyme EC:1.3.1.10?,"MATCH (g:Gene)-[:ENCODES]->(e:EC {id: '1.3.1.10'})
-RETURN g.id AS geneId, g.name AS geneName, g.symbol AS geneSymbol;",I don't know the answer.,1
+RETURN g.id AS geneId, g.name AS geneName, g.symbol AS geneSymbol;",I don't know the answer.,0
 Phase 2,Intersection & Union Queries,Find genes with redundant encoding for ats:109733199,"MATCH (g1:Gene {id: 'ats:109733199'})-[:ENCODES]->(ec:EC)<-[:ENCODES]-(g2:Gene)
 WHERE g2.id <> g1.id
 RETURN g2.id AS geneId, g2.name AS geneName, ec.id AS ecId, ec.name AS ecName;",I don't know the answer.,1
@@ -783,16 +782,16 @@ Phase 2,Intersection & Union Queries,Show genes that both produce enzyme ats:109
 RETURN g;",I don't know the answer.,1
 Phase 2,Intersection & Union Queries,Get genes with overlapping function for ath:AT1G54220,"MATCH (g:Gene {id:""ath:AT1G54220""})-[:MEMBER_OF]->(fu:FunctionalUnit)<-[:MEMBER_OF]-(o:Gene)
 WHERE o.id <> g.id
-RETURN o.id, o.name, o.symbol;",I don't know the answer.,1
+RETURN o.id, o.name, o.symbol;",I don't know the answer.,0
 Phase 2,Intersection & Union Queries,Which genes share enzyme EC:4.2.1.59?,"MATCH (g:Gene)-[:ENCODES]->(e:EC {id:'4.2.1.59'})
-RETURN g.id, g.name, g.symbol, g.position, g.link, g.species;",I don't know the answer.,1
+RETURN g.id, g.name, g.symbol, g.position, g.link, g.species;",I don't know the answer.,0
 Phase 2,Intersection & Union Queries,List genes encoding the same ath:AT2G06990,"MATCH (g1:Gene {id: 'ath:AT2G06990'})-[:ENCODES]->(ec:EC)
 MATCH (g2:Gene)-[:ENCODES]->(ec)
 WHERE g2.id <> g1.id
 RETURN DISTINCT g2.id AS geneId, g2.name AS geneName, g2.symbol AS geneSymbol;",I don't know the answer.,1
-Phase 2,Intersection & Union Queries,Which compounds are used in multiple pathways?,,Exception: CypherSyntaxError,1
-Phase 2,Intersection & Union Queries,Find metabolites shared across pathways,,Exception: CypherSyntaxError,1
-Phase 2,Intersection & Union Queries,Show compounds with broad pathway involvement,,Exception: CypherSyntaxError,1
+Phase 2,Intersection & Union Queries,Which compounds are used in multiple pathways?,,Exception: CypherSyntaxError,0
+Phase 2,Intersection & Union Queries,Find metabolites shared across pathways,,Exception: CypherSyntaxError,0
+Phase 2,Intersection & Union Queries,Show compounds with broad pathway involvement,,Exception: CypherSyntaxError,0
 Phase 2,Intersection & Union Queries,Get hub metabolites in the network,"MATCH (c:Compound)-[:PRODUCES|SUBSTRATE_OF]-(r:Reaction)
 WITH c, count(DISTINCT r) AS reactionCount
 RETURN c.id AS compoundId, c.name AS compoundName, reactionCount
@@ -848,12 +847,12 @@ WHERE NOT EXISTS {
   WHERE other <> p
 }
 RETURN r;",I don't know the answer.,1
-Phase 2,Comparative & Set Operations,Find reactions exclusive to ath00280,,Exception: CypherSyntaxError,1
+Phase 2,Comparative & Set Operations,Find reactions exclusive to ath00280,,Exception: CypherSyntaxError,0
 Phase 2,Comparative & Set Operations,Show reactions only in pathway path:gmx00603,"MATCH (p:Pathway {id:'path:gmx00603'})-[:CONTAINS]->(r:Reaction)
-RETURN r;","['R11377', 'R11376', 'R05961', 'R05963', 'R05960']",1
+RETURN r;","['R11377', 'R11376', 'R05961', 'R05963', 'R05960']",0
 Phase 2,Comparative & Set Operations,Get reactions specific to TCA cycle,"MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction)
 WHERE p.title CONTAINS ""TCA cycle""
-RETURN r;",I don't know the answer.,1
+RETURN r;",I don't know the answer.,0
 Phase 2,Comparative & Set Operations,Which reactions appear only in pathway path:ath00603?,"MATCH (p:Pathway {id: 'path:ath00603'})-[:CONTAINS]->(r:Reaction)
 WHERE NOT EXISTS { MATCH (r)-[:CONTAINS]->(p2:Pathway) WHERE p2.id <> 'path:ath00603' }
 RETURN r.id, r.name;","I’m sorry, but I don’t have that information.",1
@@ -878,13 +877,13 @@ WHERE NOT (c)-[:SUBSTRATE_OF]->()
 RETURN DISTINCT c","['C02679', 'C08362', 'C01571', 'C06423', 'C00139', 'C00011', 'C01530', 'C00712', 'C06424', 'C05762']",1
 Phase 2,Comparative & Set Operations,Which compounds have no downstream reactions?,"MATCH (c:Compound)
 WHERE NOT (c)<-[:SUBSTRATE_OF]-()
-RETURN c.id, c.name, c.formula;",I don’t know the answer.,1
+RETURN c.id, c.name, c.formula;",I don’t know the answer.,0
 Phase 2,Comparative & Set Operations,List final output compounds,"MATCH (c:Compound)<-[:PRODUCES]-(r:Reaction)
 WHERE NOT EXISTS((c)-[:SUBSTRATE_OF]->(:Reaction))
 RETURN c;","['C02679', 'C08362', 'C01571', 'C06423', 'C00139', 'C00139', 'C00139', 'C00139', 'C00011', 'C00011']",1
 Phase 2,Comparative & Set Operations,"Which compounds are only consumed, never produced?","MATCH (c:Compound)<-[:SUBSTRATE_OF]-(:Reaction)
 WHERE NOT (c)-[:PRODUCES]->(:Reaction)
-RETURN c.name AS compound, c.id AS id;",I don't know the answer.,1
+RETURN c.name AS compound, c.id AS id;",I don't know the answer.,0
 Phase 2,Comparative & Set Operations,Find starting materials in metabolism,"MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction)
 WHERE NOT EXISTS((c)<-[:PRODUCES]-(:Reaction))
 RETURN c;","['C05223', 'C05223', 'C05223', 'C05223', 'C05755', 'C05755', 'C05755', 'C05755', 'C05752', 'C05752']",1
@@ -935,17 +934,17 @@ WITH e, count(r) AS reactionCount
 WHERE reactionCount > 1
 RETURN e.id AS EC_ID, e.name AS EC_Name, reactionCount
 ORDER BY reactionCount DESC;","EC:2.3.1.-, EC:1.3.1.-",1
-Phase 2,Connectivity & Network Analysis,Which compounds are central metabolites?,,Exception: CypherSyntaxError,1
+Phase 2,Connectivity & Network Analysis,Which compounds are central metabolites?,,Exception: CypherSyntaxError,0
 Phase 2,Connectivity & Network Analysis,Find hub compounds in the network,"MATCH (c:Compound)-[:PRODUCES|SUBSTRATE_OF]->(r:Reaction)
 WITH c, count(DISTINCT r) AS reactionCount
 RETURN c.id, c.name, reactionCount
 ORDER BY reactionCount DESC
 LIMIT 10","H2O, Oxygen, NADP+, NAD+, H+, ATP, Acyl‑CoA, Acetyl‑CoA, [Reduced NADPH—hemoprotein reductase], NADPH.",1
-Phase 2,Connectivity & Network Analysis,Show compounds with most connections,,Exception: CypherSyntaxError,1
+Phase 2,Connectivity & Network Analysis,Show compounds with most connections,,Exception: CypherSyntaxError,0
 Phase 2,Connectivity & Network Analysis,Get key metabolic intermediates,"MATCH (c:Compound)-[:PRODUCES]->(r1:Reaction), (c)-[:SUBSTRATE_OF]->(r2:Reaction)
 RETURN c.id AS compoundId, c.name AS compoundName, c.formula AS formula, c.exact_mass AS exactMass,
        collect(DISTINCT r1.id) AS producedBy, collect(DISTINCT r2.id) AS consumedBy;",I don't know the answer.,1
-Phase 2,Connectivity & Network Analysis,Which compounds have highest degree?,,Exception: CypherSyntaxError,1
+Phase 2,Connectivity & Network Analysis,Which compounds have highest degree?,,Exception: CypherSyntaxError,0
 Phase 2,Connectivity & Network Analysis,List most connected metabolites,"MATCH (c:Compound)
 OPTIONAL MATCH (c)-[:SUBSTRATE_OF]->(r1:Reaction)
 OPTIONAL MATCH (c)<-[:PRODUCES]-(r2:Reaction)
@@ -971,8 +970,8 @@ AND NOT EXISTS {
   MATCH (q:Pathway)-[:CONTAINS]->(ec)
   WHERE q <> p
 }
-RETURN p;","['path:ats00511', 'path:ats03018', 'path:gmx00511', 'path:gmx03018', 'path:ath00511', 'path:ath03018', 'path:csat00511', 'path:csat03018']",1
-Phase 2,Connectivity & Network Analysis,Get pathways without metabolic crosstalk,,Exception: CypherSyntaxError,1
+RETURN p;","['path:ats00511', 'path:ats03018', 'path:gmx00511', 'path:gmx03018', 'path:ath00511', 'path:ath03018', 'path:csat00511', 'path:csat03018']",0
+Phase 2,Connectivity & Network Analysis,Get pathways without metabolic crosstalk,,Exception: CypherSyntaxError,0
 Phase 2,Connectivity & Network Analysis,List disconnected pathways,"MATCH (p:Pathway)
 WHERE NOT EXISTS((p)-[:CONTAINS]->())
 RETURN p.id, p.title, p.link, p.species, p.source, p.image;",I don't know the answer.,1
@@ -998,15 +997,15 @@ Phase 2,Connectivity & Network Analysis,Which compounds connect pathway path:ath
 MATCH (r1)-[:PRODUCES|SUBSTRATE_OF]->(c:Compound)
 MATCH (p2:Pathway)-[:CONTAINS]->(r2:Reaction)-[:PRODUCES|SUBSTRATE_OF]->(c)
 WHERE p2.id <> ""path:ath00280""
-RETURN DISTINCT c;","['C00001', 'C00080', 'C00004', 'C00013', 'C00020', 'C00011', 'C00010', 'C00009', 'C00008', 'C01352']",1
+RETURN DISTINCT c;","['C00001', 'C00080', 'C00004', 'C00013', 'C00020', 'C00011', 'C00010', 'C00009', 'C00008', 'C01352']",0
 Phase 2,Connectivity & Network Analysis,List inter-pathway path:gmx00603 metabolite exchanges,"MATCH (p1:Pathway {id:""gmx00603""})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(c:Compound),
       (p2:Pathway)-[:CONTAINS]->(r2:Reaction)-[:SUBSTRATE_OF]->(c)
 WHERE p1 <> p2
-RETURN c.name AS metabolite, p2.id AS otherPathway, collect(DISTINCT r1.id) AS producedBy, collect(DISTINCT r2.id) AS consumedBy;",I don't know the answer.,1
+RETURN c.name AS metabolite, p2.id AS otherPathway, collect(DISTINCT r1.id) AS producedBy, collect(DISTINCT r2.id) AS consumedBy;",I don't know the answer.,0
 Phase 2,Connectivity & Network Analysis,Show sequential reactions in pathway path:ath00603,"MATCH (p:Pathway {id:""ath00603""})-[:CONTAINS]->(r1:Reaction)-[:PRODUCES]->(c:Compound)<-[:SUBSTRATE_OF]-(r2:Reaction)
 WHERE (p)-[:CONTAINS]->(r2)
 RETURN r1, r2
-ORDER BY r1.id, r2.id",I don't know the answer.,1
+ORDER BY r1.id, r2.id",I don't know the answer.,0
 Phase 2,Connectivity & Network Analysis,Find reaction R00200 chains in glycolysis,"MATCH (p:Pathway {title: ""glycolysis""})-[:CONTAINS]->(r:Reaction {id: ""R00200""})
 MATCH path = (r)-[:PRODUCES]->(:Compound)-[:SUBSTRATE_OF*]->(r2:Reaction)
 WHERE (p)-[:CONTAINS]->(r2)
@@ -1018,8 +1017,8 @@ Phase 2,Connectivity & Network Analysis,Show reaction R07764 sequences in TCA cy
 WHERE p.title CONTAINS ""TCA cycle""
 MATCH (r)-[:CATALYZES]->(ec:EC)
 MATCH (g:Gene)-[:ENCODES]->(ec)
-RETURN g.id AS geneId, g.name AS geneName, g.symbol AS geneSymbol;",I don't know the answer.,1
-Phase 2,Connectivity & Network Analysis,Map reaction flow in pathway path:gmx00280,,I don't know the answer.,1
+RETURN g.id AS geneId, g.name AS geneName, g.symbol AS geneSymbol;",I don't know the answer.,0
+Phase 2,Connectivity & Network Analysis,Map reaction flow in pathway path:gmx00280,,I don't know the answer.,0
 Phase 2,Connectivity & Network Analysis,Display sequential steps in fatty acid biosynthesis path:ath00061,"MATCH (p:Pathway {id:'ath00061'})-[:CONTAINS]->(r:Reaction)
 RETURN r
 ORDER BY r.id;",I don't know the answer.,1
@@ -1097,7 +1096,7 @@ This pathway describes the enzymatic processes that build fatty acids in the GMX
 Phase 3,Informal & Conversational,I need to know which genes encode EC:4.2.1.59,"MATCH (g:Gene)-[:ENCODES]->(e:EC {id: '4.2.1.59'})
 RETURN g.id AS geneId, g.name AS geneName, g.symbol AS geneSymbol;",I don't know the answer.,0
 Phase 3,Informal & Conversational,Show me what's in the path:ath00061 pathway,"MATCH (p:Pathway {id:""ath00061""})-[:CONTAINS]->(n)
-RETURN n;",I don't know the answer.,1
+RETURN n;",I don't know the answer.,0
 Phase 3,Informal & Conversational,What does gene ath:AT2G06990 do?,"MATCH (g:Gene {id: 'ath:AT2G06990'})
 OPTIONAL MATCH (g)-[:ENCODES]->(ec:EC)
 OPTIONAL MATCH (g)-[:MEMBER_OF]->(fu:FunctionalUnit)
@@ -1121,7 +1120,7 @@ RETURN g.name AS GeneName,
        p.id AS PathwayId
 LIMIT 25;","It encodes the RNA helicase HEN2, an ATP‑dependent SK12/DOB1 protein.",0
 Phase 3,Informal & Conversational,Find stuff related to compound C00164,"MATCH (c:Compound {id: 'C00164'})-[r]-(n)
-RETURN c, r, n;",['C00164'],1
+RETURN c, r, n;",['C00164'],0
 Phase 3,Informal & Conversational,Tell me about enzyme EC:1.13.11.33,"MATCH (e:EC {id: '1.13.11.33'})
 OPTIONAL MATCH (e)-[:CATALYZES]->(r:Reaction)
 OPTIONAL MATCH (r)-[:PRODUCES]->(c:Compound)
@@ -1147,9 +1146,9 @@ OPTIONAL MATCH (g)-[:ENCODES]->(ec:EC)
 OPTIONAL MATCH (g)-[:BELONGS_TO]->(o:Ortholog)
 RETURN g, fu, ec, o;",I don't know the answer.,0
 Phase 3,Ambiguous Queries,Show me path:ats00603,"MATCH path = (p:Pathway {id: 'ats00603'})-[:CONTAINS*]->(n)
-RETURN path;",I don't know the answer.,1
+RETURN path;",I don't know the answer.,0
 Phase 3,Ambiguous Queries,Find reactions for EC:6.4.1.2,"MATCH (ec:EC {id: '6.4.1.2'})-[:CATALYZES]->(r:Reaction)
-RETURN r;",I don't know the answer.,1
+RETURN r;",I don't know the answer.,0
 Phase 3,Ambiguous Queries,Show me the pathway path:ats00280,"MATCH (p:Pathway {id: 'ats00280'})
 OPTIONAL MATCH (p)-[:CONTAINS]->(r:Reaction)
 OPTIONAL MATCH (p)-[:CONTAINS]->(fu:FunctionalUnit)
@@ -1179,7 +1178,7 @@ RETURN o;",I don't know the answer.,1
 Phase 3,Typos & Misspellings,Show substrates of reation R00010,"MATCH (c:Compound)-[:SUBSTRATE_OF]->(r:Reaction {id: 'R00010'})
 RETURN c.id, c.names, c.formula, c.name, c.link, c.exact_mass;",I don't know the answer.,1
 Phase 3,Typos & Misspellings,Find pathwys for compound C03069,"MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction)-[:PRODUCES|SUBSTRATE_OF]->(c:Compound {id:'C03069'})
-RETURN DISTINCT p;","['path:ats00280', 'path:csat00280', 'path:ath00280', 'path:gmx00280']",1
+RETURN DISTINCT p;","['path:ats00280', 'path:csat00280', 'path:ath00280', 'path:gmx00280']",0
 Phase 3,Typos & Misspellings,What does geen ath:AT3G01130 encode?,"MATCH (g:Gene {id:'ath:AT3G01130'})-[:ENCODES]->(e:EC)
 RETURN e.name AS enzymeName, e.id AS enzymeId;",I don't know the answer.,1
 Phase 3,Edge Cases & Negations,Show genes that don't encode any enzymes,"MATCH (g:Gene)
@@ -1197,7 +1196,7 @@ RETURN c;","['C02679', 'C08362', 'C01571', 'C06423', 'C00139', 'C00011', 'C01530
 Phase 3,Edge Cases & Negations,Find empty pathways,"MATCH (p:Pathway)
 WHERE NOT (p)-[:CONTAINS]->()
 RETURN p;",I don't know the answer.,1
-Phase 3,Edge Cases & Negations,Show orphan reactions,,Exception: CypherSyntaxError,1
+Phase 3,Edge Cases & Negations,Show orphan reactions,,Exception: CypherSyntaxError,0
 Phase 3,Edge Cases & Negations,Which enzymes don't catalyze anything?,"MATCH (e:EC) WHERE NOT (e)-[:CATALYZES]->() RETURN e.id, e.name, e.sysname, e.names, e.link","EC:4.2.1.*, EC:1.14.99.*, EC:2.7.8.*, EC:1.14.*, EC:6.2.1.?, EC:2.7.1.*, EC:3.1.3.",1
 Phase 3,Edge Cases & Negations,List genes not in any ortholog group,"MATCH (g:Gene)
 WHERE NOT EXISTS((g)-[:BELONGS_TO]->(:Ortholog))

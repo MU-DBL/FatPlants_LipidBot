@@ -1,12 +1,19 @@
 fastapi
 uvicorn[standard]
-sentence-transformers
-faiss-cpu
-numpy
-nltk
 pydantic
-huggingface_hub
+
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.1.0+cpu
+
+numpy==1.26.4
+sentence-transformers==3.0.1
+transformers==4.40.0
+huggingface-hub==0.23.0
+accelerate==0.30.0
+faiss-cpu
 rank-bm25
+
+nltk
 neo4j
 google-generativeai
 ollama

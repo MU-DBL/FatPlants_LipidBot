@@ -8,6 +8,7 @@ from pydantic import BaseModel
 class LLMProvider(Enum):
     GEMINI = "gemini"
     OLLAMA = "ollama"
+    OPENROUTER = "openrouter"
 
 @dataclass
 class EntityMention:
@@ -53,6 +54,7 @@ class CypherQueryRequest(BaseModel):
 class LipidBotRequest(BaseModel):
     llm_type:str # llama, gptoss
     query: str
+    client_ip: Optional[str] = None
     top_k: int = 5
     fuse: Literal["rrf", "vote", "max"] = "rrf"
     per: Literal["chunk"] = "chunk"

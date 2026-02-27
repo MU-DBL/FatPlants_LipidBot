@@ -4,14 +4,12 @@ from pydantic import BaseModel
 class SimpleClassification(BaseModel):
     is_relevant: bool
     needs_graph: bool
-    reasoning: str
-    confidence: float
 
 SIMPLE_CLASSIFICATION_PROMPT = """You are analyzing queries for a lipid biochemistry knowledge graph database.
 
 **OUR KNOWLEDGE GRAPH CONTAINS:**
 
-**Nodes:** Gene, Compound, Reaction, Pathway, EC (enzymes), Ortholog, FunctionalUnit
+**Nodes:** Gene, Compound, Reaction, Pathway, EC (enzymes), Ortholog
 
 **Relationships (what we can answer):**
 - Gene→EC (what enzyme does gene X encode?)
@@ -65,9 +63,7 @@ Query: "What is the chemical formula of EPA?"
 Respond in JSON:
 {{
     "is_relevant": true/false,
-    "needs_graph": true/false,
-    "reasoning": "Brief explanation of both decisions",
-    "confidence": 0.0-1.0
+    "needs_graph": true/false
 }}
 """
 
@@ -75,7 +71,7 @@ Respond in JSON:
 # CLASSIFICATION FUNCTION
 # ============================================================================
 
-async def classify_query_simple(
+def classify_query_simple(
     query: str,
     llm
 ) -> SimpleClassification:
@@ -86,10 +82,9 @@ async def classify_query_simple(
     """
     prompt = SIMPLE_CLASSIFICATION_PROMPT.format(query=query)
     
-    response = await llm.agenerate(prompt=prompt)
+    response = llm.generate(prompt=prompt)
     
     try:
-        # Clean response (remove markdown code blocks if present)
         cleaned = response.strip()
         if cleaned.startswith("```"):
             cleaned = cleaned.split("```")[1]
@@ -102,8 +97,48 @@ async def classify_query_simple(
     except (json.JSONDecodeError, ValueError) as e:
         
         return SimpleClassification(
-            is_relevant=True,
-            needs_graph=True,
-            reasoning="Parse failure, defaulting to safe mode",
-            confidence=0.5
+            is_relevant=False,
+            needs_graph=False
         )
+
+
+def openai_chunk(content: str, stream_id: str, finish=False):
+    payload = {
+        "id": stream_id,
+        "object": "chat.completion.chunk",
+        "choices": [{
+            "index": 0,
+            "delta": {} if finish else {"content": content},
+            "finish_reason": "stop" if finish else None
+        }]
+    }
+    return f"data: {json.dumps(payload, ensure_ascii=False)}\n\n"
+
+
+def flatten_nested_dict(prefix, obj, out):
+    """Recursively flatten Neo4j result objects into table columns."""
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            flatten_nested_dict(f"{prefix}.{k}" if prefix else k, v, out)
+    elif isinstance(obj, (list, tuple, set)):
+        out[prefix] = ", ".join(map(str, obj))
+    else:
+        out[prefix] = obj
+
+
+def flatten_row(row):
+    """Unwrap and flatten a cypher row safely."""
+    # unwrap {"r": {...}}
+    if isinstance(row, dict) and len(row) == 1:
+        row = list(row.values())[0]
+
+    flat = {}
+    flatten_nested_dict("", row, flat)
+    return flat
+
+
+def safe_str(v):
+    if v is None:
+        return ""
+    s = str(v)
+    return s.replace("\n", " ").replace("|", "/")

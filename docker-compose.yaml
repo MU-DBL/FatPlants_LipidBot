@@ -1,14 +1,84 @@
+version: '3.8'
+
 services:
   lipid-bot:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    image: lipid-bot
+    container_name: lipid-bot
+    ports:
+      - "127.0.0.1:7120:7120"
     environment:
-      - HF_HOME=/hf_home  
+      # Model caching - all models will use the mounted volume
+      - HF_HOME=/app/models/huggingface
+      - TRANSFORMERS_CACHE=/app/models/huggingface
+      - SENTENCE_TRANSFORMERS_HOME=/app/models/huggingface
+      - TORCH_HOME=/app/models/huggingface
+      
+      # NLTK data
+      - NLTK_DATA=/root/nltk_data
+      
+      # Python optimizations
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONHASHSEED=random
+      
+      # Performance tuning
+      - OMP_NUM_THREADS=4
+      - MKL_NUM_THREADS=4
     volumes:
-      - C:/Users/yqzn9/Downloads/hf_home/:/hf_home
+      # Single unified cache for all HuggingFace/ML models
+      - C:/Users/yqzn9/Downloads/hf_home/:/app/models/huggingface
+      # code
+      - C:/Users/yqzn9/Documents/GitHub/FatPlants_LipidBot/:/app
+      # NLTK data cache
+      - nltk-data:/root/nltk_data
+      
     networks:
       - neo4j_network
+    restart: unless-stopped
+    depends_on:
+      neo4j:
+        condition: service_started  
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+        reservations:
+          cpus: '2'
+          memory: 4G
+
+  neo4j:
+    image: neo4j:2025.08.0
+    container_name: neo4j-fatplants
+    ports:
+      - "127.0.0.1:7474:7474"   
+      - "127.0.0.1:7687:7687"   
+    environment:
+      NEO4J_server_config_strict__validation_enabled: "false"
+      NEO4J_server_memory_heap_initial__size: "2G"
+      NEO4J_server_memory_heap_max__size: "4G"
+      NEO4J_server_memory_pagecache_size: "4G"
+      NEO4JLABS_PLUGINS: '["apoc"]'
+    volumes:
+      - C:/Users/yqzn9/Downloads/neo4j/data:/data
+      - C:/Users/yqzn9/Downloads/neo4j/logs:/logs
+      - C:/Users/yqzn9/Downloads/neo4j/plugins:/plugins
+    networks:
+      - neo4j_network
+    restart: unless-stopped
+
+volumes:
+  nltk-data:
+    driver: local
 
 networks:
   neo4j_network:
-    external: true 
-    name: neo4j_default
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.26.0.0/16

@@ -10,19 +10,25 @@ import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 import ollama
 from ollama import AsyncClient
+import requests
+import json
 
 class BaseLLM(ABC):
     """Abstract base class for LLM implementations"""
-    
+
     @abstractmethod
     def generate(self, prompt: str) -> str:
         """Generate response from prompt"""
         pass
-    
+
     @abstractmethod
     def get_provider_name(self) -> str:
         """Get the provider name"""
         pass
+
+    def generate_stream(self, prompt: str):
+        """Stream response tokens. Default: yield entire response at once."""
+        yield self.generate(prompt)
 
 
 class GeminiLLM(BaseLLM):
@@ -72,31 +78,28 @@ class GeminiLLM(BaseLLM):
             response = self.model.generate_content(
                 prompt,
                 generation_config=self.generation_config,
-                safety_settings=self.safety_settings 
+                safety_settings=self.safety_settings
             )
             return response.text.strip()
         except Exception as e:
             print(f"Gemini Generation Error: {e}")
-            return "" 
-        
-    async def agenerate(self, prompt: str = None, messages: list = None) -> str:
-        """Async Gemini generation"""
-        try:
-            content = messages if messages else prompt
-            if not content:
-                raise ValueError("Either `prompt` or `messages` must be provided.")
+            return ""
 
-            response = await self.model.generate_content_async(
-                content,
+    def generate_stream(self, prompt: str):
+        try:
+            response = self.model.generate_content(
+                prompt,
                 generation_config=self.generation_config,
                 safety_settings=self.safety_settings,
+                stream=True,
             )
-            return response.text.strip()
-
+            for chunk in response:
+                if chunk.text:
+                    yield chunk.text
         except Exception as e:
-            print(f"Gemini Async Generation Error: {e}")
-            return ""
-    
+            print(f"Gemini Streaming Error: {e}")
+            yield self.generate(prompt)
+
     def get_provider_name(self) -> str:
         return "gemini"
 
@@ -138,28 +141,134 @@ class OllamaLLM(BaseLLM):
             options=self.options
         )
         return response['response'].strip()
-    
-    async def agenerate(self, prompt: str = None, messages: list = None) -> str:
-        """Asynchronous generation supporting both raw prompts and message lists"""
-        if messages:
-            # Use the chat API if messages are provided
-            response = await self.async_client.chat(
-                model=self.model_name,
-                messages=messages,
-                options=self.options
-            )
-            return response['message']['content'].strip()
-        
-        # Fallback to standard generation if only a prompt is provided
-        response = await self.async_client.generate(
+
+    def generate_stream(self, prompt: str):
+        for chunk in self.client.generate(
             model=self.model_name,
             prompt=prompt,
-            options=self.options
-        )
-        return response['response'].strip()
-    
+            options=self.options,
+            stream=True,
+        ):
+            content = chunk.get('response') if isinstance(chunk, dict) else getattr(chunk, 'response', None)
+            if content:
+                yield content
+
     def get_provider_name(self) -> str:
         return "ollama"
+    
+
+class OpenRouterLLM(BaseLLM):
+    def __init__(
+        self,
+        api_key: str,
+        model: str = "openai/gpt-oss-20b",
+        temperature: float = 0.5,
+        enable_reasoning: bool = False,
+        system_prompt: Optional[str] = None
+    ):
+        self.api_key = api_key
+        self.model = model
+        self.temperature = temperature
+        self.enable_reasoning = enable_reasoning
+        self.system_prompt = system_prompt
+        self.base_url = "https://openrouter.ai/api/v1/chat/completions"
+
+    def generate(self, prompt: str) -> str:
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json",
+        }
+
+        messages = []
+
+        if self.system_prompt:
+            messages.append({
+                "role": "system",
+                "content": self.system_prompt
+            })
+
+        messages.append({
+            "role": "user",
+            "content": prompt
+        })
+
+        payload = {
+            "model": self.model,
+            "messages": messages,
+            "temperature": self.temperature
+        }
+
+        if self.enable_reasoning:
+            payload["reasoning"] = {"enabled": True}
+
+        try:
+            response = requests.post(
+                url=self.base_url,
+                headers=headers,
+                data=json.dumps(payload),
+                timeout=60
+            )
+
+            response.raise_for_status()
+            data = response.json()
+
+            return data["choices"][0]["message"]["content"]
+
+        except requests.RequestException as e:
+            raise RuntimeError(f"OpenRouter API request failed: {e}")
+
+        except KeyError:
+            raise RuntimeError(f"Unexpected API response format: {data}")
+
+    def generate_stream(self, prompt: str):
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json",
+        }
+        messages = []
+        if self.system_prompt:
+            messages.append({"role": "system", "content": self.system_prompt})
+        messages.append({"role": "user", "content": prompt})
+
+        payload = {
+            "model": self.model,
+            "messages": messages,
+            "temperature": self.temperature,
+            "stream": True,
+        }
+        if self.enable_reasoning:
+            payload["reasoning"] = {"enabled": True}
+
+        try:
+            with requests.post(
+                url=self.base_url,
+                headers=headers,
+                data=json.dumps(payload),
+                stream=True,
+                timeout=120,
+            ) as response:
+                response.raise_for_status()
+                for line in response.iter_lines():
+                    if not line:
+                        continue
+                    decoded = line.decode("utf-8")
+                    if not decoded.startswith("data: "):
+                        continue
+                    data_str = decoded[6:]
+                    if data_str.strip() == "[DONE]":
+                        break
+                    try:
+                        chunk = json.loads(data_str)
+                        content = chunk["choices"][0]["delta"].get("content", "")
+                        if content:
+                            yield content
+                    except (json.JSONDecodeError, KeyError, IndexError):
+                        pass
+        except requests.RequestException as e:
+            raise RuntimeError(f"OpenRouter streaming request failed: {e}")
+
+    def get_provider_name(self) -> str:
+        return "OpenRouter"
 
 class LLMFactory:
     """Factory for creating LLM instances"""
@@ -195,6 +304,15 @@ class LLMFactory:
             return OllamaLLM(
                 model_name=default_model,
                 host=host,
+                temperature=temperature,
+                **kwargs
+            )
+        
+        elif provider == LLMProvider.OPENROUTER:
+            default_model = model_name
+            return OpenRouterLLM(
+                api_key=api_key,
+                model = default_model,
                 temperature=temperature,
                 **kwargs
             )

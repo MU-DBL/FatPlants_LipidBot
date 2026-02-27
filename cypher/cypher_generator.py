@@ -134,14 +134,14 @@ class SimpleCypherGenerator:
         self.llm = llm
         self.schema = schema or self.DETAILED_SCHEMA
 
-    def generate_query(self, question: str) -> Tuple[str, Dict]:
+    def generate_query(self, question: str, entities: Optional[List[Dict]] = None) -> Tuple[str, Dict]:
         try:
             # Step 1: Build template catalog for LLM
             template_catalog = self._build_template_catalog()
-            
+
             # Step 2: Ask LLM to select and fill template
-            prompt = self._build_prompt(question, template_catalog)
-            
+            prompt = self._build_prompt(question, template_catalog, entities)
+
             # Step 3: Get LLM response
             response = self.llm.generate(prompt)
             
@@ -170,8 +170,21 @@ class SimpleCypherGenerator:
             catalog_lines.append(f"   Template: {data['cypher']}")
         return "\n".join(catalog_lines)
 
-    def _build_prompt(self, question: str, template_catalog: str) -> str:
+    def _format_entities(self, entities: Optional[List[Dict]]) -> str:
+        """Format extracted entities into a readable block for the prompt."""
+        if not entities:
+            return ""
+        lines = []
+        for e in entities:
+            lines.append(
+                f'  "{e.get("text", "")}" → ID: {e.get("id", "?")}, '
+                f'DB: {e.get("db", "?")}, Species: {e.get("species", "-")}'
+            )
+        return "\n[DETECTED ENTITIES]\nUse these confirmed IDs when filling template placeholders:\n" + "\n".join(lines) + "\n"
+
+    def _build_prompt(self, question: str, template_catalog: str, entities: Optional[List[Dict]] = None) -> str:
         """Build the LLM prompt"""
+        entities_block = self._format_entities(entities)
         return f"""You are a Neo4j Cypher query generator. Your task is to:
 1. First, select the most appropriate response template based on the user's question
 2. If a suitable template exists, fill in the placeholders with the correct values
@@ -186,7 +199,7 @@ class SimpleCypherGenerator:
 
 [QUESTION]
 {question}
-
+{entities_block}
 [INSTRUCTIONS]
 
 STEP 1: TEMPLATE SELECTION
@@ -203,7 +216,7 @@ Review the available templates and determine if any match the query pattern.
 STEP 2: QUERY GENERATION
 Option A - If a suitable template is found:
 Fill in ALL placeholders in the template:
-- {{{{GENE_ID}}}} should be filled with gene IDs like "eco:b0001"
+- {{{{GENE_ID}}}} should be filled with gene IDs like "eco:b0001" 
 - {{{{COMPOUND_ID}}}} should be filled with compound IDs like "C00001"
 - {{{{REACTION_ID}}}} should be filled with reaction IDs like "R00001"
 - {{{{PATHWAY_ID}}}} should be filled with pathway IDs like "path:eco00010"
