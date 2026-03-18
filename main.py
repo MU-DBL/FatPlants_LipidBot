@@ -92,7 +92,7 @@ app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://fatplants.net", "http://localhost:4200"],
+    allow_origins=["https://fatplants.net", "https://ec2-100-31-63-120.compute-1.amazonaws.com", "http://localhost:4200"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -114,6 +114,15 @@ app.include_router(router)
 @app.get("/health")
 def health():
     return {"ok": True}
+
+# =========================
+# Cypher Query Endpoint
+# =========================
+@app.get("/lipidbot/cypher/")
+async def run_cypher_query(query: str, request: Request):
+    neo4j_client: Neo4jClient = request.app.state.neo4j
+    records = await neo4j_client.run_query(query)
+    return {"results": records}
 
 # =========================
 # LipidBot Streaming Endpoint
