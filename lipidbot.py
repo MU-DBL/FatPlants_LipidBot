@@ -128,12 +128,21 @@ def flatten_nested_dict(prefix, obj, out):
 
 def flatten_row(row):
     """Unwrap and flatten a cypher row safely."""
-    # unwrap {"r": {...}}
+    # Unwrap single-value node wrapper {"r": {...}}
     if isinstance(row, dict) and len(row) == 1:
-        row = list(row.values())[0]
+        inner = list(row.values())[0]
+        # Only unwrap if the inner value is also a dict (i.e. a node object),
+        # not a plain scalar — multi-column scalar rows must stay as-is.
+        if isinstance(inner, dict):
+            row = inner
 
     flat = {}
-    flatten_nested_dict("", row, flat)
+    if isinstance(row, dict):
+        # Top-level keys become column names directly (no leading dot).
+        for k, v in row.items():
+            flatten_nested_dict(k, v, flat)
+    else:
+        flatten_nested_dict("", row, flat)
     return flat
 
 

@@ -37,41 +37,41 @@ async def lifespan(app: FastAPI):
     app.state.neo4j = neo4j
 
     # Initialize LLM
-    gemini_llm = LLMFactory.create_llm(
-        provider=LLMProvider.GEMINI,
-        model_name=GEMINI_MODEL_NAME,
-        api_key=GEMINI_API_KEY
+    # gemini_llm = LLMFactory.create_llm(
+    #     provider=LLMProvider.GEMINI,
+    #     model_name=GEMINI_MODEL_NAME,
+    #     api_key=GEMINI_API_KEY
+    # )
+
+    llama_llm = LLMFactory.create_llm(
+        provider=LLMProvider.OLLAMA,
+        model_name = LLAMA_LLM_TYPE,
+        host = OLLAMA_HOST
     )
 
-    # llama_llm = LLMFactory.create_llm(
-    #     provider=LLMProvider.OLLAMA,
-    #     model_name = LLAMA_LLM_TYPE,
-    #     host = OLLAMA_HOST
-    # )
+    gpt_oss_llm = LLMFactory.create_llm(
+        provider=LLMProvider.OLLAMA,
+        model_name = GPT_OSS_LLM_TYPE,
+        host = OLLAMA_HOST
+    )
 
     # gpt_oss_llm = LLMFactory.create_llm(
-    #     provider=LLMProvider.OLLAMA,
-    #     model_name = GPT_OSS_LLM_TYPE,
-    #     host = OLLAMA_HOST
+    #     provider=LLMProvider.OPENROUTER,
+    #     model_name = "openai/gpt-oss-20b",
+    #     api_key = OPENROUTER_API_KEY,
+    #     temperature=0.2
     # )
 
-    or_gpt_oss_llm = LLMFactory.create_llm(
-        provider=LLMProvider.OPENROUTER,
-        model_name = "openai/gpt-oss-20b",
-        api_key = OPENROUTER_API_KEY,
-        temperature=0.2
-    )
-
-    or_llama_llm = LLMFactory.create_llm(
-        provider=LLMProvider.OPENROUTER,
-        model_name = "meta-llama/llama-3.1-8b-instruct",
-        api_key = OPENROUTER_API_KEY
-    )
+    # llama_llm = LLMFactory.create_llm(
+    #     provider=LLMProvider.OPENROUTER,
+    #     model_name = "meta-llama/llama-3.1-8b-instruct",
+    #     api_key = OPENROUTER_API_KEY
+    # )
 
 
     # app.state.gemini_llm = gemini_llm
-    app.state.llama_llm = or_llama_llm
-    app.state.gpt_oss_llm = or_gpt_oss_llm
+    app.state.llama_llm = llama_llm
+    app.state.gpt_oss_llm = gpt_oss_llm
 
     # Preload AI retrievers & BM25 caches
     get_cached_retrievers(None)

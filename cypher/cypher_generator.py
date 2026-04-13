@@ -127,7 +127,16 @@ class SimpleCypherGenerator:
         "T073": {"description": "Shortest path between two Genes", "cypher": "MATCH p=shortestPath((g1:Gene {id: '{GENE_ID_1}'})-[*]-(g2:Gene {id: '{GENE_ID_2}'})) RETURN p"},
         "T074": {"description": "Shortest path between two Pathways", "cypher": "MATCH p=shortestPath((p1:Pathway {id: '{PATHWAY_ID_1}'})-[*]-(p2:Pathway {id: '{PATHWAY_ID_2}'})) RETURN p"},
         "T075": {"description": "Other genes encoding same enzyme (Siblings)", "cypher": "MATCH (g1:Gene {id: '{GENE_ID}'})-[:ENCODES]->(e:EC)<-[:ENCODES]-(g2:Gene) WHERE g1 <> g2 RETURN g2"},
-        "T076": {"description": "Inter-pathway Metabolite Exchange", "cypher": "MATCH (p1:Pathway {id: '{PATHWAY_ID}'})-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(c:Compound)<-[:SUBSTRATE_OF]-(:Reaction)<-[:CONTAINS]-(p2:Pathway) WHERE p1 <> p2 RETURN DISTINCT c"}
+        "T076": {"description": "Inter-pathway Metabolite Exchange", "cypher": "MATCH (p1:Pathway {id: '{PATHWAY_ID}'})-[:CONTAINS]->(:Reaction)-[:PRODUCES]->(c:Compound)<-[:SUBSTRATE_OF]-(:Reaction)<-[:CONTAINS]-(p2:Pathway) WHERE p1 <> p2 RETURN DISTINCT c"},
+
+        # --- [T077-T083] Name/Text-Based Search (no KEGG ID required) ---
+        "T077": {"description": "Find genes by name keyword (gene family name search)", "cypher": "MATCH (g:Gene) WHERE toLower(g.name) CONTAINS toLower('{GENE_NAME}') RETURN g LIMIT 20"},
+        "T078": {"description": "Find orthologs by name or symbol keyword", "cypher": "MATCH (o:Ortholog) WHERE toLower(o.name) CONTAINS toLower('{ORTHOLOG_NAME}') OR toLower(o.symbol) CONTAINS toLower('{ORTHOLOG_NAME}') RETURN o LIMIT 20"},
+        "T079": {"description": "Find all genes in ortholog family by name or symbol (gene family members)", "cypher": "MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog) WHERE toLower(o.name) CONTAINS toLower('{ORTHOLOG_NAME}') OR toLower(o.symbol) CONTAINS toLower('{ORTHOLOG_NAME}') RETURN g, o LIMIT 20"},
+        "T080": {"description": "Find Arabidopsis genes in ortholog family by name (Arabidopsis family members)", "cypher": "MATCH (g:Gene {species: 'ath'})-[:BELONGS_TO]->(o:Ortholog) WHERE toLower(o.name) CONTAINS toLower('{ORTHOLOG_NAME}') OR toLower(o.symbol) CONTAINS toLower('{ORTHOLOG_NAME}') RETURN g, o LIMIT 20"},
+        "T081": {"description": "Find genes with Arabidopsis orthologs in pathway by title keyword (cross-species ortholog lookup)", "cypher": "MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction)<-[:CATALYZES]-(e:EC)<-[:ENCODES]-(g:Gene)-[:BELONGS_TO]->(o:Ortholog)<-[:BELONGS_TO]-(g_ath:Gene {species: 'ath'}) WHERE toLower(p.title) CONTAINS toLower('{PATHWAY_NAME}') RETURN DISTINCT g.id AS gene_id, g.name AS gene_name, g.species AS species, g_ath.id AS arabidopsis_ortholog_id, g_ath.name AS arabidopsis_ortholog_name, o.id AS ortholog_id, o.name AS ortholog_name LIMIT 20"},
+        "T082": {"description": "Find genes associated with pathway by pathway title keyword", "cypher": "MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction)<-[:CATALYZES]-(e:EC)<-[:ENCODES]-(g:Gene) WHERE toLower(p.title) CONTAINS toLower('{PATHWAY_NAME}') RETURN DISTINCT g.id AS gene_id, g.name AS gene_name, g.species AS species, p.title AS pathway LIMIT 20"},
+        "T083": {"description": "Find gene family members associated with a pathway or reaction by name keyword (e.g. FAD2 in desaturation)", "cypher": "MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction) WHERE toLower(o.name) CONTAINS toLower('{ORTHOLOG_NAME}') OR toLower(o.symbol) CONTAINS toLower('{ORTHOLOG_NAME}') OPTIONAL MATCH (p:Pathway)-[:CONTAINS]->(r) RETURN DISTINCT g.id AS gene_id, g.name AS gene_name, g.species AS species, o.id AS ortholog_id, o.name AS ortholog_name, r.name AS reaction_name, p.title AS pathway LIMIT 20"},
     }
 
     def __init__(self, llm: Any, schema: Optional[str] = None):
@@ -202,73 +211,73 @@ class SimpleCypherGenerator:
 {entities_block}
 [INSTRUCTIONS]
 
-STEP 1: TEMPLATE SELECTION
+STEP 1: DETERMINE ID TYPE
+**CRITICAL FIRST CHECK**: Does the question mention a KEGG-style database ID?
+- KEGG gene ID examples: ath:AT2G29980, eco:b0001 (species prefix + colon + alphanumeric)
+- KEGG compound ID examples: C00001, C18218 (C + 5 digits)
+- KEGG reaction ID examples: R00001 (R + 5 digits)
+- KEGG pathway ID examples: path:ath00061 (path: + species + 5 digits)
+- KEGG ortholog ID examples: K15422 (K + 5 digits)
+- EC number examples: 1.14.19.1, EC:1.14.19.1
+
+**If the question uses a NAME instead of an ID** (e.g., "FAD2", "FAD2 family", "fatty acid desaturation",
+"medium-chain fatty acid", "Arabidopsis orthologs"):
+→ You MUST use the name/text-based templates (T077-T083), NOT the ID-based templates (T001-T076).
+→ Fill {{{{GENE_NAME}}}}, {{{{ORTHOLOG_NAME}}}}, or {{{{PATHWAY_NAME}}}} with the name/keyword from the question.
+
+STEP 2: TEMPLATE SELECTION
 Analyze the question to identify:
 - Entity types mentioned (Gene, Compound, Pathway, etc.)
-- Entity IDs (e.g., eco:b0001, C00001, R00001, path:eco00010)
-- Relationships involved (ENCODES, PARTICIPATES_IN, CATALYZES, etc.)
-- What the user wants to find (enzymes, reactions, pathways, etc.)
-- **Whether the question contains "all", or or similar words**
+- Whether the query uses **IDs** (use T001-T076) or **names/keywords** (use T077-T083)
+- Relationships involved (ENCODES, BELONGS_TO, CATALYZES, etc.)
+- What the user wants to find (genes, enzymes, reactions, pathways, orthologs, etc.)
+- **Whether the question asks about gene family members, orthologs, or cross-species lookups**
+- **Whether the question asks for Arabidopsis-specific genes or cross-species ortholog mapping**
 - **Number of results requested** (e.g., "first 5", "top 10", "3 genes", "all", etc.)
 
-Review the available templates and determine if any match the query pattern.
+**NAME-BASED TEMPLATE GUIDE:**
+- Gene family members by name (e.g., "FAD2 family", "FAD2 members") → T079 (fill {{{{ORTHOLOG_NAME}}}} = FAD2)
+- FAD2 in Arabidopsis specifically → T080 (fill {{{{ORTHOLOG_NAME}}}} = FAD2)
+- Gene family + pathway association (e.g., "FAD2 associated with desaturation") → T083 (fill {{{{ORTHOLOG_NAME}}}} = FAD2)
+- Arabidopsis orthologs of genes in a process → T081 (fill {{{{PATHWAY_NAME}}}} = keyword)
+- Genes in pathway by name/description → T082 (fill {{{{PATHWAY_NAME}}}} = keyword)
+- Ortholog lookup by name → T078 (fill {{{{ORTHOLOG_NAME}}}} = name)
 
-STEP 2: QUERY GENERATION
+STEP 3: QUERY GENERATION
 Option A - If a suitable template is found:
 Fill in ALL placeholders in the template:
-- {{{{GENE_ID}}}} should be filled with gene IDs like "eco:b0001" 
-- {{{{COMPOUND_ID}}}} should be filled with compound IDs like "C00001"
-- {{{{REACTION_ID}}}} should be filled with reaction IDs like "R00001"
-- {{{{PATHWAY_ID}}}} should be filled with pathway IDs like "path:eco00010"
-- {{{{EC_ID}}}} should be filled with EC numbers like "EC:1.1.1.1"
-- {{{{ORTHOLOG_ID}}}} should be filled with ortholog IDs like "K00001"
-- {{{{FUNCTIONALUNIT_ID}}}} should be filled with functional unit IDs like "M00001"
-- {{{{PREFIX}}}} should be filled with the prefix mentioned in "starts with" queries
+- {{{{GENE_ID}}}} → KEGG gene ID like "ath:AT2G29980"
+- {{{{COMPOUND_ID}}}} → KEGG compound ID like "C00001"
+- {{{{REACTION_ID}}}} → KEGG reaction ID like "R00001"
+- {{{{PATHWAY_ID}}}} → KEGG pathway ID like "path:ath00061"
+- {{{{EC_ID}}}} → EC number like "EC:1.14.19.1"
+- {{{{ORTHOLOG_ID}}}} → KEGG ortholog ID like "K15422"
+- {{{{FUNCTIONALUNIT_ID}}}} → KEGG module ID like "M00001"
+- {{{{PREFIX}}}} → prefix text for "starts with" queries
+- {{{{GENE_NAME}}}} → gene or gene family name keyword (e.g., FAD2, SAD)
+- {{{{ORTHOLOG_NAME}}}} → ortholog name or symbol keyword (e.g., FAD2, MCFAS)
+- {{{{PATHWAY_NAME}}}} → pathway title keyword (e.g., "fatty acid desaturation", "medium-chain")
 
 **TEMPLATE MODIFICATION - ENFORCING LIMIT:**
 **CRITICAL: Always enforce a LIMIT clause on every query.**
 
-**TEMPLATE MODIFICATION - LIMITING RESULTS:**
-- **If the question contains "all", "every", "complete", or "entire":**
-  * Do NOT modify the template
-  * Keep the template exactly as-is after filling placeholders
-  * Examples: "all reactions", "every gene", "complete list" → No LIMIT modification
-
-- **If the question specifies a specific number of results to return (e.g., "first 5 genes", "top 10 pathways", "3 reactions"):**
-  * Add a LIMIT clause at the end of the query
-  * Extract the number from the question
-  * Examples:
-    - "Find the first 5 genes" → Add "LIMIT 5"
-    - "Show me 10 pathways" → Add "LIMIT 10"
-    - "Get top 3 reactions" → Add "LIMIT 3"
-
-- **If the question contains "all", "every", or doesn't specify a number:**
-  * Add "LIMIT 10" as the default
-  * Examples:
-    - "Find all reactions" → Add "LIMIT 10"
-    - "Show me genes" → Add "LIMIT 10"
+- **If the question specifies a specific number of results:**
+  * Add the specified LIMIT (e.g., "first 5 genes" → LIMIT 5)
+- **Otherwise, use the template's default LIMIT or add LIMIT 10**
 
 Option B - If NO suitable template exists:
-Generate a custom Cypher query using the schema provided. Follow these guidelines:
-- Use the correct node labels from the schema (Gene, Compound, Pathway, Reaction, EC, Ortholog, FunctionalUnit)
-- Use the correct relationship types from the schema
-- Ensure proper query structure (MATCH, WHERE, RETURN clauses)
-- Include appropriate filters and conditions
+Generate a custom Cypher query using the schema provided:
+- Use correct node labels (Gene, Compound, Pathway, Reaction, EC, Ortholog, FunctionalUnit)
+- Use correct relationship types from the schema
+- For name-based searches, use: WHERE toLower(n.name) CONTAINS toLower('keyword')
 - Use single quotes around string values
-- Ensure all entity IDs have correct prefixes
-- **Always enforce a LIMIT clause:**
-  * Use the user-specified number if provided
-  * If no number is specified, add LIMIT 10
+- **Always add a LIMIT clause (default LIMIT 10)**
 
 IMPORTANT RULES:
-- Ensure all entity IDs have correct prefixes (EC:, path:, etc.)
-- Use single quotes around ID values
+- **Never use ID-based templates (T001-T076) when only a name/keyword is given — use T077-T083 or CUSTOM**
+- Ensure all KEGG IDs have correct prefixes (EC:, path:, etc.)
 - Return the complete, ready-to-execute Cypher query
-- Prioritize templates when available, but don't force a template if it doesn't fit
 - **Always enforce a LIMIT clause**
-- **Use the user-specified number if provided**
-- **If no number is specified, add LIMIT 10**
-
 
 OUTPUT FORMAT (REQUIRED):
 If using a template:
@@ -280,25 +289,29 @@ Line 1: TEMPLATE: CUSTOM
 Line 2: <the generated Cypher query>
 
 Examples:
-Using template with user-specified number:
+ID-based (KEGG gene ID known):
 TEMPLATE: T011
-MATCH (g:Gene {{id: 'eco:b0001'}})-[:ENCODES]->(e:EC) RETURN e LIMIT 5
+MATCH (g:Gene {{id: '<gene_kegg_id>'}})-[:ENCODES]->(e:EC) RETURN e LIMIT 10
 
-Using template without specified number (default LIMIT 10):
-TEMPLATE: T011
-MATCH (g:Gene {{id: 'eco:b0001'}})-[:ENCODES]->(e:EC) RETURN e LIMIT 10
+Name-based gene family (family members by ortholog name/symbol):
+TEMPLATE: T079
+MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog) WHERE toLower(o.name) CONTAINS toLower('<family_keyword>') OR toLower(o.symbol) CONTAINS toLower('<family_keyword>') RETURN g, o LIMIT 20
 
-Using template with "all" (default LIMIT 10):
-TEMPLATE: T015
-MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction) RETURN p, r LIMIT 10
+Name-based gene family + associated reactions/pathways:
+TEMPLATE: T083
+MATCH (g:Gene)-[:BELONGS_TO]->(o:Ortholog)-[:CATALYZES]->(r:Reaction) WHERE toLower(o.name) CONTAINS toLower('<family_keyword>') OR toLower(o.symbol) CONTAINS toLower('<family_keyword>') OPTIONAL MATCH (p:Pathway)-[:CONTAINS]->(r) RETURN DISTINCT g.id AS gene_id, g.name AS gene_name, g.species AS species, o.id AS ortholog_id, o.name AS ortholog_name, r.name AS reaction_name, p.title AS pathway LIMIT 20
 
-Custom query with specified number:
-TEMPLATE: CUSTOM
-MATCH (g:Gene)-[:ENCODES]->(e:EC)-[:CATALYZES]->(r:Reaction) RETURN g, e, r LIMIT 7
+Name-based pathway + Arabidopsis orthologs (cross-species):
+TEMPLATE: T081
+MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction)<-[:CATALYZES]-(e:EC)<-[:ENCODES]-(g:Gene)-[:BELONGS_TO]->(o:Ortholog)<-[:BELONGS_TO]-(g_ath:Gene {{species: 'ath'}}) WHERE toLower(p.title) CONTAINS toLower('<pathway_keyword>') RETURN DISTINCT g.id AS gene_id, g.name AS gene_name, g.species AS species, g_ath.id AS arabidopsis_ortholog_id, g_ath.name AS arabidopsis_ortholog_name, o.id AS ortholog_id, o.name AS ortholog_name LIMIT 20
+
+Genes in pathway by name (no cross-species filter):
+TEMPLATE: T082
+MATCH (p:Pathway)-[:CONTAINS]->(r:Reaction)<-[:CATALYZES]-(e:EC)<-[:ENCODES]-(g:Gene) WHERE toLower(p.title) CONTAINS toLower('<pathway_keyword>') RETURN DISTINCT g.id AS gene_id, g.name AS gene_name, g.species AS species, p.title AS pathway LIMIT 20
 
 Custom query without specified number (default LIMIT 10):
 TEMPLATE: CUSTOM
-MATCH (r:Reaction)-[:PRODUCES]->(c:Compound {{name: 'glucose'}}) RETURN r LIMIT 10
+MATCH (r:Reaction)-[:PRODUCES]->(c:Compound) WHERE toLower(c.name) CONTAINS toLower('<compound_keyword>') RETURN r LIMIT 10
 """
 
     def _extract_query(self, response: str) -> Tuple[str, Optional[str]]:
@@ -342,12 +355,16 @@ MATCH (r:Reaction)-[:PRODUCES]->(c:Compound {{name: 'glucose'}}) RETURN r LIMIT 
         
         response = '\n'.join(lines)
         
-        # Try to extract just the MATCH...RETURN part
-        match = re.search(r'(MATCH|CALL|WITH)\s+.*?RETURN\s+.*?(?=\n\n|\n[A-Z][a-z]+:|$)', 
-                         response, re.IGNORECASE | re.DOTALL)
+        # Try to extract just the MATCH...RETURN part.
+        # Stop only at a blank line followed by non-Cypher text or end-of-string.
+        # Do NOT stop at LIMIT/ORDER/WHERE/WITH/RETURN/OPTIONAL which are valid Cypher continuations.
+        match = re.search(
+            r'(MATCH|CALL|WITH)\s+.*?RETURN\s+.*?(?=\n\n(?!MATCH|CALL|WITH|WHERE|OPTIONAL|ORDER|LIMIT|RETURN|UNION)|\Z)',
+            response, re.IGNORECASE | re.DOTALL
+        )
         if match:
             response = match.group(0)
-        
+
         return response.strip(), template_id
     
 
